@@ -25,30 +25,76 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);-webkit-font
 a{color:inherit;text-decoration:none}
 button{cursor:pointer;font-family:var(--font)}
 
+/* APP SHELL STYLES */
+.app-shell{display:flex;flex-direction:column;min-height:100vh}
+.app-content{flex:1;padding-top:64px}
+
+/* LAUNCHER VIEW */
+.launcher-view{min-height:calc(100vh - 64px);padding:2rem 0}
+.launcher-header{text-align:center;margin-bottom:3rem}
+.launcher-title{font-size:2.5rem;font-weight:800;color:#fff;margin-bottom:.5rem}
+.launcher-sub{font-size:1rem;color:var(--text2)}
+.app-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.5rem;max-width:900px;margin:0 auto;padding:0 1.5rem}
+.app-card{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:16px;padding:2rem;text-align:center;
+  cursor:pointer;transition:all .3s var(--ease);
+  display:flex;flex-direction:column;align-items:center;gap:1rem;
+}
+.app-card:hover{
+  border-color:var(--blue);transform:translateY(-4px);
+  box-shadow:0 12px 40px rgba(0,0,0,.4);
+}
+.app-icon{width:64px;height:64px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:2rem}
+.app-name{font-size:1.1rem;font-weight:700;color:#fff}
+.app-desc{font-size:.8rem;color:var(--text2);line-height:1.5}
+
+/* IFRAME CONTAINER */
+.iframe-view{display:none;flex-direction:column;height:calc(100vh - 64px)}
+.iframe-view.active{display:flex}
+.iframe-toolbar{
+  display:flex;align-items:center;gap:1rem;
+  padding:.75rem 1.5rem;background:var(--card);
+  border-bottom:1px solid var(--border);
+}
+.back-btn{
+  display:flex;align-items:center;gap:.5rem;
+  background:rgba(255,255,255,.05);border:1px solid var(--border2);
+  border-radius:8px;padding:.5rem 1rem;
+  font-size:.8rem;font-weight:600;color:var(--text2);
+  transition:all .2s;
+}
+.back-btn:hover{color:var(--text);border-color:var(--text2)}
+.iframe-title{font-size:1rem;font-weight:700;color:#fff;flex:1}
+.iframe-badge{
+  font-size:.65rem;font-weight:600;color:var(--blue);
+  background:rgba(59,130,246,.1);border:1px solid rgba(59,130,246,.2);
+  border-radius:100px;padding:.2rem .75rem;
+}
+.iframe-container{flex:1;background:#fff;border:none}
+.site-link{
+  display:flex;align-items:center;gap:.5rem;
+  font-size:.75rem;color:var(--text3);
+  transition:color .2s;
+}
+.site-link:hover{color:var(--blue)}
+
 /* WRAP */
 .wrap{max-width:var(--max);margin:0 auto;padding:0 1.5rem}
 
 /* NAV */
 nav{
   position:fixed;top:0;left:0;right:0;z-index:200;
-  background:rgba(10,14,26,0);
-  backdrop-filter:blur(0px);
-  border-bottom:1px solid transparent;
-  padding:0;
-  transition:background .4s,backdrop-filter .4s,border-color .4s;
-}
-nav.stuck{
-  background:rgba(10,14,26,.96);
-  backdrop-filter:blur(20px);
+  background:rgba(10,14,26,.96);backdrop-filter:blur(20px);
   border-bottom:1px solid var(--border);
+  padding:0;
 }
 .nav-inner{display:flex;align-items:center;height:64px;gap:1.5rem}
 .nav-logo{display:flex;align-items:center;gap:10px;flex-shrink:0}
 .logo-box{
   width:36px;height:36px;
   background:linear-gradient(135deg,#3b82f6,#8b5cf6);
-  border-radius:9px;
-  display:flex;align-items:center;justify-content:center;
+  border-radius:9px;display:flex;align-items:center;justify-content:center;
   font-size:1rem;font-weight:900;color:#fff;
   box-shadow:0 0 20px rgba(59,130,246,.3);
   transition:transform .2s,box-shadow .2s;
@@ -64,60 +110,15 @@ nav.stuck{
 }
 .nav-links a:hover,.nav-links a.active{color:var(--text);background:rgba(255,255,255,.06)}
 .nav-right{display:flex;align-items:center;gap:8px;margin-left:auto;flex-shrink:0}
-
-/* Lang picker */
-.lang-btn{
+.launcher-btn{
   display:flex;align-items:center;gap:6px;
-  background:rgba(255,255,255,.05);
-  border:1px solid var(--border2);
-  border-radius:8px;padding:.38rem .75rem;
-  font-size:.78rem;font-weight:600;color:var(--text2);
-  transition:all .2s;white-space:nowrap;
-  position:relative;
-}
-.lang-btn:hover{color:var(--text);border-color:rgba(255,255,255,.2)}
-.lang-dropdown{
-  position:absolute;top:calc(100% + 8px);right:0;
-  background:#131929;border:1px solid var(--border2);
-  border-radius:10px;padding:.4rem;
-  min-width:180px;
-  box-shadow:0 16px 40px rgba(0,0,0,.5);
-  display:none;z-index:300;
-}
-.lang-btn.open .lang-dropdown{display:block}
-.lang-opt{
-  display:flex;align-items:center;gap:8px;
-  padding:.5rem .7rem;border-radius:6px;
-  font-size:.8rem;color:var(--text2);
-  cursor:pointer;transition:all .15s;white-space:nowrap;
-}
-.lang-opt:hover{background:rgba(255,255,255,.07);color:var(--text)}
-.lang-opt.selected{background:rgba(59,130,246,.1);color:var(--blue)}
-.lang-flag{font-size:1rem;line-height:1}
-.lang-name{font-size:.78rem;font-weight:500}
-
-.btn-cta{
-  display:inline-flex;align-items:center;gap:6px;
   background:linear-gradient(135deg,#3b82f6,#2563eb);
   color:#fff;border:none;border-radius:8px;
-  font-size:.78rem;font-weight:700;
-  padding:.45rem 1rem;
+  font-size:.78rem;font-weight:700;padding:.5rem 1rem;
   box-shadow:0 4px 16px rgba(59,130,246,.25);
-  transition:all .2s;white-space:nowrap;
+  transition:all .2s;
 }
-.btn-cta:hover{transform:translateY(-1px);box-shadow:0 6px 22px rgba(59,130,246,.38)}
-.hamburger{display:none;background:none;border:none;color:var(--text2);padding:4px}
-
-/* MOBILE MENU */
-.mob-menu{
-  position:fixed;inset:0;z-index:190;
-  background:var(--bg);
-  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.5rem;
-  opacity:0;pointer-events:none;transition:opacity .3s;
-}
-.mob-menu.open{opacity:1;pointer-events:all}
-.mob-menu a{font-size:1.5rem;font-weight:700;color:var(--text);transition:color .2s}
-.mob-menu a:hover{color:var(--blue)}
+.launcher-btn:hover{transform:translateY(-1px);box-shadow:0 6px 22px rgba(59,130,246,.38)}
 
 /* HERO */
 .hero{
@@ -144,39 +145,39 @@ nav.stuck{
 .stat-n{font-size:1.9rem;font-weight:800;color:#fff;line-height:1;font-variant-numeric:tabular-nums}
 .stat-l{font-size:.7rem;font-weight:600;color:var(--text3);letter-spacing:.07em;text-transform:uppercase}
 
-/* Hero mockup */
-.hero-right{display:flex;justify-content:flex-end}
-.mockup{width:100%;max-width:520px;background:linear-gradient(145deg,#1a2235,#0f1829);border:1px solid var(--border2);border-radius:16px;overflow:hidden;box-shadow:0 24px 64px rgba(0,0,0,.5),0 0 0 1px rgba(255,255,255,.04)}
-.mock-bar{background:#0d1221;padding:.6rem 1rem;display:flex;align-items:center;gap:6px;border-bottom:1px solid var(--border)}
-.mdot{width:10px;height:10px;border-radius:50%}
-.mock-url{flex:1;height:20px;background:rgba(255,255,255,.04);border-radius:4px;margin-left:8px;display:flex;align-items:center;padding:0 8px}
-.mock-body{padding:1.1rem;display:grid;grid-template-columns:1fr 1fr;gap:.65rem}
-.mc{background:linear-gradient(135deg,rgba(59,130,246,.08),rgba(139,92,246,.05));border:1px solid rgba(59,130,246,.12);border-radius:10px;padding:1rem;display:flex;flex-direction:column;gap:.5rem;transition:border-color .2s}
-.mc:hover{border-color:rgba(59,130,246,.25)}
-.mc-ico{width:30px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center}
-.mc-t{font-size:.73rem;font-weight:700;color:#e2e8f0}
-.mc-s{font-size:.62rem;color:#4a5568}
-.mc-prev{height:32px;border-radius:5px;margin-top:3px}
-
-/* CATEGORIES */
-.categories{padding:2rem 0;background:var(--bg2);border-top:1px solid var(--border)}
-.cat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}
-.cat-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.2rem;display:flex;flex-direction:column;gap:.5rem;transition:all .22s;cursor:pointer}
-.cat-card:hover{border-color:rgba(59,130,246,.3);background:var(--card2);transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.3)}
-.cat-head{display:flex;align-items:center;gap:8px;margin-bottom:.3rem}
-.cat-ico{width:30px;height:30px;border-radius:7px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.cat-title{font-size:.85rem;font-weight:700;color:var(--text)}
-.cat-item{display:flex;align-items:center;gap:7px;font-size:.76rem;color:var(--text2);padding:.2rem 0}
-.cii{width:20px;height:20px;border-radius:5px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-
-/* WHAT WE DO */
-.wwd{padding:4rem 0;background:var(--bg)}
-.wwd-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:2.5rem}
-.wwd-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:2rem;display:flex;flex-direction:column;gap:1rem;transition:all .22s}
-.wwd-card:hover{border-color:rgba(59,130,246,.25);transform:translateY(-3px);box-shadow:0 12px 32px rgba(0,0,0,.3)}
-.wwd-ico{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:.5rem}
-.wwd-t{font-size:1.05rem;font-weight:700;color:var(--text)}
-.wwd-p{font-size:.82rem;color:var(--text2);line-height:1.7}
+/* FEATURE BANNER */
+.feature-banner{
+  padding:4rem 0;
+  background:var(--bg);border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);text-align:center;overflow:hidden;
+}
+.fb-label{font-size:.65rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--text3);margin-bottom:1.5rem;font-family:var(--mono)}
+.fb-track{position:relative;height:120px}
+.fb-slide{
+  position:absolute;inset:0;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  opacity:0;transform:translateY(12px);
+  transition:opacity .8s var(--ease),transform .8s var(--ease);
+  pointer-events:none;
+}
+.fb-slide.active{opacity:1;transform:translateY(0);pointer-events:all;animation:fbFloat 3s ease-in-out infinite}
+@keyframes fbFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.fb-icon{
+  width:44px;height:44px;border-radius:12px;
+  display:flex;align-items:center;justify-content:center;margin-bottom:1rem;
+}
+.fb-name{font-size:1.6rem;font-weight:800;color:#fff;letter-spacing:-.02em;margin-bottom:.4rem}
+.fb-tag{font-size:.85rem;color:var(--text2);max-width:360px;line-height:1.5;margin-bottom:1.2rem}
+.fb-cta{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:.8rem;font-weight:700;color:var(--blue);
+  border:1px solid rgba(59,130,246,.25);border-radius:8px;
+  padding:.5rem 1.1rem;transition:all .2s;
+}
+.fb-cta:hover{background:rgba(59,130,246,.08);gap:10px}
+.fb-dots{display:flex;gap:6px;margin-top:1.2rem}
+.fb-dot{width:6px;height:6px;border-radius:50%;background:var(--border2);transition:all .3s;cursor:pointer}
+.fb-dot.active{background:var(--blue);width:18px;border-radius:3px}
 
 /* PROJECTS */
 .projects{padding:3.5rem 0;background:var(--bg2)}
@@ -193,11 +194,6 @@ nav.stuck{
 .pc-ico{width:36px;height:36px;border-radius:9px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .pc-name{font-size:.9rem;font-weight:700;color:var(--text)}
 .pc-desc{font-size:.78rem;color:var(--text2);line-height:1.55}
-.pc-prev{height:100px;margin:.6rem .6rem 0;border-radius:8px 8px 0 0;overflow:hidden;position:relative;flex:1}
-.pc-prev-in{position:absolute;inset:0;padding:10px;display:flex;flex-direction:column;gap:5px}
-.prow{display:flex;gap:5px}
-.pbar{height:6px;border-radius:3px;flex:1}
-.pblk{height:28px;border-radius:5px;flex:1}
 .ptags{display:flex;gap:5px;flex-wrap:wrap;padding:.65rem 1rem;border-top:1px solid var(--border)}
 .ptag{font-size:.58rem;font-weight:600;color:var(--text3);border:1px solid var(--border);border-radius:4px;padding:2px 6px;text-transform:uppercase;letter-spacing:.04em;font-family:var(--mono)}
 .ptag.live{color:#22c55e;border-color:rgba(34,197,94,.22);background:rgba(34,197,94,.05)}
@@ -205,7 +201,6 @@ nav.stuck{
 /* MISSION */
 .mission{padding:4rem 0;background:var(--bg)}
 .mission-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;margin-top:2.5rem}
-.mission-left{}
 .mission-h{font-size:clamp(1.6rem,3.5vw,2.5rem);font-weight:800;color:#fff;line-height:1.2;letter-spacing:-.02em;margin-bottom:1.2rem}
 .mission-h em{color:var(--blue);font-style:normal}
 .mission-p{font-size:.9rem;color:var(--text2);line-height:1.8;margin-bottom:1rem}
@@ -219,11 +214,6 @@ nav.stuck{
 .founder-name{font-size:.85rem;font-weight:700;color:var(--text)}
 .founder-role{font-size:.72rem;color:var(--text3)}
 
-/* CTA */
-.cta-strip{padding:3.5rem 0;background:linear-gradient(135deg,#0d1530,#0a1628);border-top:1px solid var(--border);border-bottom:1px solid var(--border);text-align:center}
-.cta-h{font-size:clamp(1.4rem,3vw,2rem);font-weight:800;color:#fff;margin-bottom:.6rem;letter-spacing:-.02em}
-.cta-p{font-size:.88rem;color:var(--text2);margin-bottom:1.5rem}
-
 /* FAQ */
 .faq{padding:3.5rem 0;background:var(--bg2)}
 .faq-layout{display:grid;grid-template-columns:1fr 2fr;gap:3rem;align-items:start}
@@ -236,21 +226,6 @@ nav.stuck{
 .fq.open .fchev{transform:rotate(180deg);color:var(--blue)}
 .fa{font-size:.82rem;color:var(--text2);line-height:1.75;padding:0 1.3rem;max-height:0;overflow:hidden;transition:max-height .35s var(--ease),padding .35s}
 .fa.open{max-height:200px;padding:.1rem 1.3rem 1.1rem}
-
-/* SUPPORT */
-.support{padding:3.5rem 0;background:var(--bg)}
-.supp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:2rem}
-.sc{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.8rem;display:flex;flex-direction:column;gap:.8rem}
-.sc-ico{width:44px;height:44px;border-radius:11px;background:rgba(59,130,246,.08);border:1px solid rgba(59,130,246,.15);display:flex;align-items:center;justify-content:center;color:var(--blue)}
-.sc-t{font-size:.92rem;font-weight:700;color:var(--text)}
-.sc-d{font-size:.8rem;color:var(--text2);line-height:1.65;flex:1}
-.sc-l{display:inline-flex;align-items:center;gap:5px;font-size:.78rem;font-weight:600;color:var(--blue);transition:gap .2s}
-.sc-l:hover{gap:9px}
-.email-block{margin-top:2rem;background:linear-gradient(135deg,rgba(59,130,246,.08),rgba(139,92,246,.04));border:1px solid rgba(59,130,246,.15);border-radius:14px;padding:2.2rem;display:flex;align-items:center;justify-content:space-between;gap:2rem;flex-wrap:wrap}
-.eb-left h3{font-size:1.5rem;font-weight:800;color:#fff;margin-bottom:.35rem;letter-spacing:-.02em}
-.eb-left p{font-size:.84rem;color:var(--text2)}
-.eb-btn{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,#3b82f6,#2563eb);color:#fff;border:none;border-radius:9px;font-size:.86rem;font-weight:700;padding:.85rem 1.6rem;white-space:nowrap;box-shadow:0 4px 18px rgba(59,130,246,.25);transition:all .2s}
-.eb-btn:hover{transform:translateY(-2px)}
 
 /* FOOTER */
 footer{background:var(--bg2);border-top:1px solid var(--border);padding:3rem 0 2rem}
@@ -270,43 +245,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:3rem 0 2
 .foot-bot{display:flex;align-items:center;justify-content:space-between;padding-top:1.5rem;border-top:1px solid var(--border);flex-wrap:wrap;gap:.75rem}
 .foot-copy{font-size:.72rem;color:var(--text3)}
 
-/* FEATURE BANNER */
-.feature-banner{
-  padding:4rem 0;
-  background:var(--bg);
-  border-top:1px solid var(--border);
-  border-bottom:1px solid var(--border);
-  text-align:center;
-  overflow:hidden;
-}
-.fb-label{font-size:.65rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--text3);margin-bottom:1.5rem;font-family:var(--mono)}
-.fb-track{position:relative;height:120px}
-.fb-slide{
-  position:absolute;inset:0;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  opacity:0;transform:translateY(12px);
-  transition:opacity .8s var(--ease),transform .8s var(--ease);
-  pointer-events:none;
-}
-.fb-slide.active{opacity:1;transform:translateY(0);pointer-events:all;animation:fbFloat 3s ease-in-out infinite}
-@keyframes fbFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
-.fb-icon{
-  width:44px;height:44px;border-radius:12px;
-  display:flex;align-items:center;justify-content:center;
-  margin-bottom:1rem;
-}
-.fb-name{font-size:1.6rem;font-weight:800;color:#fff;letter-spacing:-.02em;margin-bottom:.4rem}
-.fb-tag{font-size:.85rem;color:var(--text2);max-width:360px;line-height:1.5;margin-bottom:1.2rem}
-.fb-cta{
-  display:inline-flex;align-items:center;gap:6px;
-  font-size:.8rem;font-weight:700;color:var(--blue);
-  border:1px solid rgba(59,130,246,.25);border-radius:8px;
-  padding:.5rem 1.1rem;transition:all .2s;
-}
-.fb-cta:hover{background:rgba(59,130,246,.08);gap:10px}
-.fb-dots{display:flex;gap:6px;margin-top:1.2rem}
-.fb-dot{width:6px;height:6px;border-radius:50%;background:var(--border2);transition:all .3s;cursor:pointer}
-.fb-dot.active{background:var(--blue);width:18px;border-radius:3px}
+/* #btt */
 #btt{
   position:fixed;bottom:1.5rem;right:1.5rem;z-index:100;
   width:40px;height:40px;
@@ -322,417 +261,281 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:3rem 0 2
 #btt.show{opacity:1;transform:translateY(0);pointer-events:all}
 #btt:hover{transform:translateY(-2px) scale(1.05)}
 
-/* SECTION LABEL */
-.sec-label{display:flex;align-items:center;gap:8px;font-size:.68rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--text3);margin-bottom:.7rem;font-family:var(--mono)}
-.sl-line{width:28px;height:1px;background:var(--text3)}
-
-/* REVEAL */
-.reveal{opacity:0;transform:translateY(28px);transition:opacity .65s var(--ease),transform .65s var(--ease)}
-.reveal.on{opacity:1;transform:translateY(0)}
-.d1{transition-delay:.1s}.d2{transition-delay:.18s}.d3{transition-delay:.26s}.d4{transition-delay:.34s}
-
-/* RTL support */
-[dir="rtl"] .nav-links{margin-left:0;margin-right:1rem}
-[dir="rtl"] .lang-dropdown{right:auto;left:0}
-
 /* RESPONSIVE */
 @media(max-width:960px){
-  .nav-links,.btn-cta{display:none}
-  .hamburger{display:flex}
-  .hero-grid{grid-template-columns:1fr;gap:2rem}
-  .hero-right{justify-content:flex-start}
-  .mockup{max-width:100%}
-  .cat-grid{grid-template-columns:1fr 1fr}
-  .wwd-grid{grid-template-columns:1fr}
+  .nav-links,.hero-right{display:none}
+  .hero-grid{grid-template-columns:1fr}
   .proj-grid{grid-template-columns:1fr 1fr}
-  .mission-grid{grid-template-columns:1fr;gap:2rem}
-  .faq-layout{grid-template-columns:1fr;gap:2rem}
-  .supp-grid{grid-template-columns:1fr}
+  .mission-grid{grid-template-columns:1fr}
+  .faq-layout{grid-template-columns:1fr}
   .foot-grid{grid-template-columns:1fr 1fr;gap:2rem}
 }
 @media(max-width:560px){
   .hero-h1{font-size:1.85rem}
   .proj-grid{grid-template-columns:1fr}
-  .cat-grid{grid-template-columns:1fr 1fr}
   .foot-grid{grid-template-columns:1fr 1fr}
-  .hero-btns{flex-direction:column;align-items:flex-start}
-}
-@media(max-width:400px){
-  .cat-grid,.foot-grid{grid-template-columns:1fr}
-  .mission-right{grid-template-columns:1fr 1fr}
+  .app-grid{grid-template-columns:1fr 1fr}
 }
 </style>
 </head>
 <body>
 
-<!-- MOBILE MENU -->
-<div class="mob-menu" id="mobMenu">
-  <a href="#projects" onclick="cm()" data-i18n="nav.projects">Projects</a>
-  <a href="#mission" onclick="cm()" data-i18n="nav.mission">Mission</a>
-  <a href="#blog" onclick="cm()" data-i18n="nav.blog">Blog</a>
-  <a href="#faq" onclick="cm()" data-i18n="nav.faq">FAQ</a>
-  <a href="#support" onclick="cm()" data-i18n="nav.support">Support</a>
-</div>
+<!-- APP SHELL -->
+<div class="app-shell" id="appShell">
+  
+  <!-- NAV -->
+  <nav>
+  <div class="wrap nav-inner">
+    <a href="#" class="nav-logo" onclick="showView('home')">
+      <div class="logo-box">A</div>
+      <span class="logo-name">ALPHA-1 <span>STUDIO</span></span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#" onclick="showView('home')">Home</a></li>
+      <li><a href="#" onclick="showView('launcher')">Apps</a></li>
+      <li><a href="#projects" onclick="showView('home')">Projects</a></li>
+      <li><a href="#mission" onclick="showView('home')">Mission</a></li>
+      <li><a href="#faq" onclick="showView('home')">FAQ</a></li>
+    </ul>
+    <div class="nav-right">
+      <button class="launcher-btn" onclick="showView('launcher')">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="3" y="3" width="7" height="7" rx="1"/>
+          <rect x="14" y="3" width="7" height="7" rx="1"/>
+          <rect x="3" y="14" width="7" height="7" rx="1"/>
+          <rect x="14" y="14" width="7" height="7" rx="1"/>
+        </svg>
+        Open Apps
+      </button>
+    </div>
+  </div>
+  </nav>
 
-<!-- NAV -->
-<nav id="nav">
-<div class="wrap nav-inner">
-  <a href="#" class="nav-logo">
-    <div class="logo-box">A</div>
-    <span class="logo-name">ALPHA-1 <span>STUDIO</span></span>
-  </a>
-  <ul class="nav-links">
-    <li><a href="#projects" data-i18n="nav.projects">Projects</a></li>
-    <li><a href="#mission" data-i18n="nav.mission">Mission</a></li>
-    <li><a href="#blog" data-i18n="nav.blog">Blog</a></li>
-    <li><a href="#faq" data-i18n="nav.faq">FAQ</a></li>
-    <li><a href="#support" data-i18n="nav.support">Support</a></li>
-  </ul>
-  <div class="nav-right">
-    <!-- Language picker -->
-    <button class="lang-btn" id="langBtn" onclick="toggleLang(event)">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
-      <span id="langLabel">EN</span>
-      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
-      <div class="lang-dropdown" id="langDropdown">
-        <div class="lang-opt selected" onclick="setLang('en')"><span class="lang-flag">🇺🇸</span><span class="lang-name">English</span></div>
-        <div class="lang-opt" onclick="setLang('fr')"><span class="lang-flag">🇫🇷</span><span class="lang-name">Français</span></div>
-        <div class="lang-opt" onclick="setLang('es')"><span class="lang-flag">🇪🇸</span><span class="lang-name">Español</span></div>
-        <div class="lang-opt" onclick="setLang('pt')"><span class="lang-flag">🇧🇷</span><span class="lang-name">Português</span></div>
-        <div class="lang-opt" onclick="setLang('de')"><span class="lang-flag">🇩🇪</span><span class="lang-name">Deutsch</span></div>
-        <div class="lang-opt" onclick="setLang('ar')"><span class="lang-flag">🇸🇦</span><span class="lang-name">العربية</span></div>
-        <div class="lang-opt" onclick="setLang('hi')"><span class="lang-flag">🇮🇳</span><span class="lang-name">हिन्दी</span></div>
-        <div class="lang-opt" onclick="setLang('zh')"><span class="lang-flag">🇨🇳</span><span class="lang-name">中文</span></div>
-        <div class="lang-opt" onclick="setLang('ru')"><span class="lang-flag">🇷🇺</span><span class="lang-name">Русский</span></div>
-        <div class="lang-opt" onclick="setLang('ja')"><span class="lang-flag">🇯🇵</span><span class="lang-name">日本語</span></div>
+  <!-- MAIN CONTENT -->
+  <main class="app-content">
+    
+    <!-- LAUNCHER VIEW -->
+    <div class="launcher-view" id="launcherView">
+      <div class="launcher-header">
+        <h1 class="launcher-title">Your Alpha-1 Apps</h1>
+        <p class="launcher-sub">Click any app to launch it right here</p>
       </div>
-    </button>
-    <a href="#support" class="btn-cta" data-i18n="nav.contact">Get in Touch</a>
-    <button class="hamburger" id="hambBtn">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="17" x2="21" y2="17"/></svg>
-    </button>
-  </div>
-</div>
-</nav>
+      <div class="app-grid" id="appGrid"></div>
+    </div>
 
-<!-- HERO -->
-<section class="hero" id="home">
-<div class="wrap">
-<div class="hero-grid">
-  <div>
-    <div class="hero-badge"><span class="bdot"></span><span data-i18n="hero.badge">Global Technology Studio · Ghana 🇬🇭</span></div>
-    <h1 class="hero-h1" data-i18n="hero.title">Building the Future.<br/>From Ghana,<br/>For the World.</h1>
-    <p class="hero-p" data-i18n="hero.sub">Privacy tools, AI products and developer utilities — free, open and built for everyone. No accounts. No tracking. Just powerful technology.</p>
-    <div class="hero-btns">
-      <a href="#projects" class="btn-primary">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
-        <span data-i18n="hero.cta1">Explore Products</span>
-      </a>
-      <a href="#mission" class="btn-ghost"><span data-i18n="hero.cta2">Our Mission →</span></a>
-    </div>
-    <div class="hero-stats">
-      <div class="stat-wrap"><div class="stat-n counter" data-target="5">0</div><div class="stat-l" data-i18n="stats.projects">Products</div></div>
-      <div class="stat-wrap"><div class="stat-n counter" data-target="600" data-suffix="+">0</div><div class="stat-l" data-i18n="stats.tools">Tools Built</div></div>
-      <div class="stat-wrap"><div class="stat-n counter" data-target="10">0</div><div class="stat-l" data-i18n="stats.langs">Languages</div></div>
-      <div class="stat-wrap"><div class="stat-n">∞</div><div class="stat-l" data-i18n="stats.building">Still Building</div></div>
-    </div>
-  </div>
-  <div class="hero-right">
-    <div class="mockup">
-      <div class="mock-bar">
-        <div class="mdot" style="background:#ff5f57"></div>
-        <div class="mdot" style="background:#febc2e"></div>
-        <div class="mdot" style="background:#28c840"></div>
-        <div class="mock-url"><div style="width:110px;height:7px;background:rgba(255,255,255,.07);border-radius:3px"></div></div>
+    <!-- IFRAME VIEW -->
+    <div class="iframe-view" id="iframeView">
+      <div class="iframe-toolbar">
+        <button class="back-btn" onclick="showView('launcher')">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="15 18 9 12 15 6"/>
+          </svg>
+          Back to Apps
+        </button>
+        <span class="iframe-title" id="iframeTitle"></span>
+        <span class="iframe-badge">Embedded</span>
+        <a href="#" class="site-link" id="siteLink" target="_blank">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/>
+            <polyline points="15 3 21 3 21 9"/>
+            <line x1="10" y1="14" x2="21" y2="3"/>
+          </svg>
+          Open in new tab
+        </a>
       </div>
-      <div class="mock-body">
-        <div class="mc"><div class="mc-ico" style="background:rgba(59,130,246,.18)"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></div><div class="mc-t">Sam Atlas</div><div class="mc-s">AI Assistant</div><div class="mc-prev" style="background:linear-gradient(135deg,rgba(59,130,246,.2),rgba(139,92,246,.1))"></div></div>
-        <div class="mc"><div class="mc-ico" style="background:rgba(139,92,246,.18)"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#8b5cf6" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><div class="mc-t">Alpha-1 Design</div><div class="mc-s">AI Tools PWA</div><div class="mc-prev" style="background:linear-gradient(135deg,rgba(139,92,246,.2),rgba(59,130,246,.1))"></div></div>
-        <div class="mc"><div class="mc-ico" style="background:rgba(34,197,94,.14)"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div><div class="mc-t">Privacy Toolkit</div><div class="mc-s">Security Tools</div><div class="mc-prev" style="background:linear-gradient(135deg,rgba(34,197,94,.15),rgba(16,185,129,.08))"></div></div>
-        <div class="mc"><div class="mc-ico" style="background:rgba(251,191,36,.14)"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#fbbf24" stroke-width="2"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg></div><div class="mc-t">Universal Toolbox</div><div class="mc-s">600+ Tools</div><div class="mc-prev" style="background:linear-gradient(135deg,rgba(251,191,36,.15),rgba(245,158,11,.08))"></div></div>
-      </div>
+      <iframe class="iframe-container" id="iframeContainer" allow="accelerometer; autoplay; camera; document-domain; encrypted-media; geolocation; gyroscope; microphone; midi; payment; picture-in-picture; speaker; usb; vr; web-share; clipboard-read; clipboard-write"></iframe>
     </div>
-  </div>
-</div>
-</div>
-</section>
 
-<!-- CATEGORIES -->
-<section class="categories">
-<div class="wrap">
-  <div class="cat-grid">
-    <div class="cat-card reveal">
-      <div class="cat-head"><div class="cat-ico" style="background:rgba(59,130,246,.12)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 118 0v4"/></svg></div><span class="cat-title" data-i18n="cat.privacy">Privacy Apps</span></div>
-      <div class="cat-item"><div class="cii" style="background:rgba(59,130,246,.08)"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></div>Sam Atlas</div>
-      <div class="cat-item"><div class="cii" style="background:rgba(34,197,94,.08)"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div>Privacy Toolkit</div>
-    </div>
-    <div class="cat-card reveal d1">
-      <div class="cat-head"><div class="cat-ico" style="background:rgba(139,92,246,.12)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8b5cf6" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="cat-title" data-i18n="cat.ai">AI &amp; Design</span></div>
-      <div class="cat-item"><div class="cii" style="background:rgba(139,92,246,.08)"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#8b5cf6" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>Alpha-1 Design</div>
-      <div class="cat-item"><div class="cii" style="background:rgba(244,114,182,.08)"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#f472b6" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg></div>Portfolio</div>
-    </div>
-    <div class="cat-card reveal d2">
-      <div class="cat-head"><div class="cat-ico" style="background:rgba(251,191,36,.1)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fbbf24" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div><span class="cat-title" data-i18n="cat.dev">Developer Tools</span></div>
-      <div class="cat-item"><div class="cii" style="background:rgba(251,191,36,.08)"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#fbbf24" stroke-width="2"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg></div>Universal Toolbox</div>
-      <div class="cat-item"><div class="cii" style="background:rgba(34,197,94,.08)"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div><span data-i18n="cat.devtools">Dev Utilities</span></div>
-    </div>
-    <div class="cat-card reveal d3">
-      <div class="cat-head"><div class="cat-ico" style="background:rgba(244,114,182,.1)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#f472b6" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></div><span class="cat-title" data-i18n="cat.creative">Creative Work</span></div>
-      <div class="cat-item"><div class="cii" style="background:rgba(244,114,182,.08)"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#f472b6" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></div><span data-i18n="cat.video">Video Editing</span></div>
-      <div class="cat-item"><div class="cii" style="background:rgba(139,92,246,.08)"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#8b5cf6" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div><span data-i18n="cat.design">UI Design</span></div>
-    </div>
-  </div>
-</div>
-</section>
-
-<!-- WHAT WE DO -->
-<section class="wwd">
-<div class="wrap">
-  <div class="sec-label reveal"><span class="sl-line"></span><span data-i18n="wwd.label">What We Build</span></div>
-  <h2 class="sec-title reveal" style="font-size:clamp(1.5rem,3.5vw,2.2rem);font-weight:800;letter-spacing:-.02em;color:#fff" data-i18n="wwd.title">Technology That Puts You First</h2>
-  <p class="sec-sub reveal d1" data-i18n="wwd.sub">Every product we build is free, private and works for you — not against you.</p>
-  <div class="wwd-grid">
-    <div class="wwd-card reveal">
-      <div class="wwd-ico" style="background:rgba(59,130,246,.1);border:1px solid rgba(59,130,246,.18)"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="1.8"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 118 0v4"/><circle cx="12" cy="16" r="1.5" fill="#3b82f6" stroke="none"/></svg></div>
-      <div class="wwd-t" data-i18n="wwd.p1.title">Privacy First</div>
-      <div class="wwd-p" data-i18n="wwd.p1.desc">All products are built with privacy at the core. Your data stays on your device. No tracking, no analytics, no accounts required.</div>
-    </div>
-    <div class="wwd-card reveal d1">
-      <div class="wwd-ico" style="background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.18)"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg></div>
-      <div class="wwd-t" data-i18n="wwd.p2.title">Globally Accessible</div>
-      <div class="wwd-p" data-i18n="wwd.p2.desc">Available in 10 languages. Built to work on any device, any browser, anywhere in the world — especially in markets underserved by big tech.</div>
-    </div>
-    <div class="wwd-card reveal d2">
-      <div class="wwd-ico" style="background:rgba(139,92,246,.08);border:1px solid rgba(139,92,246,.18)"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#8b5cf6" stroke-width="1.8"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
-      <div class="wwd-t" data-i18n="wwd.p3.title">Always Free</div>
-      <div class="wwd-p" data-i18n="wwd.p3.desc">Every product is free to use. No paywalls. No premium tiers for basic features. Good technology should be accessible to everyone.</div>
-    </div>
-  </div>
-</div>
-</section>
-
-<!-- PROJECTS -->
-<section class="projects" id="projects">
-<div class="wrap">
-  <div class="sec-head reveal">
-    <div><div class="sec-title" data-i18n="proj.title">All Products</div><div class="sec-sub" data-i18n="proj.sub">Every product is live and free to use.</div></div>
-    <a href="https://github.com/alpha-1-design" target="_blank" class="see-all" data-i18n="proj.github">View on GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></a>
-  </div>
-  <div class="proj-grid">
-    <a class="proj-card reveal" href="https://sam-atlas.vercel.app/" target="_blank">
-      <div class="pc-top"><div class="pc-head"><div class="pc-ico" style="background:linear-gradient(135deg,#1e3a5f,#0f2040)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></div><div class="pc-name">Sam Atlas</div></div><div class="pc-desc" data-i18n="proj.sa">Free, open AI assistant built for everyone. No login, no tracking, no subscriptions. Just powerful AI at your fingertips.</div></div>
-      <div class="pc-prev" style="background:linear-gradient(135deg,#0d1e3a,#091428)"><div class="pc-prev-in"><div class="prow"><div class="pbar" style="background:rgba(59,130,246,.25);max-width:55px"></div><div class="pbar" style="background:rgba(255,255,255,.05)"></div></div><div class="prow" style="margin-top:4px"><div class="pblk" style="background:rgba(59,130,246,.1);border:1px solid rgba(59,130,246,.15)"></div><div class="pblk" style="background:rgba(139,92,246,.08);border:1px solid rgba(139,92,246,.12)"></div></div><div class="prow" style="margin-top:4px"><div class="pblk" style="background:rgba(34,197,94,.06);border:1px solid rgba(34,197,94,.1)"></div><div class="pblk" style="background:rgba(244,114,182,.06);border:1px solid rgba(244,114,182,.1)"></div></div></div></div>
-      <div class="ptags"><span class="ptag">Next.js</span><span class="ptag">AI</span><span class="ptag">PWA</span><span class="ptag live">● Live</span></div>
-    </a>
-    <a class="proj-card reveal d1" href="https://alpha-1design.vercel.app/" target="_blank">
-      <div class="pc-top"><div class="pc-head"><div class="pc-ico" style="background:linear-gradient(135deg,#2d1a5f,#1a0f40)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8b5cf6" stroke-width="1.8"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><div class="pc-name">Alpha-1 Design</div></div><div class="pc-desc" data-i18n="proj.a1d">AI writing, image compression and color palette tools. Installable PWA powered by Claude API.</div></div>
-      <div class="pc-prev" style="background:linear-gradient(135deg,#1a0d3a,#100928)"><div class="pc-prev-in"><div class="prow" style="margin-bottom:5px"><div class="pbar" style="background:rgba(139,92,246,.25);max-width:55px"></div><div class="pbar" style="background:rgba(255,255,255,.05)"></div></div><div class="prow"><div class="pblk" style="background:linear-gradient(135deg,rgba(139,92,246,.18),rgba(59,130,246,.08));border:1px solid rgba(139,92,246,.15)"></div><div class="pblk" style="background:rgba(255,255,255,.04);border:1px solid var(--border)"></div></div></div></div>
-      <div class="ptags"><span class="ptag">Next.js</span><span class="ptag">Claude API</span><span class="ptag">PWA</span><span class="ptag live">● Live</span></div>
-    </a>
-    <a class="proj-card reveal d2" href="https://privacy-toolkit-ten.vercel.app/" target="_blank">
-      <div class="pc-top"><div class="pc-head"><div class="pc-ico" style="background:linear-gradient(135deg,#0f3a2a,#082018)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="1.8"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div><div class="pc-name">Privacy Toolkit</div></div><div class="pc-desc" data-i18n="proj.pt">13 browser-based security tools. Phishing detection, AES-256 encryption, JWT decoder. Zero servers. Zero tracking.</div></div>
-      <div class="pc-prev" style="background:linear-gradient(135deg,#091f14,#050f0a)"><div class="pc-prev-in"><div style="display:flex;flex-direction:column;gap:4px"><div style="height:10px;background:rgba(34,197,94,.08);border-radius:3px;border:1px solid rgba(34,197,94,.12)"></div><div style="height:10px;background:rgba(34,197,94,.06);border-radius:3px;border:1px solid rgba(34,197,94,.1)"></div><div style="height:10px;background:rgba(34,197,94,.04);border-radius:3px;border:1px solid rgba(34,197,94,.08)"></div></div></div></div>
-      <div class="ptags"><span class="ptag">Vanilla JS</span><span class="ptag">Web Crypto</span><span class="ptag live">● Live</span></div>
-    </a>
-    <a class="proj-card reveal" href="https://universal-toolbox.vercel.app/" target="_blank">
-      <div class="pc-top"><div class="pc-head"><div class="pc-ico" style="background:linear-gradient(135deg,#3a2a0f,#201508)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fbbf24" stroke-width="1.8"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg></div><div class="pc-name">Universal Toolbox</div></div><div class="pc-desc" data-i18n="proj.ut">600+ curated web tools across 50+ categories. Bookmarks, collections and inline preview.</div></div>
-      <div class="pc-prev" style="background:linear-gradient(135deg,#1f1505,#120d03)"><div class="pc-prev-in"><div style="display:flex;gap:4px;flex-wrap:wrap"><div style="width:26px;height:22px;background:rgba(251,191,36,.1);border:1px solid rgba(251,191,36,.15);border-radius:5px"></div><div style="width:26px;height:22px;background:rgba(59,130,246,.08);border:1px solid rgba(59,130,246,.12);border-radius:5px"></div><div style="width:26px;height:22px;background:rgba(34,197,94,.07);border:1px solid rgba(34,197,94,.1);border-radius:5px"></div><div style="width:26px;height:22px;background:rgba(244,114,182,.07);border:1px solid rgba(244,114,182,.1);border-radius:5px"></div><div style="width:26px;height:22px;background:rgba(139,92,246,.07);border:1px solid rgba(139,92,246,.1);border-radius:5px"></div><div style="width:26px;height:22px;background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:5px"></div></div></div></div>
-      <div class="ptags"><span class="ptag">React</span><span class="ptag">Vite</span><span class="ptag">PWA</span><span class="ptag live">● Live</span></div>
-    </a>
-    <a class="proj-card reveal d1" href="https://samuel-mensah-portfolio.vercel.app/" target="_blank">
-      <div class="pc-top"><div class="pc-head"><div class="pc-ico" style="background:linear-gradient(135deg,#3a1a2a,#200f18)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f472b6" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg></div><div class="pc-name" data-i18n="proj.port.name">Portfolio</div></div><div class="pc-desc" data-i18n="proj.port">Full-stack developer, video editor and creative engineer based in Ghana.</div></div>
-      <div class="pc-prev" style="background:linear-gradient(135deg,#1f0d18,#120810)"><div class="pc-prev-in"><div style="display:flex;align-items:center;gap:7px;margin-bottom:6px"><div style="width:22px;height:22px;background:rgba(244,114,182,.2);border-radius:50%"></div><div style="flex:1"><div style="height:5px;background:rgba(244,114,182,.15);border-radius:2px;margin-bottom:3px"></div><div style="height:4px;background:rgba(255,255,255,.04);border-radius:2px;width:55%"></div></div></div><div style="height:26px;background:rgba(244,114,182,.05);border-radius:5px;border:1px solid rgba(244,114,182,.1)"></div></div></div>
-      <div class="ptags"><span class="ptag">Next.js</span><span class="ptag">TypeScript</span><span class="ptag live">● Live</span></div>
-    </a>
-    <div class="proj-card reveal d2" id="blog">
-      <div class="pc-top"><div class="pc-head"><div class="pc-ico" style="background:linear-gradient(135deg,#1a3a3a,#0f2020)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="1.8"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div><div class="pc-name" data-i18n="nav.blog">Blog</div></div><div class="pc-desc" data-i18n="proj.blog">Thoughts on building, privacy and creating technology from Ghana for the world.</div></div>
-      <div class="pc-prev" style="background:linear-gradient(135deg,#091f20,#050f10)"><div class="pc-prev-in"><div style="height:7px;background:rgba(6,182,212,.18);border-radius:2px;width:50%;margin-bottom:5px"></div><div style="height:6px;background:rgba(255,255,255,.04);border-radius:2px;margin-bottom:3px"></div><div style="height:6px;background:rgba(255,255,255,.04);border-radius:2px;width:70%;margin-bottom:3px"></div><div style="display:inline-flex;align-items:center;gap:4px;background:rgba(6,182,212,.08);border:1px solid rgba(6,182,212,.18);border-radius:4px;padding:2px 7px;margin-top:3px"><div style="width:4px;height:4px;border-radius:50%;background:#06b6d4"></div><span style="font-size:.58rem;color:#06b6d4;font-family:var(--mono)" data-i18n="blog.soon">Coming Soon</span></div></div></div>
-      <div class="ptags"><span class="ptag">Dev</span><span class="ptag">Mindset</span><span class="ptag">Privacy</span></div>
-    </div>
-  </div>
-</div>
-</section>
-
-<!-- MISSION -->
-<section class="mission" id="mission">
-<div class="wrap">
-  <div class="sec-label reveal"><span class="sl-line"></span><span data-i18n="mission.label">Our Mission</span></div>
-  <div class="mission-grid">
-    <div>
-      <h2 class="mission-h reveal" data-i18n="mission.title">Technology built for <em>everyone</em> — not just those with resources.</h2>
-      <p class="mission-p reveal d1" data-i18n="mission.p1">Alpha-1 Studio is a global technology studio building privacy tools, AI products and developer utilities — free, open and accessible to everyone. We believe powerful technology should not require a subscription, an account or a data sacrifice.</p>
-      <p class="mission-p reveal d2" data-i18n="mission.p2">Built from Ghana. Used worldwide. Improving every day.</p>
-      <div class="founder reveal d3">
-        <div class="founder-avatar">S</div>
-        <div><div class="founder-name">Samuel Mensah</div><div class="founder-role" data-i18n="mission.founder">Founder · Full-Stack Developer · Ghana 🇬🇭</div></div>
+    <!-- HOME VIEW -->
+    <div id="homeView">
+    
+    <!-- HERO -->
+    <section class="hero" id="home">
+    <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <div class="hero-badge"><span class="bdot"></span><span>Global Technology Studio · Ghana 🇬🇭</span></div>
+        <h1 class="hero-h1">Building the Future.<br/>From Ghana,<br/>For the World.</h1>
+        <p class="hero-p">Privacy tools, AI products and developer utilities — free, open and built for everyone. No accounts. No tracking. Just powerful technology.</p>
+        <div class="hero-btns">
+          <button class="btn-primary" onclick="showView('launcher')">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <rect x="3" y="3" width="7" height="7" rx="1"/>
+              <rect x="14" y="3" width="7" height="7" rx="1"/>
+              <rect x="3" y="14" width="7" height="7" rx="1"/>
+              <rect x="14" y="14" width="7" height="7" rx="1"/>
+            </svg>
+            Open Apps
+          </button>
+          <a href="#mission" class="btn-ghost">Our Mission →</a>
+        </div>
+        <div class="hero-stats">
+          <div class="stat-wrap"><div class="stat-n counter" data-target="5">0</div><div class="stat-l">Products</div></div>
+          <div class="stat-wrap"><div class="stat-n counter" data-target="700" data-suffix="+">0</div><div class="stat-l">Tools Built</div></div>
+          <div class="stat-wrap"><div class="stat-n counter" data-target="10">0</div><div class="stat-l">Languages</div></div>
+          <div class="stat-wrap"><div class="stat-n">∞</div><div class="stat-l">Still Building</div></div>
+        </div>
       </div>
     </div>
-    <div class="mission-right reveal d1">
-      <div class="ms"><div class="ms-n counter" data-target="5">0</div><div class="ms-l" data-i18n="stats.products">Products</div></div>
-      <div class="ms"><div class="ms-n counter" data-target="600" data-suffix="+">0</div><div class="ms-l" data-i18n="stats.tools">Tools Built</div></div>
-      <div class="ms"><div class="ms-n counter" data-target="13">0</div><div class="ms-l" data-i18n="mission.security">Security Tools</div></div>
-      <div class="ms"><div class="ms-n counter" data-target="10">0</div><div class="ms-l" data-i18n="stats.langs">Languages</div></div>
     </div>
-  </div>
-</div>
-</section>
+    </section>
 
-<!-- FEATURE BANNER -->
-<section class="feature-banner">
-<div class="wrap">
-  <div class="fb-label">Featured Product</div>
-  <div class="fb-track" id="fbTrack">
-    <div class="fb-slide" data-index="0">
-      <div class="fb-icon" style="background:linear-gradient(135deg,#1e3a5f,#0f2040)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></div>
-      <div class="fb-name">Sam Atlas</div>
-      <div class="fb-tag">Free, open AI assistant built for everyone. No login, no tracking, no subscriptions.</div>
-      <a href="https://sam-atlas.vercel.app/" target="_blank" class="fb-cta">Try it free <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+    <!-- FEATURE BANNER -->
+    <section class="feature-banner">
+    <div class="wrap">
+      <div class="fb-label">Featured Product</div>
+      <div class="fb-track" id="fbTrack">
+        <div class="fb-slide active" data-index="0">
+          <div class="fb-icon" style="background:linear-gradient(135deg,#1e3a5f,#0f2040)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></div>
+          <div class="fb-name">Sam Atlas</div>
+          <div class="fb-tag">AI Agent Builder. Digital products to help you build and sell AI agents. No login required.</div>
+          <a href="#" onclick="openApp('sam-atlas');return false" class="fb-cta">Open App <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        </div>
+        <div class="fb-slide" data-index="1">
+          <div class="fb-icon" style="background:linear-gradient(135deg,#2d1a5f,#1a0f40)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#8b5cf6" stroke-width="1.8"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
+          <div class="fb-name">Alpha-1 Design</div>
+          <div class="fb-tag">AI writing, image compression, and color palette tools. Powered by Claude API.</div>
+          <a href="#" onclick="openApp('alpha-1-design');return false" class="fb-cta">Open App <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        </div>
+        <div class="fb-slide" data-index="2">
+          <div class="fb-icon" style="background:linear-gradient(135deg,#0f3a2a,#082018)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="1.8"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div>
+          <div class="fb-name">Privacy Toolkit</div>
+          <div class="fb-tag">13 browser-based security tools. Phishing detection, AES-256 encryption, JWT decoder.</div>
+          <a href="#" onclick="openApp('privacy-toolkit');return false" class="fb-cta">Open App <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        </div>
+        <div class="fb-slide" data-index="3">
+          <div class="fb-icon" style="background:linear-gradient(135deg,#3a2a0f,#201508)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fbbf24" stroke-width="1.8"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg></div>
+          <div class="fb-name">Universal Toolbox</div>
+          <div class="fb-tag">700+ curated web tools across 50+ categories. Your complete developer toolkit.</div>
+          <a href="#" onclick="openApp('universal-toolbox');return false" class="fb-cta">Open App <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        </div>
+      </div>
+      <div class="fb-dots" id="fbDots"></div>
     </div>
-    <div class="fb-slide" data-index="1">
-      <div class="fb-icon" style="background:linear-gradient(135deg,#2d1a5f,#1a0f40)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#8b5cf6" stroke-width="1.8"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
-      <div class="fb-name">Alpha-1 Design</div>
-      <div class="fb-tag">AI writing, image compression, and color palette tools. Powered by Claude API.</div>
-      <a href="https://alpha-1design.vercel.app/" target="_blank" class="fb-cta">Explore tools <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
-    </div>
-    <div class="fb-slide" data-index="2">
-      <div class="fb-icon" style="background:linear-gradient(135deg,#0f3a2a,#082018)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="1.8"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div>
-      <div class="fb-name">Privacy Toolkit</div>
-      <div class="fb-tag">13 browser-based security tools. Phishing detection, AES-256 encryption, JWT decoder.</div>
-      <a href="https://privacy-toolkit-ten.vercel.app/" target="_blank" class="fb-cta">Stay secure <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
-    </div>
-    <div class="fb-slide" data-index="3">
-      <div class="fb-icon" style="background:linear-gradient(135deg,#3a2a0f,#201508)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fbbf24" stroke-width="1.8"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg></div>
-      <div class="fb-name">Universal Toolbox</div>
-      <div class="fb-tag">700+ curated web tools across 50+ categories. Your complete developer toolkit.</div>
-      <a href="https://universal-toolbox.vercel.app/" target="_blank" class="fb-cta">Browse tools <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
-    </div>
-    <div class="fb-slide" data-index="4">
-      <div class="fb-icon" style="background:linear-gradient(135deg,#3a1a2a,#200f18)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#f472b6" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg></div>
-      <div class="fb-name">Portfolio</div>
-      <div class="fb-tag">Full-stack developer, video editor, and creative engineer based in Ghana.</div>
-      <a href="https://samuel-mensah-portfolio.vercel.app/" target="_blank" class="fb-cta">View portfolio <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
-    </div>
-  </div>
-  <div class="fb-dots" id="fbDots"></div>
-</div>
-</section>
+    </section>
 
-<!-- CTA -->
-<section class="cta-strip">
-<div class="wrap">
-  <h2 class="cta-h" data-i18n="cta.title">All Your Favourite Tools in One Place</h2>
-  <p class="cta-p" data-i18n="cta.sub">Free to use. Built with privacy. Improving every day.</p>
-  <a href="#projects" class="btn-primary" style="display:inline-flex">
-    <span data-i18n="cta.btn">Explore All Products</span>
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
-  </a>
-</div>
-</section>
-
-<!-- FAQ -->
-<section class="faq" id="faq">
-<div class="wrap">
-  <div class="faq-layout">
-    <div>
-      <div class="sec-label reveal"><span class="sl-line"></span><span data-i18n="nav.faq">FAQ</span></div>
-      <h2 style="font-size:1.8rem;font-weight:800;color:#fff;letter-spacing:-.02em;margin-bottom:.8rem" class="reveal" data-i18n="faq.title">Questions?<br/>Answered.</h2>
-      <p style="font-size:.83rem;color:var(--text2);line-height:1.65;margin-bottom:1.5rem" class="reveal d1" data-i18n="faq.sub">Everything you need to know about Alpha-1 Studio.</p>
-      <a href="mailto:alphariansamuel@gmail.com" class="btn-ghost reveal d2" style="display:inline-flex;font-size:.8rem;padding:.6rem 1.1rem">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-        <span data-i18n="faq.email">Email Us</span>
-      </a>
-    </div>
-    <div class="faq-list reveal d1">
-      <div class="fi"><button class="fq" onclick="tf(this)"><span data-i18n="faq.q1">What is Alpha-1 Studio?</span><svg class="fchev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button><div class="fa" data-i18n="faq.a1">Alpha-1 Studio is a global technology studio building privacy tools, AI products and developer utilities — all free, open and built for everyone. Founded by Samuel Mensah in Ghana.</div></div>
-      <div class="fi"><button class="fq" onclick="tf(this)"><span data-i18n="faq.q2">How does Sam Atlas work?</span><svg class="fchev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button><div class="fa" data-i18n="faq.a2">Sam Atlas is a free AI assistant available in your browser. No account needed — just visit sam-atlas.vercel.app and start chatting. It's that simple.</div></div>
-      <div class="fi"><button class="fq" onclick="tf(this)"><span data-i18n="faq.q3">Is my data safe?</span><svg class="fchev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button><div class="fa" data-i18n="faq.a3">Absolutely. All products are privacy-first. Privacy Toolkit runs 100% in your browser — nothing ever sent to a server. No tracking, no analytics, no accounts required.</div></div>
-      <div class="fi"><button class="fq" onclick="tf(this)"><span data-i18n="faq.q4">Are the tools free?</span><svg class="fchev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button><div class="fa" data-i18n="faq.a4">Yes — all products are completely free. Alpha-1 Design requires your own Claude API key for AI features. Everything else needs no account and no payment.</div></div>
-      <div class="fi"><button class="fq" onclick="tf(this)"><span data-i18n="faq.q5">Can I collaborate or hire?</span><svg class="fchev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button><div class="fa" data-i18n="faq.a5">Yes. We're open to collaborations, freelance work and interesting projects. Email alphariansamuel@gmail.com or WhatsApp +233553016346.</div></div>
-      <div class="fi"><button class="fq" onclick="tf(this)"><span data-i18n="faq.q6">What's coming next?</span><svg class="fchev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button><div class="fa" data-i18n="faq.a6">More products, a blog launching soon, and a signed release APK of ShieldSpace for Aptoide. Follow on X for updates.</div></div>
-    </div>
-  </div>
-</div>
-</section>
-
-<!-- SUPPORT -->
-<section class="support" id="support">
-<div class="wrap">
-  <div class="sec-label reveal"><span class="sl-line"></span><span data-i18n="nav.support">Support</span></div>
-  <h2 style="font-size:clamp(1.4rem,3vw,2rem);font-weight:800;color:#fff;letter-spacing:-.02em" class="reveal" data-i18n="supp.title">We've Got You.</h2>
-  <div class="supp-grid">
-    <div class="sc reveal">
-      <div class="sc-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17" stroke-width="3"/></svg></div>
-      <div class="sc-t" data-i18n="supp.c1.title">App Help</div>
-      <div class="sc-d" data-i18n="supp.c1.desc">Having trouble with any product? We'll walk you through it personally.</div>
-      <a href="mailto:alphariansamuel@gmail.com?subject=App Help" class="sc-l" data-i18n="supp.gethelp">Get help <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
-    </div>
-    <div class="sc reveal d1">
-      <div class="sc-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
-      <div class="sc-t" data-i18n="supp.c2.title">Report a Bug</div>
-      <div class="sc-d" data-i18n="supp.c2.desc">Found something broken? Tell us your device model and what happened.</div>
-      <a href="mailto:alphariansamuel@gmail.com?subject=Bug Report" class="sc-l" data-i18n="supp.report">Report <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
-    </div>
-    <div class="sc reveal d2">
-      <div class="sc-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div>
-      <div class="sc-t" data-i18n="supp.c3.title">General Enquiries</div>
-      <div class="sc-d" data-i18n="supp.c3.desc">Partnerships, collaborations or just want to say hello.</div>
-      <a href="mailto:alphariansamuel@gmail.com" class="sc-l" data-i18n="supp.send">Send message <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
-    </div>
-  </div>
-  <div class="email-block reveal d1">
-    <div class="eb-left"><h3 data-i18n="supp.cta.title">READY TO TALK?</h3><p data-i18n="supp.cta.sub">We respond to every message personally. Usually within 24 hours.</p></div>
-    <a href="mailto:alphariansamuel@gmail.com" class="eb-btn">
-      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-      alphariansamuel@gmail.com
-    </a>
-  </div>
-</div>
-</section>
-
-<!-- FOOTER -->
-<footer>
-<div class="wrap">
-  <div class="foot-grid">
-    <div class="fb">
-      <div class="fl"><div class="fl-ico">A</div><span class="fl-t">Alpha-1 Studio</span></div>
-      <p class="fb-d" data-i18n="foot.desc">Global technology studio building privacy tools, AI products and developer utilities. Free for everyone.</p>
-      <div class="soc">
-        <a class="sb" href="https://github.com/alpha-1-design" target="_blank" title="GitHub"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg></a>
-        <a class="sb" href="https://x.com/MensahSamu68007" target="_blank" title="X"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
-        <a class="sb" href="https://www.instagram.com/samuelmensah607?igsh=MXVkcnZsbzQxbHk5Zg==" target="_blank" title="Instagram"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5" stroke-width="2.5"/></svg></a>
-        <a class="sb" href="https://www.tiktok.com/@alpharianbaby1" target="_blank" title="TikTok"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.79a8.28 8.28 0 004.83 1.54V6.89a4.85 4.85 0 01-1.06-.2z"/></svg></a>
+    <!-- PROJECTS -->
+    <section class="projects" id="projects">
+    <div class="wrap">
+      <div class="sec-head">
+        <div><div class="sec-title">All Products</div><div class="sec-sub">Every product is live and free to use.</div></div>
+        <a href="https://github.com/alpha-1-design" target="_blank" class="see-all">View on GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></a>
+      </div>
+      <div class="proj-grid">
+        <a class="proj-card" href="#" onclick="openApp('sam-atlas');return false">
+          <div class="pc-top"><div class="pc-head"><div class="pc-ico" style="background:linear-gradient(135deg,#1e3a5f,#0f2040)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></div><div class="pc-name">Sam Atlas</div></div><div class="pc-desc">AI Agent Builder. Digital products to help you build, configure, and launch AI agents. Step-by-step guides and templates.</div></div>
+          <div class="ptags"><span class="ptag">Next.js</span><span class="ptag">AI</span><span class="ptag">PWA</span><span class="ptag live">● Live</span></div>
+        </a>
+        <a class="proj-card" href="#" onclick="openApp('alpha-1-design');return false">
+          <div class="pc-top"><div class="pc-head"><div class="pc-ico" style="background:linear-gradient(135deg,#2d1a5f,#1a0f40)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8b5cf6" stroke-width="1.8"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><div class="pc-name">Alpha-1 Design</div></div><div class="pc-desc">AI writing, image compression and color palette tools. Installable PWA powered by Claude API.</div></div>
+          <div class="ptags"><span class="ptag">Next.js</span><span class="ptag">Claude API</span><span class="ptag">PWA</span><span class="ptag live">● Live</span></div>
+        </a>
+        <a class="proj-card" href="#" onclick="openApp('privacy-toolkit');return false">
+          <div class="pc-top"><div class="pc-head"><div class="pc-ico" style="background:linear-gradient(135deg,#0f3a2a,#082018)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="1.8"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div><div class="pc-name">Privacy Toolkit</div></div><div class="pc-desc">13 browser-based security tools. Phishing detection, AES-256 encryption, JWT decoder. Zero servers. Zero tracking.</div></div>
+          <div class="ptags"><span class="ptag">Vanilla JS</span><span class="ptag">Web Crypto</span><span class="ptag live">● Live</span></div>
+        </a>
+        <a class="proj-card" href="#" onclick="openApp('universal-toolbox');return false">
+          <div class="pc-top"><div class="pc-head"><div class="pc-ico" style="background:linear-gradient(135deg,#3a2a0f,#201508)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fbbf24" stroke-width="1.8"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg></div><div class="pc-name">Universal Toolbox</div></div><div class="pc-desc">700+ curated web tools across 50+ categories. Bookmarks, collections and inline preview.</div></div>
+          <div class="ptags"><span class="ptag">React</span><span class="ptag">Vite</span><span class="ptag">PWA</span><span class="ptag live">● Live</span></div>
+        </a>
+        <a class="proj-card" href="https://samuel-mensah-portfolio.vercel.app/" target="_blank">
+          <div class="pc-top"><div class="pc-head"><div class="pc-ico" style="background:linear-gradient(135deg,#3a1a2a,#200f18)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f472b6" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg></div><div class="pc-name">Portfolio</div></div><div class="pc-desc">Full-stack developer, video editor and creative engineer based in Ghana.</div></div>
+          <div class="ptags"><span class="ptag">Next.js</span><span class="ptag">TypeScript</span><span class="ptag live">● Live</span></div>
+        </a>
       </div>
     </div>
-    <div class="fc">
-      <h4 data-i18n="foot.quick">Quick Links</h4>
-      <a href="#projects" data-i18n="nav.projects">Projects</a>
-      <a href="#mission" data-i18n="nav.mission">Mission</a>
-      <a href="#blog" data-i18n="nav.blog">Blog</a>
-      <a href="#faq" data-i18n="nav.faq">FAQ</a>
+    </section>
+
+    <!-- MISSION -->
+    <section class="mission" id="mission">
+    <div class="wrap">
+      <div class="sec-label" style="display:flex;align-items:center;gap:8px;font-size:.68rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--text3);margin-bottom:.7rem;font-family:var(--mono)"><span style="width:28px;height:1px;background:var(--text3)"></span>Our Mission</div>
+      <div class="mission-grid">
+        <div>
+          <h2 class="mission-h">Technology built for <em>everyone</em> — not just those with resources.</h2>
+          <p class="mission-p">Alpha-1 Studio is a global technology studio building privacy tools, AI products and developer utilities — free, open and accessible to everyone. We believe powerful technology should not require a subscription, an account or a data sacrifice.</p>
+          <p class="mission-p">Built from Ghana. Used worldwide. Improving every day.</p>
+          <div class="founder">
+            <div class="founder-avatar">S</div>
+            <div><div class="founder-name">Samuel Mensah</div><div class="founder-role">Founder · Full-Stack Developer · Ghana 🇬🇭</div></div>
+          </div>
+        </div>
+        <div class="mission-right">
+          <div class="ms"><div class="ms-n counter" data-target="5">0</div><div class="ms-l">Products</div></div>
+          <div class="ms"><div class="ms-n counter" data-target="700" data-suffix="+">0</div><div class="ms-l">Tools Built</div></div>
+          <div class="ms"><div class="ms-n counter" data-target="13">0</div><div class="ms-l">Security Tools</div></div>
+          <div class="ms"><div class="ms-n counter" data-target="10">0</div><div class="ms-l">Languages</div></div>
+        </div>
+      </div>
     </div>
-    <div class="fc">
-      <h4 data-i18n="foot.resources">Resources</h4>
-      <a href="https://github.com/alpha-1-design" target="_blank">GitHub</a>
-      <a href="https://samuel-mensah-portfolio.vercel.app/" target="_blank" data-i18n="proj.port.name">Portfolio</a>
-      <a href="#faq" data-i18n="nav.faq">FAQs</a>
-      <a href="mailto:alphariansamuel@gmail.com" data-i18n="nav.support">Support</a>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq" id="faq">
+    <div class="wrap">
+      <div class="faq-layout">
+        <div>
+          <div class="sec-label" style="display:flex;align-items:center;gap:8px;font-size:.68rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--text3);margin-bottom:.7rem;font-family:var(--mono)"><span style="width:28px;height:1px;background:var(--text3)"></span>FAQ</div>
+          <h2 style="font-size:1.8rem;font-weight:800;color:#fff;letter-spacing:-.02em;margin-bottom:.8rem">Questions?<br/>Answered.</h2>
+          <p style="font-size:.83rem;color:var(--text2);line-height:1.65;margin-bottom:1.5rem">Everything you need to know about Alpha-1 Studio.</p>
+          <a href="mailto:alphariansamuel@gmail.com" class="btn-ghost" style="display:inline-flex;font-size:.8rem;padding:.6rem 1.1rem">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            Email Us
+          </a>
+        </div>
+        <div class="faq-list">
+          <div class="fi"><button class="fq" onclick="tf(this)"><span>What is Alpha-1 Studio?</span><svg class="fchev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button><div class="fa">Alpha-1 Studio is a global technology studio building privacy tools, AI products and developer utilities — all free, open and built for everyone. Founded by Samuel Mensah in Ghana.</div></div>
+          <div class="fi"><button class="fq" onclick="tf(this)"><span>What is Sam Atlas?</span><svg class="fchev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button><div class="fa">Sam Atlas is an AI Agent Builder platform. We sell digital products — guides, templates, and courses — to help you build, configure, and launch your own AI agents.</div></div>
+          <div class="fi"><button class="fq" onclick="tf(this)"><span>Is my data safe?</span><svg class="fchev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button><div class="fa">Absolutely. All products are privacy-first. Privacy Toolkit runs 100% in your browser — nothing ever sent to a server. No tracking, no analytics, no accounts required.</div></div>
+          <div class="fi"><button class="fq" onclick="tf(this)"><span>Are the tools free?</span><svg class="fchev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button><div class="fa">Yes — all products are completely free. Alpha-1 Design requires your own Claude API key for AI features. Sam Atlas products have one-time purchase prices.</div></div>
+          <div class="fi"><button class="fq" onclick="tf(this)"><span>Can I collaborate or hire?</span><svg class="fchev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button><div class="fa">Yes. We're open to collaborations, freelance work and interesting projects. Email alphariansamuel@gmail.com or WhatsApp +233553016346.</div></div>
+        </div>
+      </div>
     </div>
-    <div class="fc">
-      <h4 data-i18n="foot.follow">Follow Us</h4>
-      <a href="https://x.com/MensahSamu68007" target="_blank">X / Twitter</a>
-      <a href="https://www.facebook.com/share/1AdvY4RmRQ/" target="_blank">Facebook</a>
-      <a href="https://www.instagram.com/samuelmensah607?igsh=MXVkcnZsbzQxbHk5Zg==" target="_blank">Instagram</a>
-      <a href="https://www.tiktok.com/@alpharianbaby1" target="_blank">TikTok</a>
-      <a href="https://t.me/Alpharianbaby1" target="_blank">Telegram</a>
-      <a href="https://pin.it/2SEGXhyif" target="_blank">Pinterest</a>
+    </section>
+
+    </div><!-- end homeView -->
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="fb">
+        <div class="fl"><div class="fl-ico">A</div><span class="fl-t">Alpha-1 Studio</span></div>
+        <p class="fb-d">Global technology studio building privacy tools, AI products and developer utilities. Free for everyone.</p>
+        <div class="soc">
+          <a class="sb" href="https://github.com/alpha-1-design" target="_blank" title="GitHub"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg></a>
+          <a class="sb" href="https://x.com/MensahSamu68007" target="_blank" title="X"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+        </div>
+      </div>
+      <div class="fc">
+        <h4>Quick Links</h4>
+        <a href="#" onclick="showView('launcher')">Apps</a>
+        <a href="#projects">Projects</a>
+        <a href="#mission">Mission</a>
+        <a href="#faq">FAQ</a>
+      </div>
+      <div class="fc">
+        <h4>Resources</h4>
+        <a href="https://github.com/alpha-1-design" target="_blank">GitHub</a>
+        <a href="https://samuel-mensah-portfolio.vercel.app/" target="_blank">Portfolio</a>
+        <a href="#faq">FAQs</a>
+      </div>
+      <div class="fc">
+        <h4>Follow</h4>
+        <a href="https://x.com/MensahSamu68007" target="_blank">X / Twitter</a>
+        <a href="https://www.instagram.com/samuelmensah607" target="_blank">Instagram</a>
+        <a href="https://www.tiktok.com/@alpharianbaby1" target="_blank">TikTok</a>
+      </div>
+    </div>
+    <div class="foot-bot">
+      <span class="foot-copy">© 2026 Alpha-1 Studio. All rights reserved.</span>
+      <span class="foot-copy">Built from Ghana 🇬🇭 for the world.</span>
     </div>
   </div>
-  <div class="foot-bot">
-    <span class="foot-copy" data-i18n="foot.copy">© 2026 Alpha-1 Studio. All rights reserved.</span>
-    <span class="foot-copy" data-i18n="foot.built">Built from Ghana 🇬🇭 for the world.</span>
-  </div>
+  </footer>
 </div>
-</footer>
 
 <!-- BACK TO TOP -->
 <button id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">
@@ -741,294 +544,219 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:3rem 0 2
 
 <script>
 // ═══════════════════════════════════════════════
-// TRANSLATIONS — all 10 languages
+// APP REGISTRY — Configure your embedded apps
 // ═══════════════════════════════════════════════
-const T = {
-  en:{
-    "nav.projects":"Projects","nav.mission":"Mission","nav.blog":"Blog","nav.faq":"FAQ","nav.support":"Support","nav.contact":"Get in Touch",
-    "hero.badge":"Global Technology Studio · Ghana 🇬🇭","hero.title":"Building the Future.<br/>From Ghana,<br/>For the World.","hero.sub":"Privacy tools, AI products and developer utilities — free, open and built for everyone. No accounts. No tracking. Just powerful technology.","hero.cta1":"Explore Products","hero.cta2":"Our Mission →",
-    "stats.projects":"Products","stats.tools":"Tools Built","stats.langs":"Languages","stats.building":"Still Building","stats.products":"Products",
-    "cat.privacy":"Privacy Apps","cat.ai":"AI & Design","cat.dev":"Developer Tools","cat.creative":"Creative Work","cat.devtools":"Dev Utilities","cat.video":"Video Editing","cat.design":"UI Design",
-    "wwd.label":"What We Build","wwd.title":"Technology That Puts You First","wwd.sub":"Every product we build is free, private and works for you — not against you.","wwd.p1.title":"Privacy First","wwd.p1.desc":"All products are built with privacy at the core. Your data stays on your device. No tracking, no analytics, no accounts required.","wwd.p2.title":"Globally Accessible","wwd.p2.desc":"Available in 10 languages. Built to work on any device, any browser, anywhere in the world.","wwd.p3.title":"Always Free","wwd.p3.desc":"Every product is free to use. No paywalls. No premium tiers. Good technology should be accessible to everyone.",
-    "proj.title":"All Products","proj.sub":"Every product is live and free to use.","proj.github":"View on GitHub","proj.sa":"Free, open AI assistant built for everyone. No login, no tracking, no subscriptions. Just powerful AI at your fingertips.","proj.ss":"","proj.a1d":"AI writing, image compression and color palette tools. Installable PWA powered by Claude API.","proj.pt":"13 browser-based security tools. Phishing detection, AES-256 encryption, JWT decoder. Zero servers. Zero tracking.","proj.ut":"600+ curated web tools across 50+ categories. Bookmarks, collections and inline preview.","proj.port":"Full-stack developer, video editor and creative engineer based in Ghana.","proj.port.name":"Portfolio","proj.blog":"Thoughts on building, privacy and creating technology from Ghana for the world.","blog.soon":"Coming Soon",
-    "mission.label":"Our Mission","mission.title":"Technology built for <em>everyone</em> — not just those with resources.","mission.p1":"Alpha-1 Studio is a global technology studio building privacy tools, AI products and developer utilities — free, open and accessible to everyone.","mission.p2":"Built from Ghana. Used worldwide. Improving every day.","mission.founder":"Founder · Full-Stack Developer · Ghana 🇬🇭","mission.security":"Security Tools",
-    "cta.title":"All Your Favourite Tools in One Place","cta.sub":"Free to use. Built with privacy. Improving every day.","cta.btn":"Explore All Products",
-    "faq.title":"Questions?<br/>Answered.","faq.sub":"Everything you need to know about Alpha-1 Studio.","faq.email":"Email Us","faq.q1":"What is Alpha-1 Studio?","faq.a1":"Alpha-1 Studio is a global technology studio building privacy tools, AI products and developer utilities — all free, open and built for everyone. Founded by Samuel Mensah in Ghana.","faq.q2":"How does Sam Atlas work?","faq.a2":"Sam Atlas is a free AI assistant available in your browser. No account needed — just visit sam-atlas.vercel.app and start chatting. It's that simple.","faq.q3":"Is my data safe?","faq.a3":"Absolutely. All products are privacy-first. Privacy Toolkit runs 100% in your browser — nothing ever sent to a server. No tracking, no analytics, no accounts required.","faq.q4":"Are the tools free?","faq.a4":"Yes — all products are completely free. Alpha-1 Design requires your own Claude API key for AI features. Everything else needs no account.","faq.q5":"Can I collaborate or hire?","faq.a5":"Yes. We're open to collaborations and freelance work. Email alphariansamuel@gmail.com or WhatsApp +233553016346.","faq.q6":"What's coming next?","faq.a6":"More products, a blog launching soon, and new features across the ecosystem. Follow on X for updates.",
-    "supp.title":"We've Got You.","supp.c1.title":"App Help","supp.c1.desc":"Having trouble with any product? We'll walk you through it personally.","supp.c2.title":"Report a Bug","supp.c2.desc":"Found something broken? Tell us your device model and what happened.","supp.c3.title":"General Enquiries","supp.c3.desc":"Partnerships, collaborations or just want to say hello.","supp.gethelp":"Get help","supp.report":"Report","supp.send":"Send message","supp.cta.title":"READY TO TALK?","supp.cta.sub":"We respond to every message personally. Usually within 24 hours.",
-    "foot.desc":"Global technology studio building privacy tools, AI products and developer utilities. Free for everyone.","foot.quick":"Quick Links","foot.resources":"Resources","foot.follow":"Follow Us","foot.copy":"© 2026 Alpha-1 Studio. All rights reserved.","foot.built":"Built from Ghana 🇬🇭 for the world."
+const APPS = [
+  {
+    id: 'sam-atlas',
+    name: 'Sam Atlas',
+    desc: 'AI Agent Builder. Digital products to help you build AI agents.',
+    url: 'https://sam-atlas.vercel.app',
+    icon: '🤖',
+    color: '#3b82f6'
   },
-  fr:{
-    "nav.projects":"Projets","nav.mission":"Mission","nav.blog":"Blog","nav.faq":"FAQ","nav.support":"Support","nav.contact":"Nous Contacter",
-    "hero.badge":"Studio Technologique Mondial · Ghana 🇬🇭","hero.title":"Construire l'Avenir.<br/>Du Ghana,<br/>Pour le Monde.","hero.sub":"Outils de confidentialité, produits IA et utilitaires pour développeurs — gratuits, ouverts et conçus pour tous. Sans compte. Sans traçage.","hero.cta1":"Explorer les Produits","hero.cta2":"Notre Mission →",
-    "stats.projects":"Produits Actifs","stats.tools":"Outils Créés","stats.langs":"Langues","stats.building":"En Construction",
-    "cat.privacy":"Apps Confidentialité","cat.ai":"IA & Design","cat.dev":"Outils Dev","cat.creative":"Travail Créatif","cat.devtools":"Utilitaires Dev","cat.video":"Montage Vidéo","cat.design":"Design UI",
-    "wwd.label":"Ce Que Nous Créons","wwd.title":"Une Technologie Qui Vous Met en Premier","wwd.sub":"Chaque produit que nous créons est gratuit, privé et travaille pour vous.","wwd.p1.title":"Confidentialité d'Abord","wwd.p1.desc":"Tous les produits sont conçus avec la confidentialité au cœur. Vos données restent sur votre appareil.","wwd.p2.title":"Accessible Mondialement","wwd.p2.desc":"Disponible en 10 langues. Conçu pour fonctionner sur tout appareil, partout dans le monde.","wwd.p3.title":"Toujours Gratuit","wwd.p3.desc":"Chaque produit est gratuit. Pas de barrières payantes. La bonne technologie doit être accessible à tous.",
-    "proj.title":"Tous les Produits","proj.sub":"Chaque produit est en ligne et gratuit.","proj.github":"Voir sur GitHub","proj.sa":"Assistant IA gratuit et ouvert pour tous. Pas de connexion, pas de traçage.","proj.ss":"","proj.a1d":"Rédaction IA, compression d'images et outils de palette. PWA installable propulsé par Claude API.","proj.pt":"13 outils de sécurité dans le navigateur. Aucun serveur. Aucun traçage.","proj.ut":"600+ outils web dans 50+ catégories. Favoris, collections et aperçu intégré.","proj.port":"Développeur full-stack, monteur vidéo et ingénieur créatif basé au Ghana.","proj.port.name":"Portfolio","proj.blog":"Réflexions sur le développement, la confidentialité et la création technologique du Ghana.","blog.soon":"Bientôt",
-    "mission.label":"Notre Mission","mission.title":"Technologie construite pour <em>tous</em> — pas seulement ceux qui ont des ressources.","mission.p1":"Alpha-1 Studio est un studio technologique mondial créant des outils de confidentialité, des produits IA et des utilitaires de développement — gratuits, ouverts et accessibles à tous.","mission.p2":"Construit depuis le Ghana. Utilisé partout. S'améliore chaque jour.","mission.founder":"Fondateur · Développeur Full-Stack · Ghana 🇬🇭","mission.security":"Outils de Sécurité",
-    "cta.title":"Tous Vos Outils Préférés au Même Endroit","cta.sub":"Gratuit. Privé. En amélioration constante.","cta.btn":"Explorer Tous les Produits",
-    "faq.title":"Questions ?<br/>Réponses.","faq.sub":"Tout ce que vous devez savoir sur Alpha-1 Studio.","faq.email":"Envoyez-nous un Email","faq.q1":"Qu'est-ce qu'Alpha-1 Studio ?","faq.a1":"Alpha-1 Studio est un studio technologique mondial créant des outils de confidentialité, des produits IA — tous gratuits et ouverts. Fondé par Samuel Mensah au Ghana.","faq.q2":"Comment fonctionne Sam Atlas ?","faq.a2":"Sam Atlas est un assistant IA gratuit disponible dans votre navigateur. Pas de compte nécessaire — visites simplement sam-atlas.vercel.app.","faq.q3":"Mes données sont-elles sécurisées ?","faq.a3":"Absolument. Tous les produits sont axés sur la confidentialité. Privacy Toolkit fonctionne 100% dans votre navigateur.","faq.q4":"Les outils sont-ils gratuits ?","faq.a4":"Oui — tous les produits sont entièrement gratuits. Alpha-1 Design nécessite votre propre clé API Claude. Tout le reste ne nécessite aucun compte.","faq.q5":"Puis-je collaborer ou vous embaucher ?","faq.a5":"Oui. Nous sommes ouverts aux collaborations. Email : alphariansamuel@gmail.com ou WhatsApp +233553016346.","faq.q6":"Quoi de prochain ?","faq.a6":"Plus de produits, un blog bientôt disponible. Suivez sur X pour les mises à jour.",
-    "supp.title":"Nous Sommes Là.","supp.c1.title":"Aide sur les Apps","supp.c1.desc":"Un problème avec un produit ? Nous vous guidons personnellement.","supp.c2.title":"Signaler un Bug","supp.c2.desc":"Trouvé quelque chose de cassé ? Dites-nous votre modèle d'appareil.","supp.c3.title":"Renseignements Généraux","supp.c3.desc":"Partenariats, collaborations ou juste un bonjour.","supp.gethelp":"Obtenir de l'aide","supp.report":"Signaler","supp.send":"Envoyer message","supp.cta.title":"PRÊT À DISCUTER ?","supp.cta.sub":"Nous répondons à chaque message personnellement. En général dans les 24 heures.",
-    "foot.desc":"Studio technologique mondial créant des outils de confidentialité, des produits IA. Gratuit pour tous.","foot.quick":"Liens Rapides","foot.resources":"Ressources","foot.follow":"Nous Suivre","foot.copy":"© 2026 Alpha-1 Studio. Tous droits réservés.","foot.built":"Construit depuis le Ghana 🇬🇭 pour le monde."
+  {
+    id: 'alpha-1-design',
+    name: 'Alpha-1 Design',
+    desc: 'AI writing, image tools, color palettes. Powered by Claude API.',
+    url: 'https://alpha-1design.vercel.app',
+    icon: '✨',
+    color: '#8b5cf6'
   },
-  es:{
-    "nav.projects":"Proyectos","nav.mission":"Misión","nav.blog":"Blog","nav.faq":"Preguntas","nav.support":"Soporte","nav.contact":"Contáctanos",
-    "hero.badge":"Estudio Tecnológico Global · Ghana 🇬🇭","hero.title":"Construyendo el Futuro.<br/>Desde Ghana,<br/>Para el Mundo.","hero.sub":"Herramientas de privacidad, productos de IA y utilidades para desarrolladores — gratis, abiertos y para todos. Sin cuentas. Sin rastreo.","hero.cta1":"Explorar Productos","hero.cta2":"Nuestra Misión →",
-    "stats.projects":"Productos Activos","stats.tools":"Herramientas","stats.langs":"Idiomas","stats.building":"Construyendo",
-    "cat.privacy":"Apps de Privacidad","cat.ai":"IA y Diseño","cat.dev":"Herramientas Dev","cat.creative":"Trabajo Creativo","cat.devtools":"Utilidades Dev","cat.video":"Edición de Video","cat.design":"Diseño UI",
-    "wwd.label":"Qué Construimos","wwd.title":"Tecnología Que Te Pone Primero","wwd.sub":"Cada producto es gratuito, privado y trabaja para ti.","wwd.p1.title":"Privacidad Primero","wwd.p1.desc":"Todos los productos tienen la privacidad en el núcleo. Tus datos se quedan en tu dispositivo.","wwd.p2.title":"Accesible Globalmente","wwd.p2.desc":"Disponible en 10 idiomas. Diseñado para funcionar en cualquier dispositivo, en cualquier lugar.","wwd.p3.title":"Siempre Gratis","wwd.p3.desc":"Cada producto es gratuito. Sin muros de pago. La buena tecnología debe ser accesible para todos.",
-    "proj.title":"Todos los Productos","proj.sub":"Cada producto está disponible y es gratuito.","proj.github":"Ver en GitHub","proj.sa":"Asistente de IA gratuito y abierto para todos. Sin registro, sin seguimiento, sin suscripciones.","proj.ss":"","proj.a1d":"Escritura IA, compresión de imágenes y herramientas de paleta. PWA instalable con Claude API.","proj.pt":"13 herramientas de seguridad en el navegador. Sin servidores. Sin rastreo.","proj.ut":"600+ herramientas web en 50+ categorías.","proj.port":"Desarrollador full-stack, editor de video e ingeniero creativo basado en Ghana.","proj.port.name":"Portafolio","proj.blog":"Reflexiones sobre desarrollo, privacidad y tecnología desde Ghana.","blog.soon":"Próximamente",
-    "mission.label":"Nuestra Misión","mission.title":"Tecnología construida para <em>todos</em> — no solo para quienes tienen recursos.","mission.p1":"Alpha-1 Studio es un estudio tecnológico global que construye herramientas de privacidad, productos de IA — gratuitos, abiertos y accesibles para todos.","mission.p2":"Construido desde Ghana. Usado en todo el mundo. Mejorando cada día.","mission.founder":"Fundador · Desarrollador Full-Stack · Ghana 🇬🇭","mission.security":"Herramientas de Seguridad",
-    "cta.title":"Todas Tus Herramientas Favoritas en Un Lugar","cta.sub":"Gratis. Privado. Mejorando cada día.","cta.btn":"Explorar Todos los Productos",
-    "faq.title":"¿Preguntas?<br/>Respondidas.","faq.sub":"Todo lo que necesitas saber sobre Alpha-1 Studio.","faq.email":"Envíanos un Email","faq.q1":"¿Qué es Alpha-1 Studio?","faq.a1":"Alpha-1 Studio es un estudio tecnológico global que construye herramientas de privacidad y productos de IA — todos gratuitos. Fundado por Samuel Mensah en Ghana.","faq.q2":"¿Cómo funciona Sam Atlas?","faq.a2":"Sam Atlas es un asistente de IA gratuito disponible en tu navegador. No necesitas cuenta — simplemente visita sam-atlas.vercel.app.","faq.q3":"¿Están seguros mis datos?","faq.a3":"Absolutamente. Todos los productos priorizan la privacidad. Privacy Toolkit funciona 100% en tu navegador.","faq.q4":"¿Son gratuitas las herramientas?","faq.a4":"Sí — todos los productos son completamente gratuitos. Alpha-1 Design requiere tu propia clave API de Claude.","faq.q5":"¿Puedo colaborar o contratarte?","faq.a5":"Sí. Estamos abiertos a colaboraciones. Email: alphariansamuel@gmail.com o WhatsApp +233553016346.","faq.q6":"¿Qué viene después?","faq.a6":"Más productos, un blog próximamente. Sigue en X para actualizaciones.",
-    "supp.title":"Estamos Aquí.","supp.c1.title":"Ayuda con Apps","supp.c1.desc":"¿Tienes problemas con algún producto? Te guiamos personalmente.","supp.c2.title":"Reportar un Error","supp.c2.desc":"¿Encontraste algo roto? Cuéntanos tu modelo de dispositivo.","supp.c3.title":"Consultas Generales","supp.c3.desc":"Asociaciones, colaboraciones o simplemente saludar.","supp.gethelp":"Obtener ayuda","supp.report":"Reportar","supp.send":"Enviar mensaje","supp.cta.title":"¿LISTO PARA HABLAR?","supp.cta.sub":"Respondemos a cada mensaje personalmente. Generalmente en 24 horas.",
-    "foot.desc":"Estudio tecnológico global construyendo herramientas de privacidad y productos de IA. Gratis para todos.","foot.quick":"Enlaces Rápidos","foot.resources":"Recursos","foot.follow":"Síguenos","foot.copy":"© 2026 Alpha-1 Studio. Todos los derechos reservados.","foot.built":"Construido desde Ghana 🇬🇭 para el mundo."
+  {
+    id: 'privacy-toolkit',
+    name: 'Privacy Toolkit',
+    desc: '13 browser-based security tools. Phishing, encryption, JWT decoder.',
+    url: 'https://privacy-toolkit-ten.vercel.app',
+    icon: '🔒',
+    color: '#22c55e'
   },
-  pt:{
-    "nav.projects":"Projetos","nav.mission":"Missão","nav.blog":"Blog","nav.faq":"FAQ","nav.support":"Suporte","nav.contact":"Fale Conosco",
-    "hero.badge":"Estúdio de Tecnologia Global · Ghana 🇬🇭","hero.title":"Construindo o Futuro.<br/>Do Ghana,<br/>Para o Mundo.","hero.sub":"Ferramentas de privacidade, produtos de IA e utilitários para desenvolvedores — gratuitos, abertos e para todos.","hero.cta1":"Explorar Produtos","hero.cta2":"Nossa Missão →",
-    "stats.projects":"Produtos Ativos","stats.tools":"Ferramentas","stats.langs":"Idiomas","stats.building":"Construindo",
-    "cat.privacy":"Apps de Privacidade","cat.ai":"IA e Design","cat.dev":"Ferramentas Dev","cat.creative":"Trabalho Criativo","cat.devtools":"Utilitários Dev","cat.video":"Edição de Vídeo","cat.design":"Design UI",
-    "wwd.label":"O Que Construímos","wwd.title":"Tecnologia Que Coloca Você em Primeiro","wwd.sub":"Cada produto é gratuito, privado e trabalha para você.","wwd.p1.title":"Privacidade em Primeiro","wwd.p1.desc":"Todos os produtos têm privacidade no núcleo. Seus dados ficam no seu dispositivo.","wwd.p2.title":"Acessível Globalmente","wwd.p2.desc":"Disponível em 10 idiomas. Funciona em qualquer dispositivo, em qualquer lugar.","wwd.p3.title":"Sempre Gratuito","wwd.p3.desc":"Cada produto é gratuito. Sem barreiras de pagamento. A boa tecnologia deve ser acessível a todos.",
-    "proj.title":"Todos os Produtos","proj.sub":"Cada produto está disponível e é gratuito.","proj.github":"Ver no GitHub","proj.sa":"Assistente de IA gratuito e aberto para todos. Sem login, sem rastreamento, sem assinaturas.","proj.ss":"","proj.a1d":"Escrita com IA, compressão de imagens e ferramentas de paleta. PWA instalável com Claude API.","proj.pt":"13 ferramentas de segurança no navegador. Sem servidores. Sem rastreamento.","proj.ut":"600+ ferramentas web em 50+ categorias.","proj.port":"Desenvolvedor full-stack, editor de vídeo e engenheiro criativo baseado em Ghana.","proj.port.name":"Portfólio","proj.blog":"Reflexões sobre desenvolvimento, privacidade e tecnologia do Ghana.","blog.soon":"Em Breve",
-    "mission.label":"Nossa Missão","mission.title":"Tecnologia construída para <em>todos</em> — não apenas para quem tem recursos.","mission.p1":"Alpha-1 Studio é um estúdio de tecnologia global construindo ferramentas de privacidade — gratuitas, abertas e acessíveis a todos.","mission.p2":"Construído do Ghana. Usado no mundo todo. Melhorando todos os dias.","mission.founder":"Fundador · Desenvolvedor Full-Stack · Ghana 🇬🇭","mission.security":"Ferramentas de Segurança",
-    "cta.title":"Todas as Suas Ferramentas Favoritas em Um Lugar","cta.sub":"Gratuito. Privado. Melhorando todos os dias.","cta.btn":"Explorar Todos os Produtos",
-    "faq.title":"Perguntas?<br/>Respondidas.","faq.sub":"Tudo que você precisa saber sobre Alpha-1 Studio.","faq.email":"Envie-nos um Email","faq.q1":"O que é Alpha-1 Studio?","faq.a1":"Alpha-1 Studio é um estúdio de tecnologia global construindo ferramentas de privacidade e produtos de IA — tudo gratuito. Fundado por Samuel Mensah em Ghana.","faq.q2":"Como funciona o Sam Atlas?","faq.a2":"Sam Atlas é um assistente de IA gratuito disponível no seu navegador. Sem conta necessária — basta visitar sam-atlas.vercel.app.","faq.q3":"Meus dados estão seguros?","faq.a3":"Com certeza. Todos os produtos priorizam a privacidade. Privacy Toolkit funciona 100% no seu navegador.","faq.q4":"As ferramentas são gratuitas?","faq.a4":"Sim — todos os produtos são completamente gratuitos. Alpha-1 Design requer sua própria chave API do Claude.","faq.q5":"Posso colaborar ou contratar?","faq.a5":"Sim. Email: alphariansamuel@gmail.com ou WhatsApp +233553016346.","faq.q6":"O que vem a seguir?","faq.a6":"Mais produtos, um blog em breve. Siga no X para atualizações.",
-    "supp.title":"Estamos Aqui.","supp.c1.title":"Ajuda com Apps","supp.c1.desc":"Problemas com algum produto? Te guiamos pessoalmente.","supp.c2.title":"Reportar um Bug","supp.c2.desc":"Encontrou algo quebrado? Nos conte seu modelo de dispositivo.","supp.c3.title":"Consultas Gerais","supp.c3.desc":"Parcerias, colaborações ou apenas dizer olá.","supp.gethelp":"Obter ajuda","supp.report":"Reportar","supp.send":"Enviar mensagem","supp.cta.title":"PRONTO PARA CONVERSAR?","supp.cta.sub":"Respondemos a cada mensagem pessoalmente. Geralmente em 24 horas.",
-    "foot.desc":"Estúdio de tecnologia global construindo ferramentas de privacidade e produtos de IA. Gratuito para todos.","foot.quick":"Links Rápidos","foot.resources":"Recursos","foot.follow":"Nos Siga","foot.copy":"© 2026 Alpha-1 Studio. Todos os direitos reservados.","foot.built":"Construído do Ghana 🇬🇭 para o mundo."
-  },
-  de:{
-    "nav.projects":"Projekte","nav.mission":"Mission","nav.blog":"Blog","nav.faq":"FAQ","nav.support":"Support","nav.contact":"Kontakt",
-    "hero.badge":"Globales Technologiestudio · Ghana 🇬🇭","hero.title":"Die Zukunft bauen.<br/>Aus Ghana,<br/>Für die Welt.","hero.sub":"Datenschutz-Tools, KI-Produkte und Entwickler-Utilities — kostenlos, offen und für alle. Kein Konto. Kein Tracking.","hero.cta1":"Produkte Erkunden","hero.cta2":"Unsere Mission →",
-    "stats.projects":"Live-Produkte","stats.tools":"Tools Erstellt","stats.langs":"Sprachen","stats.building":"Im Aufbau",
-    "cat.privacy":"Datenschutz-Apps","cat.ai":"KI & Design","cat.dev":"Entwickler-Tools","cat.creative":"Kreativarbeit","cat.devtools":"Dev-Utilities","cat.video":"Videobearbeitung","cat.design":"UI-Design",
-    "wwd.label":"Was Wir Bauen","wwd.title":"Technologie Die Sie an Erste Stelle Setzt","wwd.sub":"Jedes Produkt ist kostenlos, privat und arbeitet für Sie.","wwd.p1.title":"Datenschutz Zuerst","wwd.p1.desc":"Alle Produkte haben Datenschutz im Kern. Ihre Daten bleiben auf Ihrem Gerät.","wwd.p2.title":"Global Zugänglich","wwd.p2.desc":"In 10 Sprachen verfügbar. Läuft auf jedem Gerät, überall auf der Welt.","wwd.p3.title":"Immer Kostenlos","wwd.p3.desc":"Jedes Produkt ist kostenlos. Keine Bezahlschranken. Gute Technologie muss für alle zugänglich sein.",
-    "proj.title":"Alle Produkte","proj.sub":"Jedes Produkt ist live und kostenlos.","proj.github":"Auf GitHub ansehen","proj.sa":"Kostenloser, offener KI-Assistent für alle. Kein Login, kein Tracking, keine Abonnements.","proj.ss":"","proj.a1d":"KI-Schreiben, Bildkomprimierung und Farbpaletten-Tools. Installierbares PWA mit Claude API.","proj.pt":"13 browser-basierte Sicherheits-Tools. Keine Server. Kein Tracking.","proj.ut":"600+ kuratierte Web-Tools in 50+ Kategorien.","proj.port":"Full-Stack-Entwickler, Videoeditor und kreativer Ingenieur aus Ghana.","proj.port.name":"Portfolio","proj.blog":"Gedanken über Entwicklung, Datenschutz und Technologie aus Ghana.","blog.soon":"Demnächst",
-    "mission.label":"Unsere Mission","mission.title":"Technologie gebaut für <em>alle</em> — nicht nur für die mit Ressourcen.","mission.p1":"Alpha-1 Studio ist ein globales Technologiestudio, das Datenschutz-Tools, KI-Produkte baut — kostenlos, offen und für alle zugänglich.","mission.p2":"Aus Ghana gebaut. Weltweit genutzt. Jeden Tag besser.","mission.founder":"Gründer · Full-Stack-Entwickler · Ghana 🇬🇭","mission.security":"Sicherheits-Tools",
-    "cta.title":"Alle Ihre Lieblingstools an Einem Ort","cta.sub":"Kostenlos. Privat. Jeden Tag besser.","cta.btn":"Alle Produkte Erkunden",
-    "faq.title":"Fragen?<br/>Beantwortet.","faq.sub":"Alles was Sie über Alpha-1 Studio wissen müssen.","faq.email":"E-Mail Senden","faq.q1":"Was ist Alpha-1 Studio?","faq.a1":"Alpha-1 Studio ist ein globales Technologiestudio, das Datenschutz-Tools und KI-Produkte baut — alle kostenlos. Gegründet von Samuel Mensah in Ghana.","faq.q2":"Wie funktioniert Sam Atlas?","faq.a2":"Sam Atlas ist ein kostenloser KI-Assistent in Ihrem Browser. Kein Konto erforderlich — besuchen Sie einfach sam-atlas.vercel.app.","faq.q3":"Sind meine Daten sicher?","faq.a3":"Absolut. Alle Produkte priorisieren Datenschutz. Privacy Toolkit läuft 100% in Ihrem Browser.","faq.q4":"Sind die Tools kostenlos?","faq.a4":"Ja — alle Produkte sind völlig kostenlos. Alpha-1 Design benötigt Ihren eigenen Claude API-Schlüssel.","faq.q5":"Kann ich zusammenarbeiten?","faq.a5":"Ja. E-Mail: alphariansamuel@gmail.com oder WhatsApp +233553016346.","faq.q6":"Was kommt als nächstes?","faq.a6":"Mehr Produkte, ein Blog demnächst. Folgen Sie auf X.",
-    "supp.title":"Wir Haben Sie.","supp.c1.title":"App-Hilfe","supp.c1.desc":"Probleme mit einem Produkt? Wir führen Sie persönlich durch.","supp.c2.title":"Fehler Melden","supp.c2.desc":"Etwas Kaputtes gefunden? Teilen Sie uns Ihr Gerätemodell mit.","supp.c3.title":"Allgemeine Anfragen","supp.c3.desc":"Partnerschaften, Zusammenarbeit oder einfach Hallo sagen.","supp.gethelp":"Hilfe erhalten","supp.report":"Melden","supp.send":"Nachricht senden","supp.cta.title":"BEREIT ZU REDEN?","supp.cta.sub":"Wir antworten auf jede Nachricht persönlich. Normalerweise innerhalb von 24 Stunden.",
-    "foot.desc":"Globales Technologiestudio, das Datenschutz-Tools und KI-Produkte baut. Kostenlos für alle.","foot.quick":"Schnelllinks","foot.resources":"Ressourcen","foot.follow":"Folgen Sie Uns","foot.copy":"© 2026 Alpha-1 Studio. Alle Rechte vorbehalten.","foot.built":"Aus Ghana 🇬🇭 für die Welt gebaut."
-  },
-  ar:{
-    "nav.projects":"المشاريع","nav.mission":"مهمتنا","nav.blog":"المدونة","nav.faq":"الأسئلة","nav.support":"الدعم","nav.contact":"تواصل معنا",
-    "hero.badge":"استوديو تقني عالمي · غانا 🇬🇭","hero.title":"نبني المستقبل.<br/>من غانا،<br/>للعالم.","hero.sub":"أدوات الخصوصية ومنتجات الذكاء الاصطناعي وأدوات المطورين — مجانية ومفتوحة للجميع. بدون حسابات. بدون تتبع.","hero.cta1":"استكشاف المنتجات","hero.cta2":"مهمتنا ←",
-    "stats.projects":"منتجات نشطة","stats.tools":"أدوات مبنية","stats.langs":"لغات","stats.building":"في التطوير",
-    "cat.privacy":"تطبيقات الخصوصية","cat.ai":"الذكاء الاصطناعي والتصميم","cat.dev":"أدوات المطورين","cat.creative":"العمل الإبداعي","cat.devtools":"أدوات التطوير","cat.video":"تحرير الفيديو","cat.design":"تصميم UI",
-    "wwd.label":"ما نبنيه","wwd.title":"تقنية تضعك في المقدمة","wwd.sub":"كل منتج نبنيه مجاني وخاص ويعمل لصالحك.","wwd.p1.title":"الخصوصية أولاً","wwd.p1.desc":"جميع المنتجات مبنية مع الخصوصية في الجوهر. بياناتك تبقى على جهازك.","wwd.p2.title":"متاح عالمياً","wwd.p2.desc":"متوفر بـ 10 لغات. مصمم للعمل على أي جهاز، في أي مكان في العالم.","wwd.p3.title":"مجاني دائماً","wwd.p3.desc":"كل منتج مجاني. لا جدران دفع. التقنية الجيدة يجب أن تكون متاحة للجميع.",
-    "proj.title":"جميع المنتجات","proj.sub":"كل منتج متاح ومجاني.","proj.github":"عرض على GitHub","proj.sa":"مساعد ذكاء اصطناعي مجاني ومفتوح للجميع. بدون تسجيل، بدون تتبع، بدون اشتراكات.","proj.ss":"","proj.a1d":"كتابة بالذكاء الاصطناعي وضغط الصور وأدوات لوحة الألوان. PWA مع Claude API.","proj.pt":"13 أداة أمنية في المتصفح. لا خوادم. لا تتبع.","proj.ut":"أكثر من 600 أداة ويب في أكثر من 50 فئة.","proj.port":"مطور full-stack ومحرر فيديو ومهندس إبداعي من غانا.","proj.port.name":"المحفظة","proj.blog":"أفكار حول التطوير والخصوصية والتقنية من غانا.","blog.soon":"قريباً",
-    "mission.label":"مهمتنا","mission.title":"تقنية مبنية لـ <em>الجميع</em> — ليس فقط من لديهم الموارد.","mission.p1":"Alpha-1 Studio استوديو تقني عالمي يبني أدوات خصوصية ومنتجات ذكاء اصطناعي — مجانية ومفتوحة للجميع.","mission.p2":"مبني من غانا. مستخدم في جميع أنحاء العالم. يتحسن كل يوم.","mission.founder":"المؤسس · مطور Full-Stack · غانا 🇬🇭","mission.security":"أدوات الأمان",
-    "cta.title":"جميع أدواتك المفضلة في مكان واحد","cta.sub":"مجاني. خاص. يتحسن كل يوم.","cta.btn":"استكشاف جميع المنتجات",
-    "faq.title":"أسئلة؟<br/>مجابة.","faq.sub":"كل ما تحتاج معرفته عن Alpha-1 Studio.","faq.email":"راسلنا","faq.q1":"ما هو Alpha-1 Studio؟","faq.a1":"Alpha-1 Studio استوديو تقني عالمي يبني أدوات خصوصية ومنتجات ذكاء اصطناعي — جميعها مجانية. أسسه Samuel Mensah في غانا.","faq.q2":"كيف يعمل Sam Atlas؟","faq.a2":"Sam Atlas هو مساعد ذكاء اصطناعي مجاني متاح في متصفحك. لا حاجة لحساب — فقط قم بزيارة sam-atlas.vercel.app.","faq.q3":"هل بياناتي آمنة؟","faq.a3":"بالتأكيد. جميع المنتجات تضع الخصوصية أولاً. Privacy Toolkit يعمل 100% في متصفحك.","faq.q4":"هل الأدوات مجانية؟","faq.a4":"نعم — جميع المنتجات مجانية تماماً. Alpha-1 Design يتطلب مفتاح Claude API الخاص بك.","faq.q5":"هل يمكنني التعاون أو التوظيف؟","faq.a5":"نعم. البريد: alphariansamuel@gmail.com أو واتساب +233553016346.","faq.q6":"ما القادم؟","faq.a6":"المزيد من المنتجات ومدونة قريباً. تابع على X للتحديثات.",
-    "supp.title":"نحن هنا.","supp.c1.title":"مساعدة التطبيقات","supp.c1.desc":"مشكلة مع منتج؟ سنرشدك شخصياً.","supp.c2.title":"الإبلاغ عن خطأ","supp.c2.desc":"وجدت خللاً؟ أخبرنا بنوع جهازك.","supp.c3.title":"استفسارات عامة","supp.c3.desc":"شراكات أو تعاون أو مجرد التواصل.","supp.gethelp":"احصل على مساعدة","supp.report":"أبلغ","supp.send":"أرسل رسالة","supp.cta.title":"مستعد للحديث؟","supp.cta.sub":"نرد على كل رسالة شخصياً. عادةً خلال 24 ساعة.",
-    "foot.desc":"استوديو تقني عالمي يبني أدوات خصوصية ومنتجات ذكاء اصطناعي. مجاني للجميع.","foot.quick":"روابط سريعة","foot.resources":"الموارد","foot.follow":"تابعنا","foot.copy":"© 2026 Alpha-1 Studio. جميع الحقوق محفوظة.","foot.built":"مبني من غانا 🇬🇭 للعالم."
-  },
-  hi:{
-    "nav.projects":"प्रोजेक्ट","nav.mission":"मिशन","nav.blog":"ब्लॉग","nav.faq":"सवाल","nav.support":"सहायता","nav.contact":"संपर्क करें",
-    "hero.badge":"वैश्विक प्रौद्योगिकी स्टूडियो · घाना 🇬🇭","hero.title":"भविष्य बना रहे हैं।<br/>घाना से,<br/>दुनिया के लिए।","hero.sub":"गोपनीयता टूल्स, AI उत्पाद और डेवलपर यूटिलिटी — मुफ्त, खुले और सभी के लिए।","hero.cta1":"उत्पाद देखें","hero.cta2":"हमारा मिशन →",
-    "stats.projects":"लाइव उत्पाद","stats.tools":"टूल्स बनाए","stats.langs":"भाषाएं","stats.building":"निर्माण जारी",
-    "cat.privacy":"गोपनीयता ऐप्स","cat.ai":"AI और डिज़ाइन","cat.dev":"डेवलपर टूल्स","cat.creative":"क्रिएटिव काम","cat.devtools":"Dev यूटिलिटी","cat.video":"वीडियो एडिटिंग","cat.design":"UI डिज़ाइन",
-    "wwd.label":"हम क्या बनाते हैं","wwd.title":"तकनीक जो आपको पहले रखे","wwd.sub":"हर उत्पाद मुफ्त, निजी और आपके लिए काम करता है।","wwd.p1.title":"गोपनीयता पहले","wwd.p1.desc":"सभी उत्पाद गोपनीयता के साथ बने हैं। आपका डेटा आपके डिवाइस पर रहता है।","wwd.p2.title":"वैश्विक रूप से सुलभ","wwd.p2.desc":"10 भाषाओं में उपलब्ध। किसी भी डिवाइस पर, कहीं भी काम करता है।","wwd.p3.title":"हमेशा मुफ्त","wwd.p3.desc":"हर उत्पाद मुफ्त है। कोई पेवॉल नहीं। अच्छी तकनीक सभी के लिए सुलभ होनी चाहिए।",
-    "proj.title":"सभी उत्पाद","proj.sub":"हर उत्पाद लाइव और मुफ्त है।","proj.github":"GitHub पर देखें","proj.sa":"सभी के लिए मुफ्त, खुला AI सहायक। बिना लॉगिन, बिना ट्रैकिंग, बिना सब्सक्रिप्शन।","proj.ss":"","proj.a1d":"AI लेखन, इमेज कंप्रेशन और कलर पैलेट टूल्स। Claude API PWA।","proj.pt":"13 ब्राउज़र-आधारित सुरक्षा टूल। कोई सर्वर नहीं।","proj.ut":"50+ श्रेणियों में 600+ वेब टूल्स।","proj.port":"घाना से फुल-स्टैक डेवलपर, वीडियो एडिटर।","proj.port.name":"पोर्टफोलियो","proj.blog":"घाना से विकास और गोपनीयता पर विचार।","blog.soon":"जल्द आ रहा है",
-    "mission.label":"हमारा मिशन","mission.title":"तकनीक <em>सभी</em> के लिए बनाई — सिर्फ संसाधनों वालों के लिए नहीं।","mission.p1":"Alpha-1 Studio एक वैश्विक प्रौद्योगिकी स्टूडियो है जो गोपनीयता टूल्स और AI उत्पाद बनाता है — मुफ्त और सभी के लिए।","mission.p2":"घाना से बनाया। दुनिया भर में उपयोग। हर दिन बेहतर होता है।","mission.founder":"संस्थापक · फुल-स्टैक डेवलपर · घाना 🇬🇭","mission.security":"सुरक्षा टूल्स",
-    "cta.title":"आपके सभी पसंदीदा टूल्स एक जगह","cta.sub":"मुफ्त। निजी। हर दिन बेहतर।","cta.btn":"सभी उत्पाद देखें",
-    "faq.title":"सवाल?<br/>जवाब।","faq.sub":"Alpha-1 Studio के बारे में सब कुछ।","faq.email":"ईमेल करें","faq.q1":"Alpha-1 Studio क्या है?","faq.a1":"Alpha-1 Studio एक वैश्विक तकनीक स्टूडियो है जो गोपनीयता टूल्स बनाता है — सब मुफ्त। Samuel Mensah ने घाना में स्थापित किया।","faq.q2":"Sam Atlas कैसे काम करता है?","faq.a2":"Sam Atlas एक मुफ्त AI सहायक है जो आपके ब्राउज़र में उपलब्ध है। कोई खाता नहीं चाहिए — बस sam-atlas.vercel.app पर जाएं।","faq.q3":"क्या मेरा डेटा सुरक्षित है?","faq.a3":"बिल्कुल। सभी उत्पाद गोपनीयता को पहले रखते हैं। Privacy Toolkit 100% आपके ब्राउज़र में चलता है।","faq.q4":"क्या टूल्स मुफ्त हैं?","faq.a4":"हां — सभी उत्पाद पूरी तरह मुफ्त हैं। Alpha-1 Design को Claude API key चाहिए।","faq.q5":"क्या मैं सहयोग कर सकता हूं?","faq.a5":"हां। ईमेल: alphariansamuel@gmail.com या WhatsApp +233553016346.","faq.q6":"आगे क्या है?","faq.a6":"और उत्पाद, जल्द एक ब्लॉग। X पर फॉलो करें।",
-    "supp.title":"हम यहाँ हैं।","supp.c1.title":"ऐप सहायता","supp.c1.desc":"किसी उत्पाद में समस्या? हम व्यक्तिगत रूप से मार्गदर्शन करेंगे।","supp.c2.title":"बग रिपोर्ट","supp.c2.desc":"कुछ टूटा हुआ मिला? हमें अपना डिवाइस मॉडल बताएं।","supp.c3.title":"सामान्य पूछताछ","supp.c3.desc":"साझेदारी, सहयोग या बस नमस्ते।","supp.gethelp":"सहायता लें","supp.report":"रिपोर्ट करें","supp.send":"संदेश भेजें","supp.cta.title":"बात करने के लिए तैयार?","supp.cta.sub":"हम हर संदेश का व्यक्तिगत जवाब देते हैं। आमतौर पर 24 घंटों के भीतर।",
-    "foot.desc":"वैश्विक प्रौद्योगिकी स्टूडियो जो गोपनीयता टूल्स और AI उत्पाद बनाता है। सभी के लिए मुफ्त।","foot.quick":"त्वरित लिंक","foot.resources":"संसाधन","foot.follow":"हमें फॉलो करें","foot.copy":"© 2026 Alpha-1 Studio. सर्वाधिकार सुरक्षित।","foot.built":"घाना 🇬🇭 से दुनिया के लिए बनाया।"
-  },
-  zh:{
-    "nav.projects":"产品","nav.mission":"使命","nav.blog":"博客","nav.faq":"常见问题","nav.support":"支持","nav.contact":"联系我们",
-    "hero.badge":"全球科技工作室 · 加纳 🇬🇭","hero.title":"建设未来。<br/>从加纳，<br/>为世界。","hero.sub":"隐私工具、AI产品和开发者工具 — 免费、开放、为所有人而建。无需账户。无追踪。","hero.cta1":"探索产品","hero.cta2":"我们的使命 →",
-    "stats.projects":"在线产品","stats.tools":"构建工具","stats.langs":"语言","stats.building":"持续建设",
-    "cat.privacy":"隐私应用","cat.ai":"AI与设计","cat.dev":"开发者工具","cat.creative":"创意工作","cat.devtools":"Dev工具","cat.video":"视频编辑","cat.design":"UI设计",
-    "wwd.label":"我们构建什么","wwd.title":"以您为先的技术","wwd.sub":"我们构建的每个产品都是免费、私密的，为您服务。","wwd.p1.title":"隐私优先","wwd.p1.desc":"所有产品以隐私为核心。您的数据保留在您的设备上。","wwd.p2.title":"全球可访问","wwd.p2.desc":"提供10种语言。设计在任何设备、任何地方运行。","wwd.p3.title":"永远免费","wwd.p3.desc":"每个产品都是免费的。没有付费墙。好的技术应该对所有人开放。",
-    "proj.title":"所有产品","proj.sub":"每个产品都在线且免费。","proj.github":"在GitHub查看","proj.sa":"免费、开放的AI助手，为每个人打造。无需登录、无追踪、无订阅。","proj.ss":"","proj.a1d":"AI写作、图片压缩和调色板工具。由Claude API驱动的PWA。","proj.pt":"13个浏览器安全工具。无服务器。无追踪。","proj.ut":"50+类别中600+精选网络工具。","proj.port":"来自加纳的全栈开发者、视频编辑和创意工程师。","proj.port.name":"作品集","proj.blog":"关于从加纳开发、隐私和创建技术的思考。","blog.soon":"即将推出",
-    "mission.label":"我们的使命","mission.title":"为<em>所有人</em>而建的技术 — 不仅仅是有资源的人。","mission.p1":"Alpha-1 Studio是全球科技工作室，构建隐私工具、AI产品 — 免费、开放、对所有人可访问。","mission.p2":"从加纳构建。全球使用。每天进步。","mission.founder":"创始人 · 全栈开发者 · 加纳 🇬🇭","mission.security":"安全工具",
-    "cta.title":"所有您喜欢的工具集于一处","cta.sub":"免费。私密。每天进步。","cta.btn":"探索所有产品",
-    "faq.title":"问题？<br/>已解答。","faq.sub":"关于Alpha-1 Studio您需要了解的一切。","faq.email":"发送邮件","faq.q1":"什么是Alpha-1 Studio？","faq.a1":"Alpha-1 Studio是全球科技工作室，构建隐私工具和AI产品 — 全部免费。由Samuel Mensah在加纳创立。","faq.q2":"Sam Atlas如何工作？","faq.a2":"Sam Atlas是一个免费的AI助手，可在您的浏览器中使用。无需账户 — 只需访问 sam-atlas.vercel.app。","faq.q3":"我的数据安全吗？","faq.a3":"绝对安全。所有产品都优先考虑隐私。Privacy Toolkit 100%在您的浏览器中运行。","faq.q4":"工具是免费的吗？","faq.a4":"是的 — 所有产品完全免费。Alpha-1 Design需要您自己的Claude API密钥。","faq.q5":"可以合作或聘用吗？","faq.a5":"可以。邮件：alphariansamuel@gmail.com 或 WhatsApp +233553016346。","faq.q6":"接下来是什么？","faq.a6":"更多产品、即将推出的博客。在X上关注以获取更新。",
-    "supp.title":"我们在这里。","supp.c1.title":"应用帮助","supp.c1.desc":"产品有问题？我们会亲自指导您。","supp.c2.title":"报告错误","supp.c2.desc":"发现问题了？告诉我们您的设备型号。","supp.c3.title":"一般咨询","supp.c3.desc":"合作伙伴关系、协作或只是打个招呼。","supp.gethelp":"获取帮助","supp.report":"报告","supp.send":"发送消息","supp.cta.title":"准备好交流了吗？","supp.cta.sub":"我们亲自回复每条消息。通常在24小时内。",
-    "foot.desc":"全球科技工作室，构建隐私工具和AI产品。对所有人免费。","foot.quick":"快速链接","foot.resources":"资源","foot.follow":"关注我们","foot.copy":"© 2026 Alpha-1 Studio. 保留所有权利。","foot.built":"从加纳 🇬🇭 为世界构建。"
-  },
-  ru:{
-    "nav.projects":"Проекты","nav.mission":"Миссия","nav.blog":"Блог","nav.faq":"FAQ","nav.support":"Поддержка","nav.contact":"Связаться",
-    "hero.badge":"Глобальная Технологическая Студия · Гана 🇬🇭","hero.title":"Строим Будущее.<br/>Из Ганы,<br/>Для Мира.","hero.sub":"Инструменты конфиденциальности, продукты ИИ и утилиты для разработчиков — бесплатно, открыто и для всех.","hero.cta1":"Исследовать Продукты","hero.cta2":"Наша Миссия →",
-    "stats.projects":"Активных Продуктов","stats.tools":"Создано Инструментов","stats.langs":"Языков","stats.building":"В Разработке",
-    "cat.privacy":"Приложения Конфиденциальности","cat.ai":"ИИ и Дизайн","cat.dev":"Инструменты Разработчика","cat.creative":"Творческая Работа","cat.devtools":"Dev Утилиты","cat.video":"Видеомонтаж","cat.design":"UI Дизайн",
-    "wwd.label":"Что Мы Строим","wwd.title":"Технологии Которые Ставят Вас Первым","wwd.sub":"Каждый продукт бесплатный, приватный и работает для вас.","wwd.p1.title":"Конфиденциальность Прежде Всего","wwd.p1.desc":"Все продукты построены с конфиденциальностью в основе. Ваши данные остаются на вашем устройстве.","wwd.p2.title":"Глобально Доступно","wwd.p2.desc":"Доступно на 10 языках. Работает на любом устройстве, везде.","wwd.p3.title":"Всегда Бесплатно","wwd.p3.desc":"Каждый продукт бесплатен. Никаких платных барьеров. Хорошие технологии должны быть доступны всем.",
-    "proj.title":"Все Продукты","proj.sub":"Каждый продукт работает и бесплатен.","proj.github":"Посмотреть на GitHub","proj.sa":"Бесплатный, открытый AI-ассистент для всех. Без регистрации, без отслеживания, без подписок.","proj.ss":"","proj.a1d":"ИИ-письмо, сжатие изображений и цветовые палитры. PWA на Claude API.","proj.pt":"13 браузерных инструментов безопасности. Без серверов. Без отслеживания.","proj.ut":"600+ кураторских веб-инструментов в 50+ категориях.","proj.port":"Full-stack разработчик, видеоредактор из Ганы.","proj.port.name":"Портфолио","proj.blog":"Мысли о разработке, конфиденциальности и технологиях из Ганы.","blog.soon":"Скоро",
-    "mission.label":"Наша Миссия","mission.title":"Технологии созданные для <em>всех</em> — не только для тех у кого есть ресурсы.","mission.p1":"Alpha-1 Studio — глобальная технологическая студия, создающая инструменты конфиденциальности и продукты ИИ — бесплатно и для всех.","mission.p2":"Построено из Ганы. Используется по всему миру. Улучшается каждый день.","mission.founder":"Основатель · Full-Stack Разработчик · Гана 🇬🇭","mission.security":"Инструменты Безопасности",
-    "cta.title":"Все Ваши Любимые Инструменты в Одном Месте","cta.sub":"Бесплатно. Конфиденциально. Улучшается каждый день.","cta.btn":"Исследовать Все Продукты",
-    "faq.title":"Вопросы?<br/>Отвечено.","faq.sub":"Всё что нужно знать об Alpha-1 Studio.","faq.email":"Написать нам","faq.q1":"Что такое Alpha-1 Studio?","faq.a1":"Alpha-1 Studio — глобальная технологическая студия, создающая инструменты конфиденциальности и продукты ИИ — всё бесплатно. Основана Samuel Mensah в Гане.","faq.q2":"Как работает Sam Atlas?","faq.a2":"Sam Atlas — бесплатный AI-ассистент в вашем браузере. Аккаунт не нужен — просто посетите sam-atlas.vercel.app.","faq.q3":"Мои данные в безопасности?","faq.a3":"Абсолютно. Все продукты ставят конфиденциальность на первое место. Privacy Toolkit работает на 100% в вашем браузере.","faq.q4":"Инструменты бесплатны?","faq.a4":"Да — все продукты полностью бесплатны. Alpha-1 Design требует собственный ключ API Claude.","faq.q5":"Могу ли я сотрудничать?","faq.a5":"Да. Email: alphariansamuel@gmail.com или WhatsApp +233553016346.","faq.q6":"Что дальше?","faq.q6":"Больше продуктов, блог скоро. Следите на X.",
-    "supp.title":"Мы Здесь.","supp.c1.title":"Помощь с Приложением","supp.c1.desc":"Проблема с продуктом? Мы лично проведём вас.","supp.c2.title":"Сообщить об Ошибке","supp.c2.desc":"Нашли что-то сломанное? Сообщите модель устройства.","supp.c3.title":"Общие Запросы","supp.c3.desc":"Партнёрство, сотрудничество или просто поздороваться.","supp.gethelp":"Получить помощь","supp.report":"Сообщить","supp.send":"Отправить сообщение","supp.cta.title":"ГОТОВЫ ПОГОВОРИТЬ?","supp.cta.sub":"Отвечаем на каждое сообщение лично. Обычно в течение 24 часов.",
-    "foot.desc":"Глобальная технологическая студия, создающая инструменты конфиденциальности и продукты ИИ. Бесплатно для всех.","foot.quick":"Быстрые Ссылки","foot.resources":"Ресурсы","foot.follow":"Подписывайтесь","foot.copy":"© 2026 Alpha-1 Studio. Все права защищены.","foot.built":"Создано из Ганы 🇬🇭 для мира."
-  },
-  ja:{
-    "nav.projects":"プロジェクト","nav.mission":"ミッション","nav.blog":"ブログ","nav.faq":"FAQ","nav.support":"サポート","nav.contact":"お問い合わせ",
-    "hero.badge":"グローバルテクノロジースタジオ · ガーナ 🇬🇭","hero.title":"未来を築く。<br/>ガーナから、<br/>世界のために。","hero.sub":"プライバシーツール、AI製品、開発者ユーティリティ — 無料、オープン、すべての人のために。アカウント不要。追跡なし。","hero.cta1":"製品を見る","hero.cta2":"私たちのミッション →",
-    "stats.projects":"公開製品","stats.tools":"ツール数","stats.langs":"言語","stats.building":"構築中",
-    "cat.privacy":"プライバシーアプリ","cat.ai":"AIとデザイン","cat.dev":"開発者ツール","cat.creative":"クリエイティブ","cat.devtools":"Dev ユーティリティ","cat.video":"動画編集","cat.design":"UIデザイン",
-    "wwd.label":"私たちが作るもの","wwd.title":"あなたを最優先にする技術","wwd.sub":"私たちが作る製品はすべて無料でプライベートで、あなたのために働きます。","wwd.p1.title":"プライバシー最優先","wwd.p1.desc":"すべての製品はプライバシーを核心に構築されています。データはデバイスに残ります。","wwd.p2.title":"グローバルアクセス","wwd.p2.desc":"10言語で利用可能。どのデバイスでも世界中で動作するよう設計されています。","wwd.p3.title":"常に無料","wwd.p3.desc":"すべての製品が無料です。ペイウォールなし。良い技術はすべての人に届くべきです。",
-    "proj.title":"すべての製品","proj.sub":"すべての製品が公開されており無料です。","proj.github":"GitHubで見る","proj.sa":"すべての人のための無料、オープンAIアシスタント。ログイン不要、トラッキング不要、サブスクリプション不要。","proj.ss":"","proj.a1d":"AI執筆、画像圧縮、カラーパレットツール。Claude API搭載のPWA。","proj.pt":"ブラウザベースのセキュリティツール13個。サーバーなし。追跡なし。","proj.ut":"50以上のカテゴリで600以上のウェブツール。","proj.port":"ガーナを拠点とするフルスタック開発者、ビデオエディター。","proj.port.name":"ポートフォリオ","proj.blog":"ガーナからの開発、プライバシー、技術についての考察。","blog.soon":"近日公開",
-    "mission.label":"私たちのミッション","mission.title":"資源を持つ人だけでなく、<em>すべての人</em>のための技術。","mission.p1":"Alpha-1 Studioはプライバシーツール、AI製品を構築するグローバルテクノロジースタジオです — 無料でオープン、すべての人に。","mission.p2":"ガーナから構築。世界中で使用。毎日改善中。","mission.founder":"創業者 · フルスタック開発者 · ガーナ 🇬🇭","mission.security":"セキュリティツール",
-    "cta.title":"お気に入りのツールがすべて一箇所に","cta.sub":"無料。プライベート。毎日改善。","cta.btn":"すべての製品を見る",
-    "faq.title":"質問？<br/>回答済み。","faq.sub":"Alpha-1 Studioについて知っておく必要があるすべて。","faq.email":"メールを送る","faq.q1":"Alpha-1 Studioとは？","faq.a1":"Alpha-1 Studioはプライバシーツールとアプリを構築するグローバルスタジオです — すべて無料。ガーナのSamuel Mensahが設立。","faq.q2":"Sam Atlasはどうやって使うの？","faq.a2":"Sam Atlasはブラウザで使える無料のAIアシスタントです。アカウント不要 — sam-atlas.vercel.app にアクセスするだけ。","faq.q3":"データは安全ですか？","faq.a3":"絶対に。すべての製品はプライバシーを最優先にします。Privacy Toolkitは100%ブラウザ内で動作します。","faq.q4":"ツールは無料ですか？","faq.a4":"はい — すべての製品は完全に無料です。Alpha-1 DesignにはClaude APIキーが必要です。","faq.q5":"コラボや採用は？","faq.a5":"はい。Email: alphariansamuel@gmail.com またはWhatsApp +233553016346。","faq.q6":"次は何ですか？","faq.a6":"より多くの製品、ブログ近日公開。Xでフォローしてアップデートを受け取る。",
-    "supp.title":"私たちがいます。","supp.c1.title":"アプリヘルプ","supp.c1.desc":"製品で問題がありますか？個人的にご案内します。","supp.c2.title":"バグ報告","supp.c2.desc":"壊れているものを見つけましたか？デバイスモデルを教えてください。","supp.c3.title":"一般的なお問い合わせ","supp.c3.desc":"パートナーシップ、コラボレーション、またはただの挨拶。","supp.gethelp":"ヘルプを得る","supp.report":"報告する","supp.send":"メッセージを送る","supp.cta.title":"話す準備はできていますか？","supp.cta.sub":"すべてのメッセージに個人的に返信します。通常24時間以内。",
-    "foot.desc":"プライバシーツールとAI製品を構築するグローバルテクノロジースタジオ。すべての人に無料。","foot.quick":"クイックリンク","foot.resources":"リソース","foot.follow":"フォローする","foot.copy":"© 2026 Alpha-1 Studio. All rights reserved.","foot.built":"ガーナ 🇬🇭 から世界のために構築。"
+  {
+    id: 'universal-toolbox',
+    name: 'Universal Toolbox',
+    desc: '700+ curated web tools across 50+ categories.',
+    url: 'https://universal-toolbox.vercel.app',
+    icon: '🛠️',
+    color: '#fbbf24'
   }
-};
+];
 
-// Language codes metadata
-const LANGS = {
-  en:{label:'EN',dir:'ltr'},fr:{label:'FR',dir:'ltr'},es:{label:'ES',dir:'ltr'},
-  pt:{label:'PT',dir:'ltr'},de:{label:'DE',dir:'ltr'},ar:{label:'AR',dir:'rtl'},
-  hi:{label:'HI',dir:'ltr'},zh:{label:'ZH',dir:'ltr'},ru:{label:'RU',dir:'ltr'},
-  ja:{label:'JA',dir:'ltr'}
-};
-
-let currentLang = localStorage.getItem('a1_lang') || 'en';
-
-function setLang(lang) {
-  currentLang = lang;
-  localStorage.setItem('a1_lang', lang);
-  const meta = LANGS[lang];
-  document.documentElement.lang = lang;
-  document.documentElement.dir  = meta.dir;
-  document.getElementById('langLabel').textContent = meta.label;
-
-  // Translate all elements
-  document.querySelectorAll('[data-i18n]').forEach(el => {
-    const key = el.dataset.i18n;
-    const val = T[lang]?.[key] || T.en[key];
-    if (val !== undefined) el.innerHTML = val;
-  });
-
-  // Update active option in dropdown
-  document.querySelectorAll('.lang-opt').forEach(opt => {
-    const l = opt.getAttribute('onclick')?.match(/'(\w+)'/)?.[1];
-    opt.classList.toggle('selected', l === lang);
-  });
-
-  closeLangDropdown();
-}
-
-function toggleLang(e) {
-  e.stopPropagation();
-  document.getElementById('langBtn').classList.toggle('open');
-}
-function closeLangDropdown() {
-  document.getElementById('langBtn').classList.remove('open');
-}
-document.addEventListener('click', closeLangDropdown);
-document.getElementById('langDropdown').addEventListener('click', e => e.stopPropagation());
-
-// Init language on load
-setLang(currentLang);
-
-// ─── NAV scroll + active highlight ──────────────
-const nav = document.getElementById('nav');
-const sections = document.querySelectorAll('section[id], div[id]');
-
-window.addEventListener('scroll', () => {
-  nav.classList.toggle('stuck', scrollY > 60);
-
-  // Back to top
-  document.getElementById('btt').classList.toggle('show', scrollY > 400);
-
-  // Active nav link
-  let current = '';
-  sections.forEach(s => {
-    if (scrollY >= s.offsetTop - 100) current = s.id;
-  });
-  document.querySelectorAll('.nav-links a').forEach(a => {
-    const href = a.getAttribute('href')?.replace('#','');
-    a.classList.toggle('active', href === current);
-  });
-}, {passive:true});
-
-// ─── Mobile menu ────────────────────────────────
-let mob = false;
-document.getElementById('hambBtn').addEventListener('click', () => {
-  mob = !mob;
-  document.getElementById('mobMenu').classList.toggle('open', mob);
-});
-function cm() { mob=false; document.getElementById('mobMenu').classList.remove('open'); }
-
-// ─── Scroll reveal ───────────────────────────────
-const ro = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if (e.isIntersecting) { e.target.classList.add('on'); ro.unobserve(e.target); }
-  });
-}, {threshold: 0.08});
-document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
-
-// ─── Counter animation ───────────────────────────
-function animateCounter(el) {
-  const target = parseInt(el.dataset.target);
-  const suffix = el.dataset.suffix || '';
-  const duration = 1800;
-  const step = 16;
-  const increment = target / (duration / step);
-  let current = 0;
-  const timer = setInterval(() => {
-    current = Math.min(current + increment, target);
-    el.textContent = Math.floor(current) + suffix;
-    if (current >= target) clearInterval(timer);
-  }, step);
-}
-
-const cro = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      e.target.querySelectorAll('.counter').forEach(animateCounter);
-      cro.unobserve(e.target);
+// ═══════════════════════════════════════════════
+// BROADCAST CHANNEL — Cross-app context sync
+// ═══════════════════════════════════════════════
+let channel;
+try {
+  channel = new BroadcastChannel('alpha-1-studio');
+  channel.onmessage = (event) => {
+    const { type, data } = event.data;
+    if (type === 'THEME_CHANGE') {
+      applyTheme(data.theme);
+    } else if (type === 'PING') {
+      channel.postMessage({ type: 'PONG' });
     }
-  });
-}, {threshold: 0.3});
-document.querySelectorAll('.hero-stats, .mission-right').forEach(el => cro.observe(el));
-
-// ─── FAQ accordion ───────────────────────────────
-function tf(btn) {
-  const a = btn.nextElementSibling;
-  const open = a.classList.contains('open');
-  document.querySelectorAll('.fq').forEach(b => { b.classList.remove('open'); b.nextElementSibling.classList.remove('open'); });
-  if (!open) { btn.classList.add('open'); a.classList.add('open'); }
+  };
+} catch(e) {
+  console.log('BroadcastChannel not supported');
 }
 
-// ─── Feature Banner Rotation ─────────────────────
-(function initFeatureBanner() {
-  const slides = document.querySelectorAll('.fb-slide');
+// ═══════════════════════════════════════════════
+// VIEW MANAGEMENT
+// ═══════════════════════════════════════════════
+function showView(view) {
+  const homeView = document.getElementById('homeView');
+  const launcherView = document.getElementById('launcherView');
+  const iframeView = document.getElementById('iframeView');
+  
+  if (view === 'home') {
+    homeView.style.display = 'block';
+    launcherView.style.display = 'none';
+    iframeView.classList.remove('active');
+    window.scrollTo({top:0, behavior:'smooth'});
+  } else if (view === 'launcher') {
+    homeView.style.display = 'none';
+    launcherView.style.display = 'block';
+    iframeView.classList.remove('active');
+    renderAppGrid();
+    window.scrollTo({top:0, behavior:'smooth'});
+  }
+}
+
+function openApp(appId) {
+  const app = APPS.find(a => a.id === appId);
+  if (!app) return;
+  
+  const homeView = document.getElementById('homeView');
+  const launcherView = document.getElementById('launcherView');
+  const iframeView = document.getElementById('iframeView');
+  const iframeTitle = document.getElementById('iframeTitle');
+  const iframeContainer = document.getElementById('iframeContainer');
+  const siteLink = document.getElementById('siteLink');
+  
+  homeView.style.display = 'none';
+  launcherView.style.display = 'none';
+  iframeView.classList.add('active');
+  
+  iframeTitle.textContent = app.name;
+  iframeContainer.src = app.url;
+  siteLink.href = app.url;
+  
+  window.scrollTo({top:0, behavior:'smooth'});
+  
+  // Notify parent if we're embedded
+  if (window !== window.parent) {
+    window.parent.postMessage({ type: 'APP_OPENED', appId: app.id, appName: app.name }, '*');
+  }
+}
+
+function renderAppGrid() {
+  const grid = document.getElementById('appGrid');
+  grid.innerHTML = APPS.map(app => `
+    <div class="app-card" onclick="openApp('${app.id}')">
+      <div class="app-icon" style="background:${app.color}20;border:1px solid ${app.color}40">
+        ${app.icon}
+      </div>
+      <div class="app-name">${app.name}</div>
+      <div class="app-desc">${app.desc}</div>
+    </div>
+  `).join('');
+}
+
+// ═══════════════════════════════════════════════
+// FEATURE BANNER SLIDER
+// ═══════════════════════════════════════════════
+let currentSlide = 0;
+const slides = document.querySelectorAll('.fb-slide');
+const totalSlides = slides.length;
+
+function initFeatureBanner() {
   const dotsContainer = document.getElementById('fbDots');
-  let current = 0;
-  let timer;
+  dotsContainer.innerHTML = Array(totalSlides).fill(0).map((_, i) => 
+    `<div class="fb-dot ${i === 0 ? 'active' : ''}" onclick="goToSlide(${i})"></div>`
+  ).join('');
+  
+  setInterval(() => {
+    goToSlide((currentSlide + 1) % totalSlides);
+  }, 4000);
+}
 
-  // Create dots
-  slides.forEach((_, i) => {
-    const dot = document.createElement('div');
-    dot.className = 'fb-dot' + (i === 0 ? ' active' : '');
-    dot.addEventListener('click', () => goTo(i));
-    dotsContainer.appendChild(dot);
+function goToSlide(index) {
+  slides[currentSlide].classList.remove('active');
+  document.querySelectorAll('.fb-dot')[currentSlide].classList.remove('active');
+  
+  currentSlide = index;
+  
+  slides[currentSlide].classList.add('active');
+  document.querySelectorAll('.fb-dot')[currentSlide].classList.add('active');
+}
+
+// ═══════════════════════════════════════════════
+// FAQ ACCORDION
+// ═══════════════════════════════════════════════
+function tf(btn) {
+  const fa = btn.nextElementSibling;
+  const isOpen = btn.classList.contains('open');
+  
+  document.querySelectorAll('.fq').forEach(b => {
+    b.classList.remove('open');
+    b.nextElementSibling.classList.remove('open');
   });
-
-  function goTo(index) {
-    slides[current].classList.remove('active');
-    dotsContainer.children[current].classList.remove('active');
-    current = index;
-    slides[current].classList.add('active');
-    dotsContainer.children[current].classList.add('active');
-    resetTimer();
+  
+  if (!isOpen) {
+    btn.classList.add('open');
+    fa.classList.add('open');
   }
+}
 
-  function next() {
-    goTo((current + 1) % slides.length);
+// ═══════════════════════════════════════════════
+// COUNTER ANIMATION
+// ═══════════════════════════════════════════════
+function animateCounters() {
+  const counters = document.querySelectorAll('.counter');
+  counters.forEach(counter => {
+    const target = parseInt(counter.dataset.target);
+    const suffix = counter.dataset.suffix || '';
+    const duration = 2000;
+    const step = target / (duration / 16);
+    let current = 0;
+    
+    const update = () => {
+      current += step;
+      if (current < target) {
+        counter.textContent = Math.floor(current) + suffix;
+        requestAnimationFrame(update);
+      } else {
+        counter.textContent = target + suffix;
+      }
+    };
+    update();
+  });
+}
+
+// ═══════════════════════════════════════════════
+// BACK TO TOP
+// ═══════════════════════════════════════════════
+window.addEventListener('scroll', () => {
+  const btt = document.getElementById('btt');
+  if (window.scrollY > 500) {
+    btt.classList.add('show');
+  } else {
+    btt.classList.remove('show');
   }
+});
 
-  function resetTimer() {
-    clearInterval(timer);
-timer = setInterval(next, 7000);
+// ═══════════════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════════════
+document.addEventListener('DOMContentLoaded', () => {
+  initFeatureBanner();
+  animateCounters();
+  
+  // Check if embedded and hide shell
+  if (window !== window.parent) {
+    document.querySelector('nav').style.display = 'none';
+    document.querySelector('footer').style.display = 'none';
   }
-
-  // Start
-  timer = setInterval(next, 5000);
-})();
+});
 </script>
 </body>
 </html>
