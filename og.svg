@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0a0e1a"/>
+      <stop offset="50%" stop-color="#0d1530"/>
+      <stop offset="100%" stop-color="#080e1e"/>
+    </linearGradient>
+    <linearGradient id="glow" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#3b82f6"/>
+      <stop offset="100%" stop-color="#8b5cf6"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <circle cx="200" cy="315" r="280" fill="none" stroke="rgba(59,130,246,.08)" stroke-width="60"/>
+  <circle cx="1000" cy="200" r="200" fill="none" stroke="rgba(139,92,246,.06)" stroke-width="40"/>
+  <rect x="80" y="60" width="80" height="80" rx="16" fill="url(#glow)"/>
+  <text x="120" y="112" text-anchor="middle" font-size="48" font-weight="900" font-family="system-ui" fill="white">A</text>
+  <text x="180" y="110" font-size="36" font-weight="800" font-family="system-ui" fill="white">ALPHA-1 STUDIO</text>
+  <text x="80" y="340" font-size="60" font-weight="900" font-family="system-ui" fill="white" letter-spacing="-2">Privacy Tools · AI Products</text>
+  <text x="80" y="410" font-size="60" font-weight="900" font-family="system-ui" fill="url(#glow)" letter-spacing="-2">Developer Utilities</text>
+  <text x="80" y="490" font-size="28" font-weight="400" fill="#8892b0" font-family="system-ui">Free &amp; open-source technology. Built from Ghana, for the world.</text>
+  <rect x="80" y="530" width="180" height="4" rx="2" fill="#3b82f6"/>
+</svg>

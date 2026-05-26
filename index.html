@@ -3,15 +3,94 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<meta name="description" content="Alpha-1 Studio — Global technology studio building privacy tools, AI products and developer utilities."/>
-<meta property="og:title" content="Alpha-1 Studio"/>
-<meta property="og:description" content="Building the future. From Ghana, for the world."/>
-<title>Alpha-1 Studio</title>
+
+<!-- PRIMARY META -->
+<title>Alpha-1 Studio — Privacy Tools, AI Products & Developer Utilities</title>
+<meta name="description" content="Alpha-1 Studio builds privacy tools, AI products, and developer utilities. Free, open-source technology from Ghana for the world."/>
+<meta name="keywords" content="privacy tools, AI products, developer utilities, open source, Ghana, Alpha-1, Sam Atlas, encryption, password manager, QR code"/>
+<meta name="author" content="Samuel Mensah"/>
+<link rel="canonical" href="https://alpha1studio.vercel.app/"/>
+
+<!-- OPEN GRAPH -->
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="https://alpha1studio.vercel.app/"/>
+<meta property="og:title" content="Alpha-1 Studio — Privacy Tools, AI & Developer Utilities"/>
+<meta property="og:description" content="Free, open-source privacy tools, AI products, and developer utilities. Built from Ghana for the world."/>
+<meta property="og:image" content="https://alpha1studio.vercel.app/og.svg"/>
+<meta property="og:image:width" content="1200"/>
+<meta property="og:image:height" content="630"/>
+<meta property="og:locale" content="en_US"/>
+
+<!-- TWITTER CARD -->
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="Alpha-1 Studio — Privacy Tools, AI & Developer Utilities"/>
+<meta name="twitter:description" content="Free, open-source privacy tools, AI products, and developer utilities from Ghana."/>
+<meta name="twitter:image" content="https://alpha1studio.vercel.app/og.svg"/>
+
+<!-- PWA / MOBILE -->
+<meta name="theme-color" content="#0a0e1a"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+<link rel="manifest" href="manifest.json"/>
+<link rel="icon" type="image/svg+xml" href="favicon.svg"/>
+<link rel="apple-touch-icon" href="apple-touch-icon.svg"/>
+<meta name="apple-mobile-web-app-title" content="Alpha-1 Studio"/>
+
+<!-- STRUCTURED DATA -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Alpha-1 Studio",
+  "url": "https://alpha1studio.vercel.app/",
+  "description": "Global technology studio building privacy tools, AI products and developer utilities.",
+  "author": {
+    "@type": "Person",
+    "name": "Samuel Mensah",
+    "url": "https://samuel-mensah-portfolio.vercel.app/"
+  },
+  "inLanguage": "en-US",
+  "applicationCategory": "DeveloperApplication"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is Alpha-1 Studio?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Alpha-1 Studio is a global technology studio building privacy tools, AI products and developer utilities — all free, open and built for everyone. Founded by Samuel Mensah in Ghana." }
+    },
+    {
+      "@type": "Question",
+      "name": "What is Sam Atlas?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Sam Atlas is an AI Agent Builder platform. We sell digital products — guides, templates, and courses — to help you build, configure, and launch your own AI agents. Prices vary by region." }
+    },
+    {
+      "@type": "Question",
+      "name": "Is my data safe?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Absolutely. All products are privacy-first. Privacy Toolkit runs 100% in your browser — nothing ever sent to a server. No tracking, no analytics, no accounts required." }
+    },
+    {
+      "@type": "Question",
+      "name": "Are the tools free?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes — most products are completely free. Alpha-1 Design requires your own Claude API key for AI features. Sam Atlas products have regional pricing based on your location." }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I collaborate or hire?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes. We are open to collaborations, freelance work and interesting projects. Email alphariansamuel@gmail.com or WhatsApp +233553016346." }
+    }
+  ]
+}
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;scroll-padding-top:80px}
 :root{
   --bg:#0a0e1a;--bg2:#0d1221;--bg3:#111827;
   --card:#131929;--card2:#1a2235;
@@ -225,6 +304,11 @@ nav{
 .btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(59,130,246,.4)}
 .btn-ghost{display:inline-flex;align-items:center;gap:7px;background:rgba(255,255,255,.05);border:1px solid var(--border2);color:var(--text2);border-radius:9px;font-size:.88rem;font-weight:600;padding:.75rem 1.5rem;transition:all .2s}
 .btn-ghost:hover{color:var(--text);border-color:rgba(255,255,255,.25);background:rgba(255,255,255,.08)}
+.btn-share{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;background:rgba(255,255,255,.04);border:1px solid var(--border2);color:var(--text2);border-radius:9px;transition:all .2s;cursor:pointer;flex-shrink:0}
+.btn-share:hover{color:var(--text);border-color:rgba(255,255,255,.25);background:rgba(255,255,255,.08);transform:translateY(-2px)}
+.float-share{position:fixed;bottom:1.5rem;right:5.5rem;z-index:99;width:38px;height:38px;border-radius:50%;background:var(--card);border:1px solid var(--border);color:var(--text2);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s;backdrop-filter:blur(12px);opacity:0;transform:translateY(20px);pointer-events:none}
+.float-share.show{opacity:1;transform:translateY(0);pointer-events:all}
+.float-share:hover{color:var(--blue);border-color:var(--blue)}
 .hero-stats{display:flex;gap:2rem;flex-wrap:wrap;padding-top:1.8rem;border-top:1px solid var(--border)}
 .stat-wrap{display:flex;flex-direction:column;gap:2px}
 .stat-n{font-size:1.9rem;font-weight:800;color:#fff;line-height:1;font-variant-numeric:tabular-nums}
@@ -272,16 +356,80 @@ nav{
 .see-all{display:inline-flex;align-items:center;gap:5px;font-size:.78rem;font-weight:600;color:var(--blue);border:1px solid rgba(59,130,246,.25);border-radius:7px;padding:.4rem .85rem;transition:all .2s}
 .see-all:hover{background:rgba(59,130,246,.08)}
 .proj-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
-.proj-card{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;transition:all .22s;display:flex;flex-direction:column;cursor:pointer}
-.proj-card:hover{border-color:rgba(59,130,246,.28);transform:translateY(-3px);box-shadow:0 14px 40px rgba(0,0,0,.4)}
-.pc-top{padding:1.1rem 1.1rem .6rem}
-.pc-head{display:flex;align-items:center;gap:9px;margin-bottom:.6rem}
-.pc-ico{width:36px;height:36px;border-radius:9px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.pc-name{font-size:.9rem;font-weight:700;color:var(--text)}
-.pc-desc{font-size:.78rem;color:var(--text2);line-height:1.55}
-.ptags{display:flex;gap:5px;flex-wrap:wrap;padding:.65rem 1rem;border-top:1px solid var(--border)}
-.ptag{font-size:.58rem;font-weight:600;color:var(--text3);border:1px solid var(--border);border-radius:4px;padding:2px 6px;text-transform:uppercase;letter-spacing:.04em;font-family:var(--mono)}
-.ptag.live{color:#22c55e;border-color:rgba(34,197,94,.22);background:rgba(34,197,94,.05)}
+.proj-card{background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:all .35s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column;cursor:pointer;position:relative;opacity:0;transform:translateY(20px)}
+.proj-card.visible{opacity:1;transform:translateY(0)}
+.proj-card::before{content:'';position:absolute;inset:0;border-radius:14px;padding:1px;background:linear-gradient(135deg,transparent 40%,var(--border2) 100%);-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none;opacity:0;transition:opacity .35s}
+.proj-card:hover{border-color:transparent;transform:translateY(-6px);box-shadow:0 20px 60px rgba(0,0,0,.5),0 0 40px rgba(59,130,246,.06)}
+.proj-card:hover::before{opacity:1}
+.pc-accent{height:3px;border-radius:14px 14px 0 0;flex-shrink:0}
+.pc-top{padding:1rem 1.1rem .6rem;flex:1;display:flex;flex-direction:column}
+.pc-head{display:flex;align-items:center;gap:10px;margin-bottom:.6rem}
+.pc-ico{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:transform .3s cubic-bezier(.4,0,.2,1),box-shadow .3s}
+.proj-card:hover .pc-ico{transform:scale(1.08);box-shadow:0 0 24px currentColor}
+.pc-ico svg{width:19px;height:19px}
+.pc-name{font-size:.92rem;font-weight:700;color:var(--text);letter-spacing:-.01em}
+.pc-desc{font-size:.76rem;color:var(--text2);line-height:1.6;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.ptags{display:flex;gap:5px;flex-wrap:wrap;padding:.6rem 1rem .4rem;border-top:1px solid var(--border)}
+.ptag{font-size:.56rem;font-weight:600;color:var(--text3);border:1px solid var(--border);border-radius:5px;padding:3px 7px;text-transform:uppercase;letter-spacing:.04em;font-family:var(--mono);display:inline-flex;align-items:center;gap:4px}
+.ptag.live{color:#22c55e;border-color:rgba(34,197,94,.22);background:rgba(34,197,94,.06)}
+.lang-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.pc-actions{display:flex;gap:1px;padding:.3rem .75rem .5rem;background:var(--bg3);border-top:1px solid var(--border)}
+.pc-action{display:inline-flex;align-items:center;justify-content:center;gap:4px;padding:.35rem .55rem;font-size:.62rem;font-weight:600;color:var(--text3);border-radius:6px;transition:all .2s;cursor:pointer;background:none;border:none;font-family:var(--font);line-height:1;text-decoration:none}
+.pc-action:hover{color:var(--text);background:rgba(255,255,255,.06)}
+.pc-action.star:hover{color:#fbbf24}
+.pc-action.issues:hover{color:#22c55e}
+.pc-action.gh:hover{color:#fff}
+.pc-action.share:hover{color:var(--blue)}
+/* SKELETON LOADER */
+@keyframes shimmer{0%{background-position:-400px 0}100%{background-position:400px 0}}
+.skel-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+.skel-card{background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden;display:flex;flex-direction:column}
+.skel-bar{height:3px;background:var(--bg3)}
+.skel-body{padding:1rem 1.1rem;display:flex;flex-direction:column;gap:10px;flex:1}
+.skel-row{display:flex;align-items:center;gap:10px}
+.skel-icon{width:38px;height:38px;border-radius:10px;background:linear-gradient(90deg,var(--card) 25%,var(--card2) 50%,var(--card) 75%);background-size:400px 100%;animation:shimmer 1.6s ease-in-out infinite}
+.skel-line{height:12px;border-radius:4px;background:linear-gradient(90deg,var(--card) 25%,var(--card2) 50%,var(--card) 75%);background-size:400px 100%;animation:shimmer 1.6s ease-in-out infinite}
+.skel-line.w50{width:50%}.skel-line.w70{width:70%}.skel-line.w90{width:90%}
+.skel-line.w30{width:30%}
+.skel-desc{height:10px;border-radius:3px;background:linear-gradient(90deg,var(--card) 25%,var(--card2) 50%,var(--card) 75%);background-size:400px 100%;animation:shimmer 1.6s ease-in-out infinite;margin-top:2px}
+.skel-actions{display:flex;gap:4px;padding:.4rem .75rem;border-top:1px solid var(--border);background:var(--bg3)}
+.skel-act{width:48px;height:18px;border-radius:5px;background:linear-gradient(90deg,var(--card) 25%,var(--card2) 50%,var(--card) 75%);background-size:400px 100%;animation:shimmer 1.6s ease-in-out infinite}
+
+/* PROJECT SEARCH */
+.proj-toolbar{display:flex;align-items:center;gap:1rem;margin-bottom:1.25rem;flex-wrap:wrap}
+.proj-search{flex:1;min-width:180px;display:flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--border);border-radius:10px;padding:.55rem .85rem;transition:border-color .2s}
+.proj-search:focus-within{border-color:var(--blue);box-shadow:0 0 0 3px rgba(59,130,246,.1)}
+.proj-search input{background:none;border:none;color:var(--text);font-size:.82rem;font-family:var(--font);outline:none;width:100%}
+.proj-search input::placeholder{color:var(--text3)}
+.proj-count{font-size:.75rem;color:var(--text3);font-weight:600;white-space:nowrap;font-family:var(--mono)}
+
+/* SCROLL REVEAL */
+.reveal{opacity:0;transform:translateY(30px);transition:opacity .7s cubic-bezier(.4,0,.2,1),transform .7s cubic-bezier(.4,0,.2,1)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* MOBILE NAV */
+.nav-toggle{display:none;flex-direction:column;gap:4px;cursor:pointer;background:none;border:none;padding:4px;margin-left:12px;flex-shrink:0}
+.nav-toggle span{display:block;width:20px;height:2px;background:var(--text2);border-radius:2px;transition:all .3s}
+.nav-toggle.active span:nth-child(1){transform:translateY(6px) rotate(45deg)}
+.nav-toggle.active span:nth-child(2){opacity:0}
+.nav-toggle.active span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
+.mobile-nav{position:fixed;inset:0;top:64px;z-index:199;background:rgba(10,14,26,.98);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2rem;opacity:0;pointer-events:none;transition:all .35s cubic-bezier(.4,0,.2,1)}
+.mobile-nav.open{opacity:1;pointer-events:all}
+.mobile-nav a{font-size:1.4rem;font-weight:700;color:var(--text2);transition:color .2s;letter-spacing:-.01em}
+.mobile-nav a:hover{color:var(--text)}
+.mobile-nav a.active{color:var(--blue)}
+.mn-close{position:absolute;bottom:3rem;font-size:.85rem;color:var(--text3);font-weight:500;display:flex;align-items:center;gap:6px;font-family:var(--mono)}
+
+/* TOAST */
+.toast{position:fixed;bottom:1.5rem;left:50%;transform:translateX(-50%) translateY(80px);z-index:500;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:.65rem 1.2rem;font-size:.8rem;font-weight:500;color:var(--text);box-shadow:0 8px 32px rgba(0,0,0,.5);opacity:0;transition:all .4s cubic-bezier(.4,0,.2,1);pointer-events:none;display:flex;align-items:center;gap:8px;backdrop-filter:blur(12px)}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.toast svg{flex-shrink:0}
+
+/* KEYBOARD HINT */
+.kb-hint{position:fixed;bottom:1.3rem;right:1.3rem;z-index:100;background:var(--card);border:1px solid var(--border);border-radius:10px;padding:.45rem .65rem;font-size:.6rem;color:var(--text3);display:flex;align-items:center;gap:5px;opacity:0;transition:opacity .4s;cursor:pointer;backdrop-filter:blur(8px)}
+.kb-hint.show{opacity:1}
+.kb-hint:hover{opacity:1!important;border-color:var(--border2)}
+.kb-hint kbd{background:var(--bg3);border:1px solid var(--border);border-radius:4px;padding:1px 5px;font-family:var(--mono);font-size:.55rem;color:var(--text2)}
 
 /* MISSION */
 .mission{padding:4rem 0;background:var(--bg)}
@@ -309,8 +457,8 @@ nav{
 .fq.open{color:var(--blue)}
 .fchev{flex-shrink:0;transition:transform .3s var(--ease);color:var(--text3)}
 .fq.open .fchev{transform:rotate(180deg);color:var(--blue)}
-.fa{font-size:.82rem;color:var(--text2);line-height:1.75;padding:0 1.3rem;max-height:0;overflow:hidden;transition:max-height .35s var(--ease),padding .35s}
-.fa.open{max-height:200px;padding:.1rem 1.3rem 1.1rem}
+.fa{font-size:.82rem;color:var(--text2);line-height:1.75;padding:0 1.3rem;max-height:0;overflow:hidden;transition:max-height .4s cubic-bezier(.4,0,.2,1),padding .4s}
+.fa.open{max-height:300px;padding:.1rem 1.3rem 1.1rem}
 
 /* FOOTER */
 footer{background:var(--bg2);border-top:1px solid var(--border);padding:3rem 0 2rem}
@@ -349,6 +497,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:3rem 0 2
 /* RESPONSIVE */
 @media(max-width:960px){
   .nav-links,.hero-right{display:none}
+  .nav-toggle{display:flex}
   .hero-grid{grid-template-columns:1fr}
   .proj-grid{grid-template-columns:1fr 1fr}
   .mission-grid{grid-template-columns:1fr}
@@ -360,6 +509,11 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:3rem 0 2
   .proj-grid{grid-template-columns:1fr}
   .foot-grid{grid-template-columns:1fr 1fr}
   .app-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:480px){
+  .skel-grid{grid-template-columns:1fr}
+  .mission-right{grid-template-columns:1fr}
+  .nav-toggle{margin-right:-4px}
 }
 </style>
 </head>
@@ -395,6 +549,9 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:3rem 0 2
       <li><a href="#mission" onclick="showView('home')">Mission</a></li>
       <li><a href="#faq" onclick="showView('home')">FAQ</a></li>
     </ul>
+    <button class="nav-toggle" id="navToggle" onclick="toggleNav()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
     <div class="nav-right">
       <button class="launcher-btn" onclick="showView('launcher')">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -408,6 +565,24 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:3rem 0 2
     </div>
   </div>
   </nav>
+
+  <!-- MOBILE NAV OVERLAY -->
+  <div class="mobile-nav" id="mobileNav">
+    <a href="#" onclick="showView('home');closeNav()">Home</a>
+    <a href="#" onclick="showView('launcher');closeNav()">Apps</a>
+    <a href="#projects" onclick="showView('home');closeNav()">Projects</a>
+    <a href="#mission" onclick="showView('home');closeNav()">Mission</a>
+    <a href="#faq" onclick="showView('home');closeNav()">FAQ</a>
+    <div class="mn-close">Press <kbd style="background:var(--bg3);border:1px solid var(--border);border-radius:3px;padding:0 5px;font-family:var(--mono);font-size:.7rem">Esc</kbd> to close</div>
+  </div>
+
+  <!-- TOAST -->
+  <div class="toast" id="toast"></div>
+
+  <!-- KEYBOARD HINT -->
+  <div class="kb-hint" id="kbHint" onclick="showShortcuts()">
+    <kbd>?</kbd> <span>Shortcuts</span>
+  </div>
 
   <!-- MAIN CONTENT -->
   <main class="app-content">
@@ -487,6 +662,9 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:3rem 0 2
             Open Apps
           </button>
           <a href="#mission" class="btn-ghost">Our Mission →</a>
+          <button class="btn-share" onclick="shareSite()" title="Share this site">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+          </button>
         </div>
         <div class="hero-stats">
           <div class="stat-wrap"><div class="stat-n counter" data-target="4">0</div><div class="stat-l">Products</div></div>
@@ -500,7 +678,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:3rem 0 2
     </section>
 
     <!-- FEATURE BANNER -->
-    <section class="feature-banner">
+    <section class="feature-banner reveal">
     <div class="wrap">
       <div class="fb-label">Featured Product</div>
       <div class="fb-track" id="fbTrack">
@@ -536,31 +714,25 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:3rem 0 2
     <!-- PROJECTS -->
     <section class="projects" id="projects">
     <div class="wrap">
-      <div class="sec-head">
-        <div><div class="sec-title">All Products</div><div class="sec-sub">Every product is live and free to use.</div></div>
+      <div class="sec-head reveal">
+        <div>
+          <div style="display:flex;align-items:center;gap:8px;font-size:.65rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--blue);margin-bottom:.4rem;font-family:var(--mono)">
+            <span style="width:24px;height:2px;background:var(--blue);border-radius:2px"></span>Open Source
+          </div>
+          <div class="sec-title">Projects</div>
+          <div class="sec-sub">Public repositories from <strong style="color:var(--text)">alpha-1-design</strong></div>
+        </div>
         <a href="https://github.com/alpha-1-design" target="_blank" class="see-all">View on GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></a>
       </div>
-      <div class="proj-grid">
-        <a class="proj-card" href="#" onclick="openApp('sam-atlas');return false">
-          <div class="pc-top"><div class="pc-head"><div class="pc-ico" style="background:linear-gradient(135deg,#1e3a5f,#0f2040)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></div><div class="pc-name">Sam Atlas</div></div><div class="pc-desc">AI Agent Builder. Digital products to help you build, configure, and launch AI agents. Step-by-step guides and templates.</div></div>
-          <div class="ptags"><span class="ptag">Next.js</span><span class="ptag">AI</span><span class="ptag">PWA</span><span class="ptag live">● Live</span></div>
-        </a>
-        <a class="proj-card" href="#" onclick="openApp('alpha-1-design');return false">
-          <div class="pc-top"><div class="pc-head"><div class="pc-ico" style="background:linear-gradient(135deg,#2d1a5f,#1a0f40)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8b5cf6" stroke-width="1.8"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><div class="pc-name">Alpha-1 Design</div></div><div class="pc-desc">AI writing, image compression and color palette tools. Installable PWA powered by Claude API.</div></div>
-          <div class="ptags"><span class="ptag">Next.js</span><span class="ptag">Claude API</span><span class="ptag">PWA</span><span class="ptag live">● Live</span></div>
-        </a>
-        <a class="proj-card" href="#" onclick="openApp('privacy-toolkit');return false">
-          <div class="pc-top"><div class="pc-head"><div class="pc-ico" style="background:linear-gradient(135deg,#0f3a2a,#082018)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="1.8"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div><div class="pc-name">Privacy Toolkit</div></div><div class="pc-desc">13 browser-based security tools. Phishing detection, AES-256 encryption, JWT decoder. Zero servers. Zero tracking.</div></div>
-          <div class="ptags"><span class="ptag">Vanilla JS</span><span class="ptag">Web Crypto</span><span class="ptag live">● Live</span></div>
-        </a>
-        <a class="proj-card" href="#" onclick="openApp('universal-toolbox');return false">
-          <div class="pc-top"><div class="pc-head"><div class="pc-ico" style="background:linear-gradient(135deg,#3a2a0f,#201508)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fbbf24" stroke-width="1.8"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg></div><div class="pc-name">Universal Toolbox</div></div><div class="pc-desc">700+ curated web tools across 50+ categories. Bookmarks, collections and inline preview.</div></div>
-          <div class="ptags"><span class="ptag">React</span><span class="ptag">Vite</span><span class="ptag">PWA</span><span class="ptag live">● Live</span></div>
-        </a>
-        <a class="proj-card" href="https://samuel-mensah-portfolio.vercel.app/" target="_blank">
-          <div class="pc-top"><div class="pc-head"><div class="pc-ico" style="background:linear-gradient(135deg,#3a1a2a,#200f18)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f472b6" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg></div><div class="pc-name">Portfolio</div></div><div class="pc-desc">Full-stack developer, video editor and creative engineer based in Ghana.</div></div>
-          <div class="ptags"><span class="ptag">Next.js</span><span class="ptag">TypeScript</span><span class="ptag live">● Live</span></div>
-        </a>
+      <div class="proj-toolbar reveal" style="transition-delay:.1s">
+        <div class="proj-search">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--text3)" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input type="text" id="projFilter" placeholder="Search projects..." oninput="filterProjects(this.value)">
+        </div>
+        <div class="proj-count" id="projCount"></div>
+      </div>
+      <div class="proj-grid" id="projGrid">
+        <div class="skel-grid" id="skelGrid"></div>
       </div>
     </div>
     </section>
@@ -568,9 +740,9 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:3rem 0 2
     <!-- MISSION -->
     <section class="mission" id="mission">
     <div class="wrap">
-      <div class="sec-label" style="display:flex;align-items:center;gap:8px;font-size:.68rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--text3);margin-bottom:.7rem;font-family:var(--mono)"><span style="width:28px;height:1px;background:var(--text3)"></span>Our Mission</div>
+      <div class="sec-label reveal" style="display:flex;align-items:center;gap:8px;font-size:.68rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--text3);margin-bottom:.7rem;font-family:var(--mono)"><span style="width:28px;height:1px;background:var(--text3)"></span>Our Mission</div>
       <div class="mission-grid">
-        <div>
+        <div class="reveal">
           <h2 class="mission-h">Technology built for <em>everyone</em> — not just those with resources.</h2>
           <p class="mission-p">Alpha-1 Studio is a global technology studio building privacy tools, AI products and developer utilities — free, open and accessible to everyone. We believe powerful technology should not require a subscription, an account or a data sacrifice.</p>
           <p class="mission-p">Built from Ghana. Used worldwide. Improving every day.</p>
@@ -579,11 +751,11 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:3rem 0 2
             <div><div class="founder-name">Samuel Mensah</div><div class="founder-role">Founder · Full-Stack Developer · Ghana 🇬🇭</div></div>
           </div>
         </div>
-        <div class="mission-right">
-          <div class="ms"><div class="ms-n counter" data-target="4">0</div><div class="ms-l">Products</div></div>
-          <div class="ms"><div class="ms-n counter" data-target="700" data-suffix="+">0</div><div class="ms-l">Tools Built</div></div>
-          <div class="ms"><div class="ms-n counter" data-target="13">0</div><div class="ms-l">Security Tools</div></div>
-          <div class="ms"><div class="ms-n counter" data-target="10">0</div><div class="ms-l">Languages</div></div>
+        <div class="mission-right reveal counter-parent" style="transition-delay:.15s">
+          <div class="ms reveal" style="transition-delay:0s"><div class="ms-n counter" data-target="4">0</div><div class="ms-l">Products</div></div>
+          <div class="ms reveal" style="transition-delay:.08s"><div class="ms-n counter" data-target="700" data-suffix="+">0</div><div class="ms-l">Tools Built</div></div>
+          <div class="ms reveal" style="transition-delay:.15s"><div class="ms-n counter" data-target="13">0</div><div class="ms-l">Security Tools</div></div>
+          <div class="ms reveal" style="transition-delay:.22s"><div class="ms-n counter" data-target="10">0</div><div class="ms-l">Languages</div></div>
         </div>
       </div>
     </div>
@@ -593,7 +765,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:3rem 0 2
     <section class="faq" id="faq">
     <div class="wrap">
       <div class="faq-layout">
-        <div>
+        <div class="reveal">
           <div class="sec-label" style="display:flex;align-items:center;gap:8px;font-size:.68rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--text3);margin-bottom:.7rem;font-family:var(--mono)"><span style="width:28px;height:1px;background:var(--text3)"></span>FAQ</div>
           <h2 style="font-size:1.8rem;font-weight:800;color:#fff;letter-spacing:-.02em;margin-bottom:.8rem">Questions?<br/>Answered.</h2>
           <p style="font-size:.83rem;color:var(--text2);line-height:1.65;margin-bottom:1.5rem">Everything you need to know about Alpha-1 Studio.</p>
@@ -602,7 +774,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:3rem 0 2
             Email Us
           </a>
         </div>
-        <div class="faq-list">
+        <div class="faq-list reveal" style="transition-delay:.15s">
           <div class="fi"><button class="fq" onclick="tf(this)"><span>What is Alpha-1 Studio?</span><svg class="fchev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button><div class="fa">Alpha-1 Studio is a global technology studio building privacy tools, AI products and developer utilities — all free, open and built for everyone. Founded by Samuel Mensah in Ghana.</div></div>
           <div class="fi"><button class="fq" onclick="tf(this)"><span>What is Sam Atlas?</span><svg class="fchev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button><div class="fa">Sam Atlas is an AI Agent Builder platform. We sell digital products — guides, templates, and courses — to help you build, configure, and launch your own AI agents. Prices vary by region.</div></div>
           <div class="fi"><button class="fq" onclick="tf(this)"><span>Is my data safe?</span><svg class="fchev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button><div class="fa">Absolutely. All products are privacy-first. Privacy Toolkit runs 100% in your browser — nothing ever sent to a server. No tracking, no analytics, no accounts required.</div></div>
@@ -617,7 +789,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:3rem 0 2
   </main>
 
   <!-- FOOTER -->
-  <footer>
+  <footer class="reveal">
   <div class="wrap">
     <div class="foot-grid">
       <div class="fb">
@@ -659,6 +831,11 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:3rem 0 2
 <!-- BACK TO TOP -->
 <button id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">
   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18 15 12 9 6 15"/></svg>
+</button>
+
+<!-- FLOATING SHARE -->
+<button id="floatShare" onclick="shareSite()" title="Share this site" class="float-share">
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
 </button>
 
 <script>
@@ -743,12 +920,6 @@ function closeApp() {
   }, 200);
 }
 
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape' && isAppOpen) {
-    closeApp();
-  }
-});
-
 // ═══════════════════════════════════════════════
 // VIEW MANAGEMENT
 // ═══════════════════════════════════════════════
@@ -819,13 +990,21 @@ function tf(btn) {
   const fa = btn.nextElementSibling;
   const isOpen = btn.classList.contains('open');
   
-  document.querySelectorAll('.fq').forEach(b => {
-    b.classList.remove('open');
-    b.nextElementSibling.classList.remove('open');
-  });
-  
   if (!isOpen) {
+    document.querySelectorAll('.fq').forEach(b => {
+      b.classList.remove('open');
+      b.nextElementSibling.classList.remove('open');
+      b.nextElementSibling.style.maxHeight = '';
+    });
+  }
+  
+  if (isOpen) {
+    btn.classList.remove('open');
+    fa.classList.remove('open');
+    fa.style.maxHeight = '';
+  } else {
     btn.classList.add('open');
+    fa.style.maxHeight = fa.scrollHeight + 30 + 'px';
     fa.classList.add('open');
   }
 }
@@ -856,15 +1035,318 @@ function animateCounters() {
 }
 
 // ═══════════════════════════════════════════════
+// SKELETON LOADER
+// ═══════════════════════════════════════════════
+function renderSkeletons() {
+  const grid = document.getElementById('skelGrid');
+  if (!grid) return;
+  grid.innerHTML = Array(6).fill(0).map(() => `
+    <div class="skel-card">
+      <div class="skel-bar"></div>
+      <div class="skel-body">
+        <div class="skel-row">
+          <div class="skel-icon"></div>
+          <div class="skel-line w50"></div>
+        </div>
+        <div class="skel-line w90"></div>
+        <div class="skel-line w70"></div>
+        <div class="skel-desc w30"></div>
+      </div>
+      <div class="skel-actions">
+        <div class="skel-act"></div>
+        <div class="skel-act"></div>
+        <div class="skel-act"></div>
+      </div>
+    </div>
+  `).join('');
+}
+
+// ═══════════════════════════════════════════════
+// GITHUB PROJECTS FETCH
+// ═══════════════════════════════════════════════
+const GITHUB_USER = 'alpha-1-design';
+const SKIP_REPOS = ['alpha1studio', 'alpha-analytics', 'alpha1-status-frontend', 'alpha1-status-api', 'My-portfolio-', 'alpha1design'];
+
+function fetchRepos() {
+  const grid = document.getElementById('projGrid');
+  const CACHE_KEY = 'a1s_repos';
+  const CACHE_AGE = 3600000;
+
+  const cached = localStorage.getItem(CACHE_KEY);
+  if (cached) {
+    const { data, timestamp } = JSON.parse(cached);
+    if (Date.now() - timestamp < CACHE_AGE) {
+      document.getElementById('skelGrid').remove();
+      renderRepos(data);
+      return;
+    }
+  }
+
+  fetch(`https://api.github.com/users/${GITHUB_USER}/repos?sort=updated&per_page=100&type=owner`)
+    .then(r => r.json())
+    .then(data => {
+      const repos = data.filter(r => !r.fork && !SKIP_REPOS.some(s => r.name.includes(s)));
+      localStorage.setItem(CACHE_KEY, JSON.stringify({ data: repos, timestamp: Date.now() }));
+      document.getElementById('skelGrid').remove();
+      renderRepos(repos);
+    })
+    .catch(() => {
+      document.getElementById('skelGrid').remove();
+      grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:3rem;color:var(--text3);font-size:.9rem;">Failed to load projects. <a href="https://github.com/alpha-1-design" style="color:var(--blue)">View on GitHub →</a></div>';
+    });
+}
+
+function filterProjects(q) {
+  const cards = document.querySelectorAll('.proj-card');
+  q = q.toLowerCase().trim();
+  let count = 0;
+  cards.forEach(c => {
+    const match = !q || c.getAttribute('data-name').includes(q) || (c.getAttribute('data-desc') || '').includes(q) || (c.getAttribute('data-lang') || '').includes(q);
+    c.style.display = match ? '' : 'none';
+    if (match) count++;
+  });
+  document.getElementById('projCount').textContent = `${count} project${count !== 1 ? 's' : ''}`;
+}
+
+function revealObserve() {
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        if (entry.target.classList.contains('counter-parent')) {
+          const counters = entry.target.querySelectorAll('.counter');
+          if (counters.length && !entry.target.dataset.counted) {
+            entry.target.dataset.counted = 'true';
+            animateCounters();
+          }
+        }
+      }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+}
+
+// ═══════════════════════════════════════════════
+// MOBILE NAV
+// ═══════════════════════════════════════════════
+function toggleNav() {
+  document.getElementById('navToggle').classList.toggle('active');
+  document.getElementById('mobileNav').classList.toggle('open');
+}
+function closeNav() {
+  document.getElementById('navToggle').classList.remove('active');
+  document.getElementById('mobileNav').classList.remove('open');
+}
+
+// ═══════════════════════════════════════════════
+// ACTIVE NAV LINK ON SCROLL
+// ═══════════════════════════════════════════════
+function updateActiveNav() {
+  const sections = [
+    { id: 'launcherView', link: 'a[onclick*="launcher"]' },
+    { id: 'projects', link: 'a[href="#projects"]' },
+    { id: 'mission', link: 'a[href="#mission"]' },
+    { id: 'faq', link: 'a[href="#faq"]' }
+  ];
+  const scrollY = window.scrollY + 200;
+  let activeId = null;
+  
+  sections.forEach(s => {
+    const el = document.getElementById(s.id);
+    if (el && el.offsetTop <= scrollY) activeId = s.id;
+  });
+  
+  document.querySelectorAll('.nav-links a, .mobile-nav a').forEach(a => a.classList.remove('active'));
+  
+  if (activeId) {
+    const s = sections.find(x => x.id === activeId);
+    if (s) {
+      document.querySelectorAll(`.nav-links ${s.link}, .mobile-nav ${s.link}`).forEach(a => a.classList.add('active'));
+    }
+  }
+}
+
+// ═══════════════════════════════════════════════
+// TOAST NOTIFICATIONS
+// ═══════════════════════════════════════════════
+function showToast(msg, icon) {
+  const t = document.getElementById('toast');
+  t.innerHTML = (icon || '') + msg;
+  t.classList.add('show');
+  clearTimeout(t._hide);
+  t._hide = setTimeout(() => t.classList.remove('show'), 2500);
+}
+
+// ═══════════════════════════════════════════════
+// KEYBOARD SHORTCUTS
+// ═══════════════════════════════════════════════
+const SHORTCUTS = [
+  { key: '1', desc: 'Open Privacy Toolkit' },
+  { key: '2', desc: 'Open Sam Atlas' },
+  { key: '3', desc: 'Open Alpha-1 Design' },
+  { key: '4', desc: 'Open Universal Toolbox' },
+  { key: 'p', desc: 'Scroll to Projects' },
+  { key: 'm', desc: 'Scroll to Mission' },
+  { key: 'f', desc: 'Scroll to FAQ' },
+  { key: 'Esc', desc: 'Close app / menu' },
+  { key: '?', desc: 'Show this help' }
+];
+
+function showShortcuts() {
+  showToast(SHORTCUTS.map(s => `<kbd style="background:var(--bg3);border:1px solid var(--border);border-radius:3px;padding:1px 5px;font-family:var(--mono);font-size:.65rem;margin:0 2px">${s.key}</kbd> ${s.desc}`).join(' &middot; '),
+    '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M6 8h.01M10 8h.01M14 8h.01M18 8h.01M8 12h.01M12 12h.01M16 12h.01M6 16h.01M10 16h.01M14 16h.01"/></svg>');
+}
+
+document.addEventListener('keydown', e => {
+  const tag = document.activeElement.tagName;
+  if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'IFRAME') return;
+  
+  if (e.key === 'Escape') {
+    if (document.getElementById('mobileNav').classList.contains('open')) { closeNav(); return; }
+    if (document.getElementById('fullscreenMode').classList.contains('active')) { closeApp(); return; }
+    return;
+  }
+  
+  const navMap = { 'p': 'projects', 'm': 'mission', 'f': 'faq' };
+  if (navMap[e.key]) {
+    e.preventDefault();
+    showView('home');
+    setTimeout(() => document.getElementById(navMap[e.key]).scrollIntoView({ behavior: 'smooth' }), 50);
+    return;
+  }
+  
+  if (e.key === '1' || e.key === '2' || e.key === '3' || e.key === '4') {
+    if (typeof APPS !== 'undefined' && APPS[e.key - 1]) {
+      e.preventDefault();
+      showView('launcher');
+      setTimeout(() => openApp(APPS[e.key - 1].id), 100);
+    }
+    return;
+  }
+  
+  if (e.key === '?' && e.shiftKey) {
+    e.preventDefault();
+    showShortcuts();
+  }
+});
+
+function renderRepos(repos) {
+  const grid = document.getElementById('projGrid');
+  const COLORS = ['#3b82f6','#8b5cf6','#22c55e','#f59e0b','#ef4444','#ec4899','#06b6d4','#84cc16'];
+  const ICONS = [
+    `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>`,
+    `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>`,
+    `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>`,
+    `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>`,
+    `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>`,
+    `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>`,
+    `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 002 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>`,
+    `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="6" y1="3" x2="6" y2="15"/><circle cx="18" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M18 9a9 9 0 01-9 9"/></svg>`
+  ];
+
+  function hashIcon(name) {
+    let h = 0;
+    for (let i = 0; i < name.length; i++) h = (h * 31 + name.charCodeAt(i)) | 0;
+    return ICONS[((h >>> 0) % ICONS.length)];
+  }
+
+  if (!repos.length) {
+    grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:3rem;color:var(--text3);font-size:.9rem;">No projects to show yet.</div>';
+    document.getElementById('projCount').textContent = '0 projects';
+    return;
+  }
+
+  const LANG_COLORS = { 'JavaScript':'#f7df1e','TypeScript':'#3178c6','Python':'#3572a5','HTML':'#e34c26','CSS':'#563d7c','Kotlin':'#A97BFF','Java':'#b07219','Astro':'#ff5a03','Rust':'#dea584','Go':'#00add8','Swift':'#ffac45','Ruby':'#701516','C':'#555555','C++':'#f34b7d','C#':'#178600','Shell':'#89e051','PHP':'#4F5D95','SCSS':'#c6538c','Svelte':'#ff3e00','Vue':'#41b883','Dart':'#00B4AB','Zig':'#ec915c','Nix':'#7e7eff' };
+  const colorOf = l => LANG_COLORS[l] || '#8892b0';
+
+  grid.innerHTML = repos.map((repo, i) => {
+    const lang = repo.language || 'Code';
+    const desc = repo.description || null;
+    const langColor = colorOf(lang);
+    const color = COLORS[i % COLORS.length];
+    const hasUrl = !!repo.homepage;
+    const url = repo.homepage || repo.html_url;
+    const isApp = typeof APPS !== 'undefined' && APPS.some(a => a.url === repo.homepage);
+    const tags = [];
+
+    tags.push(`<span class="ptag"><span class="lang-dot" style="background:${langColor}"></span>${lang}</span>`);
+    if (repo.stargazers_count > 0) tags.push(`<span class="ptag">★ ${repo.stargazers_count}</span>`);
+    if (hasUrl) tags.push(`<span class="ptag live">● Live</span>`);
+
+    const onclick = isApp ? `openApp('${APPS.find(a => a.url === repo.homepage).id}');return false` : '';
+
+    return `
+      <a class="proj-card" href="${url}" target="${hasUrl && !isApp ? '_blank' : '_self'}" ${onclick ? `onclick="${onclick}"` : ''} data-name="${repo.name.toLowerCase()}" data-desc="${(desc||'').toLowerCase()}" data-lang="${lang.toLowerCase()}">
+        <div class="pc-accent" style="background:${color}"></div>
+        <div class="pc-top">
+          <div class="pc-head">
+            <div class="pc-ico" style="background:linear-gradient(135deg,${color}20,${color}08);color:${color}">${hashIcon(repo.name)}</div>
+            <div class="pc-name">${repo.name}</div>
+          </div>
+          ${desc ? `<div class="pc-desc">${desc}</div>` : ''}
+        </div>
+        <div class="ptags">${tags.join('')}</div>
+        <div class="pc-actions">
+          <a href="${repo.html_url}" target="_blank" class="pc-action star" title="Star on GitHub">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            ${repo.stargazers_count || ''}
+          </a>
+          <a href="${repo.html_url}/issues" target="_blank" class="pc-action issues" title="Open Issues">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="1"/></svg>
+          </a>
+          <a href="${repo.html_url}" target="_blank" class="pc-action gh" title="View on GitHub">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+          </a>
+          <button class="pc-action share" title="Copy link" onclick="event.preventDefault();event.stopPropagation();navigator.clipboard.writeText('${repo.html_url}').then(()=>{const t=this;const o=t.innerHTML;t.innerHTML='<svg width=12 height=12 viewBox=\"0 0 24 24\" fill=none stroke=currentColor stroke-width=2.5><polyline points=\"20 6 9 17 4 12\"/></svg>';setTimeout(()=>t.innerHTML=o,1500)})">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+          </button>
+        </div>
+      </a>
+    `;
+  }).join('');
+
+  document.getElementById('projCount').textContent = `${repos.length} projects`;
+
+  // Stagger entrance animation
+  requestAnimationFrame(() => {
+    grid.querySelectorAll('.proj-card').forEach((card, i) => {
+      setTimeout(() => card.classList.add('visible'), i * 60);
+    });
+  });
+}
+
+// ═══════════════════════════════════════════════
+// SHARE
+// ═══════════════════════════════════════════════
+function shareSite() {
+  const data = {
+    title: 'Alpha-1 Studio',
+    text: 'Privacy tools, AI products and developer utilities — free, open and built for everyone. No accounts. No tracking.',
+    url: window.location.href
+  };
+  if (navigator.share) {
+    navigator.share(data).catch(() => {});
+  } else {
+    navigator.clipboard.writeText(window.location.href);
+    showToast('Link copied! Share it anywhere.',
+      '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>');
+  }
+}
+
+// ═══════════════════════════════════════════════
 // BACK TO TOP
 // ═══════════════════════════════════════════════
 window.addEventListener('scroll', () => {
   const btt = document.getElementById('btt');
-  if (window.scrollY > 500 && !isAppOpen) {
-    btt.classList.add('show');
-  } else {
-    btt.classList.remove('show');
-  }
+  const fs = document.getElementById('floatShare');
+  const show = window.scrollY > 500 && !isAppOpen;
+  btt.classList.toggle('show', show);
+  fs.classList.toggle('show', show);
+  updateActiveNav();
+});
+
+window.addEventListener('resize', () => {
+  if (window.innerWidth > 960) closeNav();
 });
 
 // ═══════════════════════════════════════════════
@@ -872,7 +1354,15 @@ window.addEventListener('scroll', () => {
 // ═══════════════════════════════════════════════
 document.addEventListener('DOMContentLoaded', () => {
   initFeatureBanner();
-  animateCounters();
+  renderSkeletons();
+  fetchRepos();
+  revealObserve();
+  
+  setTimeout(() => document.getElementById('kbHint').classList.add('show'), 3000);
+  setTimeout(() => document.getElementById('kbHint').classList.remove('show'), 10000);
+  document.getElementById('kbHint').addEventListener('mouseenter', () => document.getElementById('kbHint').classList.add('show'));
+  
+  if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js');
   
   if (window !== window.parent) {
     document.querySelector('nav').style.display = 'none';
