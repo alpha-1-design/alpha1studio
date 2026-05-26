@@ -144,6 +144,7 @@ button{cursor:pointer;font-family:var(--font)}
   animation:fadeInDown .6s ease-out;
 }
 .lb-dot{width:6px;height:6px;background:#3b82f6;border-radius:50%;animation:pulse 2s infinite}
+.lb-ver{font-size:.62rem;font-weight:600;color:var(--text3);background:var(--bg3);border:1px solid var(--border);border-radius:100px;padding:.15rem .55rem;font-family:var(--mono);letter-spacing:.02em}
 @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.8)}}
 .launcher-title{
   font-size:clamp(2rem,5vw,3rem);font-weight:800;line-height:1.1;
@@ -592,7 +593,8 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:3rem 0 2
       <div class="launcher-header">
         <div class="launcher-badge">
           <span class="lb-dot"></span>
-          <span>4 Apps Available</span>
+          <span id="appCount">4 Apps Available</span>
+          <span class="lb-ver" id="appVersion">v2.0</span>
         </div>
         <h1 class="launcher-title">
           <span class="lt-word">Your</span>
@@ -601,7 +603,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:3rem 0 2
         </h1>
         <p class="launcher-sub">Select an app to launch it instantly. All apps run seamlessly in your browser.</p>
         <div class="launcher-stats">
-          <div class="ls-item"><span class="ls-num">4</span><span class="ls-label">Apps</span></div>
+          <div class="ls-item"><span class="ls-num" id="statApps">4</span><span class="ls-label">Apps</span></div>
           <div class="ls-div"></div>
           <div class="ls-item"><span class="ls-num">700+</span><span class="ls-label">Tools</span></div>
           <div class="ls-div"></div>
@@ -1363,6 +1365,9 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('kbHint').addEventListener('mouseenter', () => document.getElementById('kbHint').classList.add('show'));
   
   if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js');
+  
+  document.getElementById('appCount').textContent = APPS.length + ' App' + (APPS.length !== 1 ? 's' : '') + ' Available';
+  document.getElementById('statApps').textContent = APPS.length;
   
   if (window !== window.parent) {
     document.querySelector('nav').style.display = 'none';
