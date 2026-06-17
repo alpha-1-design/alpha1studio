@@ -5,7 +5,8 @@ const APPS = [
   {id:'sam-atlas',name:'Sam Atlas',desc:'AI Agent Builder. Digital products to help you build and sell AI agents.',icon:'\u{1F916}',color:'#1e3a5f',category:'AI',url:'https://sam-atlas.vercel.app'},
   {id:'alpha-1-design',name:'Alpha-1 Design',desc:'AI writing, image compression, and color palette tools. Powered by Claude API.',icon:'\u2728',color:'#2d1a5f',category:'AI',url:'https://alpha-1-design.vercel.app'},
   {id:'privacy-toolkit',name:'Privacy Toolkit',desc:'13 browser-based security tools. Phishing detection, AES-256 encryption, JWT decoder.',icon:'\u{1F512}',color:'#0f3a2a',category:'Security',url:'https://privacy-toolkit-omega.vercel.app'},
-  {id:'universal-toolbox',name:'Universal Toolbox',desc:'700+ curated web tools across 50+ categories. Your complete developer toolkit.',icon:'\u{1F6E0}\uFE0F',color:'#3a2a0f',category:'Tools',url:'https://universal-toolbox.vercel.app'}
+  {id:'universal-toolbox',name:'Universal Toolbox',desc:'700+ curated web tools across 50+ categories. Your complete developer toolkit.',icon:'\u{1F6E0}\uFE0F',color:'#3a2a0f',category:'Tools',url:'https://universal-toolbox.vercel.app'},
+  {id:'gia-app',name:'GIA',desc:'Generative Interface Agent — private on-device AI workspace. 21 providers, wake word, agentic tools.',icon:'\u{1F916}',color:'#0f2745',category:'AI',url:'https://alpha-1-design.github.io/gia-app/'}
 ];
 
 let currentView = 'home';

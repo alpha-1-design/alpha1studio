@@ -17,7 +17,9 @@
 <link rel="manifest" href="manifest.json"/>
 <link rel="icon" type="image/svg+xml" href="favicon.svg"/>
 <link rel="apple-touch-icon" href="apple-touch-icon.svg"/>
-<title id="pageTitle">Alpha-1 Studio</title>
+<link rel="robots" href="robots.txt"/>
+<link rel="sitemap" type="application/xml" href="sitemap.xml"/>
+<title id="pageTitle">Alpha-1 Studio — Global Technology Studio</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
 <link rel="stylesheet" href="style.css"/>
@@ -93,7 +95,7 @@
 <h1 class="launcher-title"><span class="lt-word" data-i18n="launcherTitle1">Your</span> <span class="lt-word gradient-text" data-i18n="launcherTitle2">Alpha-1</span> <span class="lt-word" data-i18n="launcherTitle3">Apps</span></h1>
 <p class="launcher-sub" data-i18n="launcherSub">Select an app to launch it instantly. All apps run seamlessly in your browser.</p>
 <div class="launcher-stats">
-<div class="ls-item"><span class="ls-num" id="statApps">4</span><span class="ls-label" data-i18n="statApps">Apps</span></div>
+<div class="ls-item"><span class="ls-num" id="statApps">5</span><span class="ls-label" data-i18n="statApps">Apps</span></div>
 <div class="ls-div"></div>
 <div class="ls-item"><span class="ls-num">10</span><span class="ls-label" data-i18n="statRepos">Repos</span></div>
 <div class="ls-div"></div>
@@ -153,9 +155,10 @@
 </div>
 </div>
 
-<section class="hero" id="home"><div class="wrap"><div class="hero-grid"><div>
+<section class="hero" id="home"><div class="wrap"><div class="hero-grid">
+<div>
 <div class="hero-badge"><span class="bdot"></span><span data-i18n="heroBadge">Global Technology Studio &middot; Ghana</span></div>
-<h1 class="hero-h1"><span data-i18n="heroH1">Building the Future.<br/>From Ghana,<br/>For the World.</span></h1>
+<h1 class="hero-h1"><span data-i18n="heroH1">Building the Future.<br/>From Ghana,<br/><span class="gradient-text">For the World.</span></span></h1>
 <p class="hero-p" data-i18n="heroP">Privacy tools, AI products and developer utilities &mdash; free, open and built for everyone. No accounts. No tracking. Just powerful technology.</p>
 <div class="hero-btns">
 <button class="btn-primary" onclick="showView('launcher')"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg><span data-i18n="openApps">Open Apps</span></button>
@@ -163,46 +166,116 @@
 <button class="btn-share" onclick="shareSite()" title="Share this site"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg></button>
 </div>
 <div class="hero-stats">
-<div class="stat-wrap"><div class="stat-n counter" data-target="4">0</div><div class="stat-l" data-i18n="statProducts">Apps</div></div>
+<div class="stat-wrap"><div class="stat-n counter" data-target="5">0</div><div class="stat-l" data-i18n="statProducts">Apps</div></div>
 <div class="stat-wrap"><div class="stat-n counter" data-target="10">0</div><div class="stat-l" data-i18n="statRepos">Repos</div></div>
 <div class="stat-wrap"><div class="stat-n counter" data-target="8">0</div><div class="stat-l" data-i18n="statLanguages">Languages</div></div>
 <div class="stat-wrap"><div class="stat-n">&infin;</div><div class="stat-l" data-i18n="statBuilding">Still Building</div></div>
 </div>
-</div></div></div></section>
+</div>
+<div class="hero-mock">
+<div class="mock-terminal">
+<div class="mock-term-header">
+<span class="mock-term-dot red"></span>
+<span class="mock-term-dot yellow"></span>
+<span class="mock-term-dot green"></span>
+<span class="mock-term-title">studio — alpha-1</span>
+</div>
+<div class="mock-term-body">
+<div class="mock-line"><span class="mock-prompt">$</span> <span class="mock-cmd">whoami</span></div>
+<div class="mock-line mock-output"><span class="mock-green">alpha-1</span> — Global Technology Studio</div>
+<div class="mock-line" style="margin-top:8px"><span class="mock-prompt">$</span> <span class="mock-cmd">ls products/</span></div>
+<div class="mock-line mock-output">privacy-toolkit/  alpha-1-design/  sam-atlas/  gia/</div>
+<div class="mock-line" style="margin-top:8px"><span class="mock-prompt">$</span> <span class="mock-cmd">cat mission.txt</span></div>
+<div class="mock-line mock-output"><span class="mock-green">"Technology for everyone."</span></div>
+<div class="mock-line" style="margin-top:8px"><span class="mock-prompt">$</span> <span class="mock-cmd blink">_</span></div>
+</div>
+</div>
+</div>
+</div></div></section>
 
 <section class="showcase-section reveal"><div class="wrap">
 <div class="fb-label" data-i18n="featuredProduct">Featured Products</div>
 <div class="showcase-grid" id="showcaseGrid">
-<div class="sc-card" data-app="sam-atlas" style="--sc-color:#1e3a5f;--sc-accent:#3b82f6">
-<div class="sc-card-inner">
-<div class="sc-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></div>
-<div class="sc-name">Sam Atlas</div>
-<div class="sc-desc">AI Agent Builder. Digital products for building and selling AI agents.</div>
-<div class="sc-badge">AI</div>
+<div class="sc-card reveal" data-app="sam-atlas" style="--sc-color:#1e3a5f;--sc-accent:#3b82f6;transition-delay:0s">
+  <div class="sc-card-inner">
+    <div class="sc-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></div>
+    <div class="sc-name">Sam Atlas</div>
+    <div class="sc-desc">AI Agent Builder. Digital products for building and selling AI agents.</div>
+    <div class="sc-badge">AI</div>
+  </div>
+</div>
+<div class="sc-card reveal" data-app="alpha-1-design" style="--sc-color:#2d1a5f;--sc-accent:#8b5cf6;transition-delay:0.05s">
+  <div class="sc-card-inner">
+    <div class="sc-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
+    <div class="sc-name">Alpha-1 Design</div>
+    <div class="sc-desc">AI writing, image compression, and color palette tools. Powered by Claude API.</div>
+    <div class="sc-badge">AI</div>
+  </div>
+</div>
+<div class="sc-card reveal" data-app="privacy-toolkit" style="--sc-color:#0f3a2a;--sc-accent:#22c55e;transition-delay:0.1s">
+  <div class="sc-card-inner">
+    <div class="sc-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div>
+    <div class="sc-name">Privacy Toolkit</div>
+    <div class="sc-desc">13 browser-based security tools. Phishing detection, AES-256 encryption, JWT decoder.</div>
+    <div class="sc-badge">Security</div>
+  </div>
+</div>
+<div class="sc-card reveal" style="--sc-color:#0a3a2a;--sc-accent:#10b981;transition-delay:0.15s" data-app="universal-toolbox">
+  <div class="sc-card-inner">
+    <div class="sc-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg></div>
+    <div class="sc-name">Universal Toolbox</div>
+    <div class="sc-desc">700+ curated web tools across 50+ categories. Your complete developer toolkit.</div>
+    <div class="sc-badge">Tools</div>
+  </div>
+</div>
+<div class="sc-card reveal" style="--sc-color:#0f2745;--sc-accent:#3b82f6;transition-delay:0.2s" data-app="gia-app">
+  <div class="sc-card-inner">
+    <div class="sc-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/><path d="M12 2v2"/><path d="M22 12h-2"/><path d="M4 12H2"/></svg></div>
+    <div class="sc-name">GIA</div>
+    <div class="sc-desc">Generative Interface Agent — private, on-device AI workspace. 21+ providers, wake word, agentic tools, on-device LLM.</div>
+    <div class="sc-badge">AI</div>
+  </div>
 </div>
 </div>
-<div class="sc-card" data-app="alpha-1-design" style="--sc-color:#2d1a5f;--sc-accent:#8b5cf6">
-<div class="sc-card-inner">
-<div class="sc-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
-<div class="sc-name">Alpha-1 Design</div>
-<div class="sc-desc">AI writing, image compression, and color palette tools. Powered by Claude API.</div>
-<div class="sc-badge">AI</div>
+</div></section>
+
+<section class="demo-section reveal"><div class="wrap">
+<div class="demo-label" data-i18n="liveDemo">Live Demo</div>
+<h2 class="demo-title" data-i18n="demoTitle">See Alpha-1 in Action</h2>
+<div class="demo-mock">
+<div class="demo-mock-header">
+<div class="demo-mock-dots">
+<span class="dm-dot" style="background:#ff5f56"></span>
+<span class="dm-dot" style="background:#ffbd2e"></span>
+<span class="dm-dot" style="background:#27c93f"></span>
+</div>
+<div class="demo-mock-title">GIA v2.3.1 — Agentic Session</div>
+</div>
+<div class="demo-mock-body">
+<div class="dm-msg dm-user">
+<span class="dm-avatar" style="background:var(--blue)">U</span>
+<div class="dm-bubble dm-bubble-user">
+  <span class="dm-cmd">web_search("AI privacy tools 2026")</span>
 </div>
 </div>
-<div class="sc-card" data-app="privacy-toolkit" style="--sc-color:#0f3a2a;--sc-accent:#22c55e">
-<div class="sc-card-inner">
-<div class="sc-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div>
-<div class="sc-name">Privacy Toolkit</div>
-<div class="sc-desc">13 browser-based security tools. Phishing detection, AES-256 encryption, JWT decoder.</div>
-<div class="sc-badge">Security</div>
+<div class="dm-msg dm-assistant">
+<span class="dm-avatar" style="background:var(--purple)">A</span>
+<div class="dm-bubble dm-bubble-assistant">
+  <span class="dm-tool-call">▶ web_search results</span>
+  <span class="dm-tool-result">Top results: Privacy Toolkit, AES-256 encryption tools, on-device AI frameworks...</span>
 </div>
 </div>
-<div class="sc-card" data-app="universal-toolbox" style="--sc-color:#3a2a0f;--sc-accent:#fbbf24">
-<div class="sc-card-inner">
-<div class="sc-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg></div>
-<div class="sc-name">Universal Toolbox</div>
-<div class="sc-desc">700+ curated web tools across 50+ categories. Your complete developer toolkit.</div>
-<div class="sc-badge">Tools</div>
+<div class="dm-msg dm-assistant">
+<span class="dm-avatar" style="background:var(--purple)">A</span>
+<div class="dm-bubble dm-bubble-assistant">
+  <span>Here's what I found — Alpha-1 Studio's <strong>Privacy Toolkit</strong> offers 13 browser-based security tools. All run locally, no data leaves your device. Their <strong>GIA</strong> agent provides on-device AI with wake word and 21+ provider support.</span>
+</div>
+</div>
+<div class="dm-msg dm-user">
+<span class="dm-avatar" style="background:var(--blue)">U</span>
+<div class="dm-bubble dm-bubble-user">
+  Deploy a privacy toolkit instance for me <span class="dm-cmd">▋</span>
+</div>
 </div>
 </div>
 </div>
@@ -231,7 +304,7 @@
 <div class="founder"><div class="founder-avatar">S</div><div><div class="founder-name">Samuel Mensah</div><div class="founder-role" data-i18n="founderRole">Founder &middot; Full-Stack Developer &middot; Ghana</div></div></div>
 </div>
 <div class="mission-right reveal counter-parent" style="transition-delay:.15s">
-<div class="ms reveal" style="transition-delay:0s"><div class="ms-n counter" data-target="4">0</div><div class="ms-l" data-i18n="statProducts">Apps</div></div>
+<div class="ms reveal" style="transition-delay:0s"><div class="ms-n counter" data-target="5">0</div><div class="ms-l" data-i18n="statProducts">Apps</div></div>
 <div class="ms reveal" style="transition-delay:.08s"><div class="ms-n counter" data-target="10">0</div><div class="ms-l" data-i18n="statRepos">Repos</div></div>
 <div class="ms reveal" style="transition-delay:.15s"><div class="ms-n counter" data-target="8">0</div><div class="ms-l" data-i18n="statLanguages">Languages</div></div>
 <div class="ms reveal" style="transition-delay:.22s"><div class="ms-n">&infin;</div><div class="ms-l" data-i18n="statBuilding">Still Building</div></div>
@@ -271,7 +344,6 @@
 </div>
 <div class="foot-bot"><span class="foot-copy" data-i18n="copyright">&copy; 2026 Alpha-1 Studio. All rights reserved.</span><span class="foot-copy" data-i18n="builtFrom">Built from Ghana for the world.</span></div>
 </div></footer>
-</div>
 
 <button id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18 15 12 9 6 15"/></svg></button>
 <button id="floatShare" onclick="shareSite()" title="Share this site" class="float-share"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg></button>
