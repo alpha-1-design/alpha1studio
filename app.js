@@ -3,8 +3,8 @@
 
 const APPS = [
   {id:'sam-atlas',name:'Sam Atlas',desc:'AI Agent Builder. Digital products to help you build and sell AI agents.',icon:'\u{1F916}',color:'#1e3a5f',category:'AI',url:'https://sam-atlas.vercel.app'},
-  {id:'alpha-1-design',name:'Alpha-1 Design',desc:'AI writing, image compression, and color palette tools. Powered by Claude API.',icon:'\u2728',color:'#2d1a5f',category:'AI',url:'https://alpha-1-design.vercel.app'},
-  {id:'privacy-toolkit',name:'Privacy Toolkit',desc:'13 browser-based security tools. Phishing detection, AES-256 encryption, JWT decoder.',icon:'\u{1F512}',color:'#0f3a2a',category:'Security',url:'https://privacy-toolkit-omega.vercel.app'},
+  {id:'alpha-1-design',name:'Alpha-1 Design',desc:'AI writing, image compression, and color palette tools. Powered by Claude API.',icon:'\u2728',color:'#2d1a5f',category:'AI',url:'https://alpha-1design.vercel.app'},
+  {id:'privacy-toolkit',name:'Privacy Toolkit',desc:'13 browser-based security tools. Phishing detection, AES-256 encryption, JWT decoder.',icon:'\u{1F512}',color:'#0f3a2a',category:'Security',url:'https://privacy-toolkit-ten.vercel.app'},
   {id:'universal-toolbox',name:'Universal Toolbox',desc:'700+ curated web tools across 50+ categories. Your complete developer toolkit.',icon:'\u{1F6E0}\uFE0F',color:'#3a2a0f',category:'Tools',url:'https://universal-toolbox.vercel.app'},
   {id:'gia-app',name:'GIA',desc:'Generative Interface Agent — private on-device AI workspace. 21 providers, wake word, agentic tools.',icon:'\u{1F916}',color:'#0f2745',category:'AI',url:'https://alpha-1-design.github.io/gia-app/'}
 ];
@@ -174,10 +174,12 @@ function loadProjects() {
   })
   .then(r => { if (!r.ok) throw new Error('GitHub API error'); return r.json(); })
   .then(repos => {
-    allRepos = repos;
+    // Skip the profile README repo and forks — they are not projects
+    allRepos = repos.filter(r => r.name !== 'alpha-1-design' && !r.fork);
     if (skel) skel.innerHTML = '';
-    if (countEl) countEl.textContent = repos.length + ' repos';
-    grid.innerHTML = repos.map(r => {
+    if (countEl) countEl.textContent = allRepos.length + ' repos';
+    syncStats();
+    grid.innerHTML = allRepos.map(r => {
       const topics = r.topics || [];
       const lang = r.language ? `<span class="pc-tag">${r.language}</span>` : '';
       const desc = r.description || '';
@@ -186,8 +188,10 @@ function loadProjects() {
       const forks = r.forks_count || 0;
       const updated = new Date(r.updated_at).toLocaleDateString();
       const topTopics = topics.slice(0,3).map(t => `<span class="pc-tag">${t}</span>`).join('');
-      return `<div class="proj-card">
+      const shot = SITE_SHOTS[r.name] ? `<div class="pc-shot"><img src="${shotUrl(SITE_SHOTS[r.name])}" alt="${r.name} preview" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('shot-fail')"></div>` : '';
+      return `<div class="proj-card" onclick="showWikiDetail('${r.name}')" title="Open project wiki">
         ${fork}
+        ${shot}
         <div class="pc-name">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/></svg>
           <a href="${r.html_url}" target="_blank" style="color:#fff">${r.name}</a>
@@ -225,6 +229,25 @@ function animateCounters() {
       else el.textContent = target + suffix;
     }
     requestAnimationFrame(update);
+  });
+}
+
+// Sync hardcoded stat numbers with live repo data
+function syncStats() {
+  const apps = APPS.length;
+  const repos = allRepos.length;
+  const langs = new Set(allRepos.map(r => r.language).filter(Boolean)).size;
+  const la = document.getElementById('statApps');
+  const lr = document.getElementById('lsRepos');
+  if (la) la.textContent = apps;
+  if (lr) lr.textContent = repos;
+  document.querySelectorAll('.counter').forEach(el => {
+    const count = el.dataset.count;
+    const val = count === 'apps' ? apps : count === 'langs' ? langs : count === 'repos' ? repos : null;
+    if (val === null) return;
+    el.dataset.target = String(val);
+    const parent = el.closest('.counter-parent');
+    if (parent && parent.classList.contains('visible')) el.textContent = val;
   });
 }
 
@@ -342,6 +365,18 @@ if (btt) {
 
 // Wiki functions
 const readmeCache = {};
+
+// Projects with a live web build — used for screenshot thumbnails
+const SITE_SHOTS = {
+  'gia-app':'https://alpha-1-design.github.io/gia-app/',
+  'privacy-toolkit':'https://privacy-toolkit-ten.vercel.app',
+  'universal-toolbox':'https://universal-toolbox.vercel.app',
+  'Terra-Core':'https://terra-core-nu.vercel.app',
+  'alpha1studio':'https://alpha1studio.vercel.app'
+};
+function shotUrl(url) {
+  return 'https://s0.wp.com/mshots/v1/' + encodeURIComponent(url) + '?w=720&h=450';
+}
 function repoColors(name) {
   let h = 0;
   for (let i = 0; i < name.length; i++) h = ((h << 5) - h) + name.charCodeAt(i);
@@ -349,25 +384,18 @@ function repoColors(name) {
   return {primary:`hsl(${h},70%,55%)`,secondary:`hsl(${(h+30)%360},60%,45%)`,bg:`hsla(${h},70%,55%,.1)`,bgHover:`hsla(${h},70%,55%,.15)`};
 }
 function fmtNum(n) {if(!n&&n!==0)return'—';return n>=1000?(n/1000).toFixed(1)+'k':n;}
-function mdToHtml(md, repoName) {
+function mdToHtml(md, repoName, branch) {
   if (!md) return '';
-  const base = `https://raw.githubusercontent.com/alpha-1-design/${repoName}/main/`;
-  let h = md
-    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
-    .replace(/```(\w*)\n([\s\S]*?)```/g,'<pre><code>$2</code></pre>')
-    .replace(/`([^`]+)`/g,'<code>$1</code>')
-    .replace(/^### (.+)$/gm,'<h4>$1</h4>')
-    .replace(/^## (.+)$/gm,'<h3>$1</h3>')
-    .replace(/^# (.+)$/gm,'<h2>$1</h2>')
-    .replace(/^\- (.+)$/gm,'<li>$1</li>')
-    .replace(/^(\d+)\. (.+)$/gm,'<li>$1. $2</li>')
-    .replace(/!\[([^\]]*)\]\(([^)]+)\)/g,(m,alt,url)=>{const u=url.startsWith('http')?url:base+url;return `<img src="${u}" alt="${alt}" loading="lazy" style="max-width:100%;border-radius:8px;margin:12px 0">`;})
-    .replace(/\[([^\]]+)\]\(([^)]+)\)/g,'<a href="$2" target="_blank" rel="noopener">$1</a>')
-    .replace(/\*\*([^*]+)\*\*/g,'<strong>$1</strong>')
-    .replace(/\*([^*]+)\*/g,'<em>$1</em>')
-    .replace(/\n\n/g,'</p><p>')
-    .replace(/\n/g,'<br>');
-  return '<p>'+h+'</p>';
+  const base = `https://raw.githubusercontent.com/alpha-1-design/${repoName}/${branch || 'main'}/`;
+  if (typeof marked === 'undefined' || !marked.parse) {
+    return '<p>' + md.slice(0, 500).replace(/</g,'&lt;').replace(/\n/g,'<br>') + '…</p>';
+  }
+  try {
+    const html = marked.parse(md, { gfm: true, breaks: true, baseUrl: base });
+    return html.replace(/<a href="/g, '<a target="_blank" rel="noopener" href="');
+  } catch (e) {
+    return '<p>Could not render this README.</p>';
+  }
 }
 window.showWiki = function() {showView('wiki');};
 window.showWikiDetail = function(repoName) {
@@ -414,6 +442,11 @@ function renderWikiDetail(repo) {
   if (langEl) langEl.textContent = repo.language || '—';
   if (descEl) descEl.textContent = repo.description || 'Project details';
   if (ghLink) ghLink.href = repo.html_url;
+  const shotEl = document.getElementById('wdShot');
+  if (shotEl) {
+    const s = SITE_SHOTS[repo.name];
+    shotEl.innerHTML = s ? `<img src="${shotUrl(s)}" alt="${repo.name} screenshot" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">` : '';
+  }
   if (overviewEl) overviewEl.innerHTML = 'Loading README...';
   if (detailsGrid) {
     detailsGrid.innerHTML = [
@@ -431,7 +464,7 @@ function renderWikiDetail(repo) {
   document.title = repo.name + ' - Wiki - Alpha-1 Studio';
   // Fetch README
   if (readmeCache[repo.name]) {
-    if (overviewEl) overviewEl.innerHTML = mdToHtml(readmeCache[repo.name], repo.name);
+    if (overviewEl) overviewEl.innerHTML = mdToHtml(readmeCache[repo.name], repo.name, repo.default_branch);
     return;
   }
   fetch(`https://api.github.com/repos/alpha-1-design/${repo.name}/readme`)
@@ -440,7 +473,7 @@ function renderWikiDetail(repo) {
       const text = atob(data.content.replace(/\n/g,''));
       readmeCache[repo.name] = text;
       const el = document.getElementById('wdOverview');
-      if (el) el.innerHTML = mdToHtml(text, repo.name);
+      if (el) el.innerHTML = mdToHtml(text, repo.name, repo.default_branch);
     })
     .catch(() => {
       const el = document.getElementById('wdOverview');

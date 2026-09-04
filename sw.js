@@ -1,4 +1,4 @@
-const NAME = 'a1s-v1';
+const NAME = 'a1s-v2';
 const FILES = [
   '/index.html',
   '/manifest.json',

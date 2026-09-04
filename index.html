@@ -91,13 +91,13 @@
 
 <div class="launcher-view" id="launcherView">
 <div class="launcher-header">
-<div class="launcher-badge"><span class="lb-dot"></span><span id="appCount"></span><span class="lb-ver" id="appVersion">v2.1</span></div>
+<div class="launcher-badge"><span class="lb-dot"></span><span id="appCount"></span><span class="lb-ver" id="appVersion">v2.2</span></div>
 <h1 class="launcher-title"><span class="lt-word" data-i18n="launcherTitle1">Your</span> <span class="lt-word gradient-text" data-i18n="launcherTitle2">Alpha-1</span> <span class="lt-word" data-i18n="launcherTitle3">Apps</span></h1>
 <p class="launcher-sub" data-i18n="launcherSub">Select an app to launch it instantly. All apps run seamlessly in your browser.</p>
 <div class="launcher-stats">
 <div class="ls-item"><span class="ls-num" id="statApps">5</span><span class="ls-label" data-i18n="statApps">Apps</span></div>
 <div class="ls-div"></div>
-<div class="ls-item"><span class="ls-num">10</span><span class="ls-label" data-i18n="statRepos">Repos</span></div>
+<div class="ls-item"><span class="ls-num" id="lsRepos">10</span><span class="ls-label" data-i18n="statRepos">Repos</span></div>
 <div class="ls-div"></div>
 <div class="ls-item"><span class="ls-num">100%</span><span class="ls-label" data-i18n="statFree">Free</span></div>
 </div>
@@ -144,6 +144,7 @@
 </div>
 </div>
 <div class="wd-body wrap">
+<div class="wd-shot" id="wdShot"></div>
 <div class="wd-section">
 <h3 class="wd-sec-h" data-i18n="wikiOverview">Overview</h3>
 <p class="wd-sec-p" id="wdOverview"></p>
@@ -166,9 +167,9 @@
 <button class="btn-share" onclick="shareSite()" title="Share this site"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg></button>
 </div>
 <div class="hero-stats">
-<div class="stat-wrap"><div class="stat-n counter" data-target="5">0</div><div class="stat-l" data-i18n="statProducts">Apps</div></div>
-<div class="stat-wrap"><div class="stat-n counter" data-target="10">0</div><div class="stat-l" data-i18n="statRepos">Repos</div></div>
-<div class="stat-wrap"><div class="stat-n counter" data-target="8">0</div><div class="stat-l" data-i18n="statLanguages">Languages</div></div>
+<div class="stat-wrap"><div class="stat-n counter" data-target="5" data-count="apps">0</div><div class="stat-l" data-i18n="statProducts">Apps</div></div>
+<div class="stat-wrap"><div class="stat-n counter" data-target="10" data-count="repos">0</div><div class="stat-l" data-i18n="statRepos">Repos</div></div>
+<div class="stat-wrap"><div class="stat-n counter" data-target="8" data-count="langs">0</div><div class="stat-l" data-i18n="statLanguages">Languages</div></div>
 <div class="stat-wrap"><div class="stat-n">&infin;</div><div class="stat-l" data-i18n="statBuilding">Still Building</div></div>
 </div>
 </div>
@@ -184,7 +185,7 @@
 <div class="mock-line"><span class="mock-prompt">$</span> <span class="mock-cmd">whoami</span></div>
 <div class="mock-line mock-output"><span class="mock-green">alpha-1</span> — Global Technology Studio</div>
 <div class="mock-line" style="margin-top:8px"><span class="mock-prompt">$</span> <span class="mock-cmd">ls products/</span></div>
-<div class="mock-line mock-output">privacy-toolkit/  alpha-1-design/  sam-atlas/  gia/</div>
+<div class="mock-line mock-output">gia/  gia-studio/  privacy-toolkit/  universal-toolbox/</div>
 <div class="mock-line" style="margin-top:8px"><span class="mock-prompt">$</span> <span class="mock-cmd">cat mission.txt</span></div>
 <div class="mock-line mock-output"><span class="mock-green">"Technology for everyone."</span></div>
 <div class="mock-line" style="margin-top:8px"><span class="mock-prompt">$</span> <span class="mock-cmd blink">_</span></div>
@@ -249,7 +250,7 @@
 <span class="dm-dot" style="background:#ffbd2e"></span>
 <span class="dm-dot" style="background:#27c93f"></span>
 </div>
-<div class="demo-mock-title">GIA v2.3.1 — Agentic Session</div>
+<div class="demo-mock-title">GIA — Agentic Session</div>
 </div>
 <div class="demo-mock-body">
 <div class="dm-msg dm-user">
@@ -304,9 +305,9 @@
 <div class="founder"><div class="founder-avatar">S</div><div><div class="founder-name">Samuel Mensah</div><div class="founder-role" data-i18n="founderRole">Founder &middot; Full-Stack Developer &middot; Ghana</div></div></div>
 </div>
 <div class="mission-right reveal counter-parent" style="transition-delay:.15s">
-<div class="ms reveal" style="transition-delay:0s"><div class="ms-n counter" data-target="5">0</div><div class="ms-l" data-i18n="statProducts">Apps</div></div>
-<div class="ms reveal" style="transition-delay:.08s"><div class="ms-n counter" data-target="10">0</div><div class="ms-l" data-i18n="statRepos">Repos</div></div>
-<div class="ms reveal" style="transition-delay:.15s"><div class="ms-n counter" data-target="8">0</div><div class="ms-l" data-i18n="statLanguages">Languages</div></div>
+<div class="ms reveal" style="transition-delay:0s"><div class="ms-n counter" data-target="5" data-count="apps">0</div><div class="ms-l" data-i18n="statProducts">Apps</div></div>
+<div class="ms reveal" style="transition-delay:.08s"><div class="ms-n counter" data-target="10" data-count="repos">0</div><div class="ms-l" data-i18n="statRepos">Repos</div></div>
+<div class="ms reveal" style="transition-delay:.15s"><div class="ms-n counter" data-target="8" data-count="langs">0</div><div class="ms-l" data-i18n="statLanguages">Languages</div></div>
 <div class="ms reveal" style="transition-delay:.22s"><div class="ms-n">&infin;</div><div class="ms-l" data-i18n="statBuilding">Still Building</div></div>
 </div>
 </div></div></section>
@@ -348,6 +349,7 @@
 <button id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18 15 12 9 6 15"/></svg></button>
 <button id="floatShare" onclick="shareSite()" title="Share this site" class="float-share"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg></button>
 
+<script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
 <script src="i18n.js"></script>
 <script src="app.js"></script>
 </body>
