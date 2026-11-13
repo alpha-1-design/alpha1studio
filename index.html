@@ -193,7 +193,6 @@ h1{font-family:var(--serif);font-size:var(--t8);line-height:1.02;letter-spacing:
 .roles{display:flex;gap:8px;flex-wrap:wrap}
 .role{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--ln);border-radius:999px;padding:7px 14px;font-size:var(--t2);background:var(--sf)}
 .role::before{content:"";width:5px;height:5px;background:var(--ac);flex:none}
-.about-footnote{font-size:var(--t2);color:var(--mu);line-height:1.75;border-left:2px solid var(--ln);padding-left:15px;margin-top:30px}
 .portrait-plate{margin:0;background:var(--sf);border:1px solid var(--ln);border-radius:10px;overflow:hidden}
 .plate-img{position:relative;background:#0B0B0A}
 .plate-img img{width:100%;height:auto;aspect-ratio:1/1;object-fit:cover}
@@ -219,7 +218,8 @@ h1{font-family:var(--serif);font-size:var(--t8);line-height:1.02;letter-spacing:
 .svc-row p{font-size:var(--t2);color:var(--mu);line-height:1.6;margin-top:6px}
 .about-socials{margin-top:32px}
 .socials{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
-.socials a{font-family:var(--mono);font-size:var(--t1);border:1px solid var(--ln);border-radius:6px;padding:9px 13px;transition:border-color .2s,color .2s}
+.socials a{display:inline-flex;align-items:center;gap:9px;font-family:var(--mono);font-size:var(--t1);border:1px solid var(--ln);border-radius:6px;padding:9px 13px;transition:border-color .2s,color .2s}
+.socials svg{width:16px;height:16px;flex:none;display:block}
 .socials a:hover{border-color:var(--ac);color:var(--ac)}
 
 .contact-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
@@ -227,8 +227,7 @@ h1{font-family:var(--serif);font-size:var(--t8);line-height:1.02;letter-spacing:
 .contact-item .lbl{font-family:var(--mono);font-size:var(--t1);color:var(--mu);text-transform:uppercase;letter-spacing:.09em;margin-bottom:14px}
 .contact-item a{font-size:var(--t3);color:var(--ac);word-break:break-word;border-bottom:1px solid transparent;transition:border-color .2s}
 .contact-item a:hover{border-bottom-color:var(--ac)}
-.copy-btn{font-family:var(--mono);font-size:var(--t1);color:var(--mu);border:1px solid var(--ln);border-radius:5px;padding:5px 10px;margin-top:16px;transition:border-color .2s,color .2s}
-.copy-btn:hover{border-color:var(--ac);color:var(--ac)}
+.contact-item .hint{display:block;font-family:var(--mono);font-size:var(--t1);color:var(--mu);margin-top:12px}
 
 footer{padding:64px 0 48px}
 .foot-top{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr) minmax(0,1fr);gap:40px}
@@ -237,8 +236,9 @@ footer{padding:64px 0 48px}
 .foot-mark img.wm{width:190px;height:auto;border-radius:0}
 .foot-top p{font-size:var(--t2);color:var(--mu);margin-top:14px;max-width:320px;line-height:1.7}
 .foot-col h4{font-family:var(--mono);font-size:var(--t1);text-transform:uppercase;letter-spacing:.1em;color:var(--mu);margin-bottom:16px;font-weight:400}
-.foot-col a{display:block;font-size:var(--t2);padding:5px 0;color:var(--ink);transition:color .2s}
+.foot-col a{display:flex;align-items:center;gap:9px;font-size:var(--t2);padding:5px 0;color:var(--ink);transition:color .2s}
 .foot-col a:hover{color:var(--ac)}
+.foot-ico{width:15px;height:15px;flex:none;display:block}
 .foot-bot{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;border-top:1px solid var(--ln);margin-top:48px;padding-top:20px;font-family:var(--mono);font-size:var(--t1);color:var(--mu)}
 details{margin-top:32px;border:1px solid var(--ln);border-radius:9px;background:var(--sf);padding:0 24px}
 summary{cursor:pointer;padding:18px 0;font-size:var(--t2);list-style:none}
@@ -346,7 +346,7 @@ kbd{font-family:var(--mono);font-size:var(--t1);border:1px solid var(--ln);borde
     </figure>
   </div>
   <div class="stats" id="stats"></div>
-  <div class="source-note">Every figure is read from one data object. No counters, no animation, no hardcoded duplicates.</div>
+  <div class="source-note">Every figure is computed from the index on this page.</div>
 </div></section>
 
 <section class="band"><div class="band-in">
@@ -377,7 +377,7 @@ kbd{font-family:var(--mono);font-size:var(--t1);border:1px solid var(--ln);borde
       <p class="dir-note"><b>Only BLACKBOX ships through a store.</b> It is published on F-Droid as <span class="mono" style="font-size:var(--t1)">com.blackbox.app</span> and carries the official F-Droid mark. The other Android and desktop apps are source-only or private and are not linked here.</p>
     </div>
   </div>
-  <p class="source-note" style="margin-top:20px">Client work backed by private repositories is excluded from this public directory by default. That is a decision, not an oversight; the full inventory is in the hub atlas.</p>
+  <p class="source-note" style="margin-top:20px">Only studio-owned public surfaces are listed.</p>
 </div></section>
 
 <section id="receipts"><div class="wrap">
@@ -389,11 +389,11 @@ kbd{font-family:var(--mono);font-size:var(--t1);border:1px solid var(--ln);borde
   <div class="sec-head rise"><span class="sec-no">06 / OPEN SOURCE</span><h2>The studio repository index</h2><p class="sec-note">Every public studio repository, including one archived repo and one profile README. Descriptions, languages, stars and live links come from a single audited inventory.</p></div>
   <div class="filters" id="filters"><span class="filter-count" id="filter-count"></span></div>
   <div class="grid3" id="repos"></div>
-  <p class="source-note" style="margin-top:20px"><span id="repo-summary"></span> Private repositories are never listed by name. One personal project is intentionally omitted at the owner's request.</p>
+  <p class="source-note" style="margin-top:20px"><span id="repo-summary"></span></p>
 </div></section>
 
 <section id="about"><div class="wrap">
-  <div class="sec-head rise"><span class="sec-no">07 / ABOUT ME</span><h2>The person behind the studio</h2><p class="sec-note">The standalone portfolio is gone. Its bio, practice areas, published rates and direct channels now live here, on one page.</p></div>
+  <div class="sec-head rise"><span class="sec-no">07 / ABOUT ME</span><h2>The person behind the studio</h2><p class="sec-note">Full-stack development, deployment, video and photo work. Practice areas, published rates and ways to reach me, all in one place.</p></div>
   <div class="about-grid">
     <div class="about-copy">
       <div class="about-status mono" id="about-status"></div>
@@ -402,8 +402,6 @@ kbd{font-family:var(--mono);font-size:var(--t1);border:1px solid var(--ln);borde
       <div class="bio" id="about-bio"></div>
       <div class="about-label">Practice</div>
       <div class="roles" id="about-roles"></div>
-      <p class="about-footnote" id="about-absorbed"></p>
-      <p class="source-note" id="about-source"></p>
     </div>
     <figure class="portrait-plate">
       <div class="plate-img"><span class="tick tl"></span><span class="tick br"></span><img id="portrait-img" src="assets/portrait.webp" width="640" height="640" alt="Portrait of Samuel Mensah" loading="lazy" decoding="async"></div>
@@ -444,12 +442,11 @@ kbd{font-family:var(--mono);font-size:var(--t1);border:1px solid var(--ln);borde
       <a href="#top">Home</a><a href="#work">Top projects</a><a href="#directory">Directory</a><a href="#receipts">Principles</a><a href="#open">Open source</a><a href="#about">About me</a><a href="#contact">Contact</a>
     </div>
     <div class="foot-col"><h4>Elsewhere</h4>
-      <a href="https://f-droid.org/packages/com.blackbox.app/" target="_blank" rel="noopener">BLACKBOX on F-Droid ↗</a>
-      <a href="https://terra-core-nu.vercel.app" target="_blank" rel="noopener">Terra-Core ↗</a>
-      <a href="https://github.com/alpha-1-design" target="_blank" rel="noopener">GitHub ↗</a>
-      <a href="https://privacy-toolkit-ten.vercel.app" target="_blank" rel="noopener">Privacy Toolkit ↗</a>
-      <a href="https://universal-toolbox.vercel.app" target="_blank" rel="noopener">Universal Toolbox ↗</a>
-      <a href="sitemap.xml">XML sitemap</a>
+      <a href="https://f-droid.org/packages/com.blackbox.app/" target="_blank" rel="noopener"><img class="foot-ico" src="assets/fdroid-icon.svg" width="15" height="15" alt="">BLACKBOX on F-Droid ↗</a>
+      <a href="https://terra-core-nu.vercel.app" target="_blank" rel="noopener"><img class="foot-ico" src="mark.svg" width="15" height="15" alt="">Terra-Core ↗</a>
+      <a href="https://github.com/alpha-1-design" target="_blank" rel="noopener"><img class="foot-ico" src="assets/github.svg" width="15" height="15" alt="">GitHub ↗</a>
+      <a href="https://privacy-toolkit-ten.vercel.app" target="_blank" rel="noopener"><img class="foot-ico" src="mark.svg" width="15" height="15" alt="">Privacy Toolkit ↗</a>
+      <a href="https://universal-toolbox.vercel.app" target="_blank" rel="noopener"><img class="foot-ico" src="mark.svg" width="15" height="15" alt="">Universal Toolbox ↗</a>
     </div>
   </div>
   <div class="foot-bot"><span>© 2026 Samuel Mensah · Alpha-1 Studio</span><span>alpha1studio.vercel.app — the only canonical URL</span></div>
@@ -474,7 +471,7 @@ kbd{font-family:var(--mono);font-size:var(--t1);border:1px solid var(--ln);borde
 var DATA = {
   stats:[
     {label:'top projects',source:'Selected by Sam · 2026-11-12'},
-    {label:'studio repositories',source:'GitHub API · one personal repo omitted'},
+    {label:'studio repositories',source:'GitHub API · audited 2026-11-12'},
     {label:'languages',source:'primaryLanguage across listed repos'},
     {label:'live surfaces',source:'HTTP 200 probes · 2026-11-12'}
   ],
@@ -502,7 +499,6 @@ var DATA = {
     "status": "profile",
     "url": "",
     "github": "https://github.com/alpha-1-design/alpha-1-design",
-    "absorbed": false,
     "fdroid": false
   },
   {
@@ -516,7 +512,6 @@ var DATA = {
     "status": "live",
     "url": "https://alpha1studio.vercel.app/",
     "github": "https://github.com/alpha-1-design/alpha1studio",
-    "absorbed": false,
     "fdroid": false
   },
   {
@@ -530,7 +525,6 @@ var DATA = {
     "status": "live",
     "url": "https://f-droid.org/packages/com.blackbox.app/",
     "github": "https://github.com/alpha-1-design/BLACKBOX",
-    "absorbed": false,
     "fdroid": true
   },
   {
@@ -544,7 +538,6 @@ var DATA = {
     "status": "archived",
     "url": "",
     "github": "https://github.com/alpha-1-design/Core-x",
-    "absorbed": false,
     "fdroid": false
   },
   {
@@ -558,7 +551,6 @@ var DATA = {
     "status": "live",
     "url": "https://alpha-1-design.github.io/gia-app/",
     "github": "https://github.com/alpha-1-design/gia-app",
-    "absorbed": false,
     "fdroid": false
   },
   {
@@ -572,7 +564,6 @@ var DATA = {
     "status": "source",
     "url": "",
     "github": "https://github.com/alpha-1-design/Gia-co-Design-",
-    "absorbed": false,
     "fdroid": false
   },
   {
@@ -586,7 +577,6 @@ var DATA = {
     "status": "live",
     "url": "https://gia-cowork.vercel.app",
     "github": "https://github.com/alpha-1-design/gia-cowork",
-    "absorbed": false,
     "fdroid": false
   },
   {
@@ -600,7 +590,6 @@ var DATA = {
     "status": "source",
     "url": "",
     "github": "https://github.com/alpha-1-design/gia-studio",
-    "absorbed": false,
     "fdroid": false
   },
   {
@@ -614,7 +603,6 @@ var DATA = {
     "status": "source",
     "url": "",
     "github": "https://github.com/alpha-1-design/jetbot-upgraded",
-    "absorbed": false,
     "fdroid": false
   },
   {
@@ -628,13 +616,12 @@ var DATA = {
     "status": "source",
     "url": "",
     "github": "https://github.com/alpha-1-design/knowledge-synthesis-engine",
-    "absorbed": false,
     "fdroid": false
   },
   {
     "name": "My-portfolio-",
     "display": "Samuel Mensah · Portfolio",
-    "desc": "Former standalone portfolio. Its content has been absorbed into the About me section of this hub.",
+    "desc": "Personal portfolio covering full-stack development, design and creative engineering work.",
     "lang": "TypeScript",
     "stars": 0,
     "kind": "Website",
@@ -642,7 +629,6 @@ var DATA = {
     "status": "live",
     "url": "",
     "github": "https://github.com/alpha-1-design/My-portfolio-",
-    "absorbed": true,
     "fdroid": false
   },
   {
@@ -656,7 +642,6 @@ var DATA = {
     "status": "source",
     "url": "",
     "github": "https://github.com/alpha-1-design/Nexus",
-    "absorbed": false,
     "fdroid": false
   },
   {
@@ -670,7 +655,6 @@ var DATA = {
     "status": "live",
     "url": "https://privacy-toolkit-ten.vercel.app",
     "github": "https://github.com/alpha-1-design/privacy-toolkit",
-    "absorbed": false,
     "fdroid": false
   },
   {
@@ -684,7 +668,6 @@ var DATA = {
     "status": "live",
     "url": "https://terra-core-nu.vercel.app",
     "github": "https://github.com/alpha-1-design/Terra-Core",
-    "absorbed": false,
     "fdroid": false
   },
   {
@@ -698,7 +681,6 @@ var DATA = {
     "status": "live",
     "url": "https://universal-toolbox.vercel.app",
     "github": "https://github.com/alpha-1-design/universal-toolbox",
-    "absorbed": false,
     "fdroid": false
   }
 ],
@@ -747,18 +729,6 @@ var DATA = {
   }
 ],
   about:{
-  "source": {
-    "repo": "alpha-1-design/My-portfolio-",
-    "tip": "05129db",
-    "files": [
-      "components/about-section.tsx",
-      "components/hero-section.tsx",
-      "components/services-section.tsx",
-      "components/contact-section.tsx",
-      "components/structured-data.tsx"
-    ],
-    "note": "Transcribed from the portfolio source, not invented. The structured-data URL samuelmensah.dev is excluded because Sam confirmed the domain does not exist yet. Share-only URLs, one-time invite links and QR codes were dropped in favour of durable addresses."
-  },
   "name": "Samuel Mensah",
   "availability": "Available for hire",
   "location": "Based in Ghana, available worldwide",
@@ -813,7 +783,7 @@ var DATA = {
       "level": 95
     }
   ],
-  "skills_note": "Carried over from the portfolio. These are my own estimates, not a benchmark or a third-party measurement.",
+  "skills_note": "Self-assessed, not a benchmark or third-party measurement.",
   "services": [
     {
       "title": "Web & App Development",
@@ -836,7 +806,7 @@ var DATA = {
       "price": "From $2 / GHS 30"
     }
   ],
-  "services_note": "From-rates in USD with GHS equivalents, negotiable by project scope. Restated here unchanged from the portfolio.",
+  "services_note": "From-rates in USD with GHS equivalents, negotiable by project scope.",
   "socials": [
     {
       "label": "Email",
@@ -871,13 +841,22 @@ var DATA = {
       "url": "https://open.spotify.com/user/31no777qrxgz76zx2iawcnw2rhv4"
     }
   ],
-  "absorbed_note": "The separate portfolio site is no longer a destination. Its bio, roles, practice areas, published rates and direct channels now live here on the hub."
+  "icons": {
+    "Email": "<rect x=\"3\" y=\"5\" width=\"18\" height=\"14\" rx=\"2\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\"/><path d=\"m3.6 6.8 8.4 6 8.4-6\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>",
+    "GitHub": "<path fill=\"currentColor\" d=\"M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12\"/>",
+    "Instagram": "<path fill=\"currentColor\" d=\"M7.0301.084c-1.2768.0602-2.1487.264-2.911.5634-.7888.3075-1.4575.72-2.1228 1.3877-.6652.6677-1.075 1.3368-1.3802 2.127-.2954.7638-.4956 1.6365-.552 2.914-.0564 1.2775-.0689 1.6882-.0626 4.947.0062 3.2586.0206 3.6671.0825 4.9473.061 1.2765.264 2.1482.5635 2.9107.308.7889.72 1.4573 1.388 2.1228.6679.6655 1.3365 1.0743 2.1285 1.38.7632.295 1.6361.4961 2.9134.552 1.2773.056 1.6884.069 4.9462.0627 3.2578-.0062 3.668-.0207 4.9478-.0814 1.28-.0607 2.147-.2652 2.9098-.5633.7889-.3086 1.4578-.72 2.1228-1.3881.665-.6682 1.0745-1.3378 1.3795-2.1284.2957-.7632.4966-1.636.552-2.9124.056-1.2809.0692-1.6898.063-4.948-.0063-3.2583-.021-3.6668-.0817-4.9465-.0607-1.2797-.264-2.1487-.5633-2.9117-.3084-.7889-.72-1.4568-1.3876-2.1228C21.2982 1.33 20.628.9208 19.8378.6165 19.074.321 18.2017.1197 16.9244.0645 15.6471.0093 15.236-.005 11.977.0014 8.718.0076 8.31.0215 7.0301.0839m.1402 21.6932c-1.17-.0509-1.8053-.2453-2.2287-.408-.5606-.216-.96-.4771-1.3819-.895-.422-.4178-.6811-.8186-.9-1.378-.1644-.4234-.3624-1.058-.4171-2.228-.0595-1.2645-.072-1.6442-.079-4.848-.007-3.2037.0053-3.583.0607-4.848.05-1.169.2456-1.805.408-2.2282.216-.5613.4762-.96.895-1.3816.4188-.4217.8184-.6814 1.3783-.9003.423-.1651 1.0575-.3614 2.227-.4171 1.2655-.06 1.6447-.072 4.848-.079 3.2033-.007 3.5835.005 4.8495.0608 1.169.0508 1.8053.2445 2.228.408.5608.216.96.4754 1.3816.895.4217.4194.6816.8176.9005 1.3787.1653.4217.3617 1.056.4169 2.2263.0602 1.2655.0739 1.645.0796 4.848.0058 3.203-.0055 3.5834-.061 4.848-.051 1.17-.245 1.8055-.408 2.2294-.216.5604-.4763.96-.8954 1.3814-.419.4215-.8181.6811-1.3783.9-.4224.1649-1.0577.3617-2.2262.4174-1.2656.0595-1.6448.072-4.8493.079-3.2045.007-3.5825-.006-4.848-.0608M16.953 5.5864A1.44 1.44 0 1 0 18.39 4.144a1.44 1.44 0 0 0-1.437 1.4424M5.8385 12.012c.0067 3.4032 2.7706 6.1557 6.173 6.1493 3.4026-.0065 6.157-2.7701 6.1506-6.1733-.0065-3.4032-2.771-6.1565-6.174-6.1498-3.403.0067-6.156 2.771-6.1496 6.1738M8 12.0077a4 4 0 1 1 4.008 3.9921A3.9996 3.9996 0 0 1 8 12.0077\"/>",
+    "YouTube": "<path fill=\"currentColor\" d=\"M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z\"/>",
+    "TikTok": "<path fill=\"currentColor\" d=\"M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z\"/>",
+    "Telegram": "<path fill=\"currentColor\" d=\"M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z\"/>",
+    "WhatsApp": "<path fill=\"currentColor\" d=\"M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z\"/>",
+    "Spotify": "<path fill=\"currentColor\" d=\"M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z\"/>"
+  }
 },
   /* GENERATED:END */
   contact:[
-    {label:'Email',text:'alphariansamuel@gmail.com',href:'mailto:alphariansamuel@gmail.com',copy:true},
-    {label:'WhatsApp',text:'+233 55 301 6346',href:'https://wa.me/233553016346',copy:false},
-    {label:'Source',text:'github.com/alpha-1-design',href:'https://github.com/alpha-1-design',copy:false}
+    {label:'Email',text:'alphariansamuel@gmail.com',href:'mailto:alphariansamuel@gmail.com'},
+    {label:'WhatsApp',text:'+233 55 301 6346',href:'https://wa.me/233553016346'},
+    {label:'Source',text:'github.com/alpha-1-design',href:'https://github.com/alpha-1-design'}
   ],
   shortcuts:[['?','Open this shortcuts panel'],['W','Jump to top projects'],['D','Jump to directory'],['P','Jump to principles'],['O','Jump to open source'],['A','Jump to About me'],['C','Jump to contact'],['T','Back to top'],['Esc','Close this panel']],
   notes:{
@@ -890,7 +869,7 @@ var DATA = {
       '<b>Component upgrades</b> — featured product split, language filter on repositories, magnetic buttons, underline-draw links, back-to-top, stats with provenance, expandable site map in the footer.',
       '<b>Hub phase</b> — the directory separates websites from apps. BLACKBOX is the only F-Droid release. Studio repositories are generated from one audited inventory; 23 private repositories stay off the page.',
       '<b>Top projects, set by Sam</b> — BLACKBOX, GIA, GIA Cowork and Terra-Core. Sam Atlas and Symphonia are not part of the studio and were removed from products, directory, structured data and the open-source index.',
-      '<b>About me</b> — the standalone portfolio is absorbed here. Real portrait, bio, roles, self-assessed capability, published rates and durable direct channels. No <code>samuelmensah.dev</code>; that domain does not exist yet. Share-only and one-time invite links were dropped.',
+      '<b>About me</b> — portrait, bio, practice areas, self-assessed capability, published rates and direct channels. Each channel carries its own icon, drawn inline as SVG.',
       '<b>F-Droid badge</b> — the official Get it on F-Droid artwork and logo are cached locally as SVG and PNG, and appear on the featured card, directory row and repository card. Still zero external requests.',
       '<b>One source of truth</b> — every number, product, price, repo, directory entry, service, contact and shortcut comes from <code>DATA</code>. The stat strip is computed from the same arrays the page renders, so no number can drift.',
       '<b>14 contradictions removed</b>, including 13 security tools, 700+/50+ toolbox tools, honest pricing, consistent theme colour and one canonical URL.'
@@ -918,7 +897,7 @@ var fMeta=f.channelNote?'<div class="fd-meta">'+esc(f.channelNote)+'<br><a class
 document.getElementById('featured').innerHTML='<img src="assets/detail.webp" width="900" height="900" alt="Closed aluminium laptop, folded paper and a vermilion pencil in hard window light" loading="lazy" decoding="async"><div class="feature-body"><span class="mono">01 / '+String(DATA.products.length).padStart(2,'0')+' · featured · '+esc(f.cat)+'</span><h3>'+esc(f.name)+'</h3><p>'+esc(f.desc)+'</p>'+fBadge+fMeta+'</div>';
 document.getElementById('products').innerHTML=DATA.products.slice(1).map(function(p,i){return '<article class="card"><div class="idx">'+String(i+2).padStart(2,'0')+' / '+String(DATA.products.length).padStart(2,'0')+'</div><h3>'+esc(p.name)+'</h3><div class="cat">'+esc(p.cat)+'</div><p>'+esc(p.desc)+'</p><div class="foot"><span class="price'+(p.paid?' paid':'')+'">'+esc(p.price)+'</span><a class="go" href="'+esc(p.url)+'" target="_blank" rel="noopener">Open ↗</a></div></article>';}).join('');
 document.getElementById('principles').innerHTML=DATA.principles.map(function(p,i){return '<article class="receipt"><div class="no">0'+(i+1)+' / CLAIM</div><h3>'+esc(p.title)+'</h3><p class="muted" style="font-size:var(--t2)">'+esc(p.text)+'</p><div class="proof"><b>Receipt:</b> '+esc(p.proof)+'</div></article>';}).join('');
-document.getElementById('repos').innerHTML=DATA.repos.map(function(r){var flag=r.status==='archived'?' · archived':(r.absorbed?' · absorbed':'');var icon=r.fdroid?'<img class="fd-icon" src="assets/fdroid-icon.svg" width="18" height="18" alt="">':'';var live=r.url?'<a class="go" href="'+esc(r.url)+'" target="_blank" rel="noopener">'+icon+(r.channel==='F-Droid'?'F-Droid':'Live')+' ↗</a>':'';return '<article class="repo" data-lang="'+esc(r.lang)+'"><div class="rname">'+esc(r.name)+'</div><div class="rkind">'+esc(r.kind)+flag+'</div><p>'+esc(r.desc)+'</p><div class="rmeta"><span>'+esc(r.lang)+'</span><span>'+r.stars+' stars</span>'+live+'<a class="go" href="'+esc(r.github)+'" target="_blank" rel="noopener">GitHub ↗</a></div></article>';}).join('');
+document.getElementById('repos').innerHTML=DATA.repos.map(function(r){var flag=r.status==='archived'?' · archived':'';var icon=r.fdroid?'<img class="fd-icon" src="assets/fdroid-icon.svg" width="18" height="18" alt="">':'';var live=r.url?'<a class="go" href="'+esc(r.url)+'" target="_blank" rel="noopener">'+icon+(r.channel==='F-Droid'?'F-Droid':'Live')+' ↗</a>':'';return '<article class="repo" data-lang="'+esc(r.lang)+'"><div class="rname">'+esc(r.name)+'</div><div class="rkind">'+esc(r.kind)+flag+'</div><p>'+esc(r.desc)+'</p><div class="rmeta"><span>'+esc(r.lang)+'</span><span>'+r.stars+' stars</span>'+live+'<a class="go" href="'+esc(r.github)+'" target="_blank" rel="noopener">GitHub ↗</a></div></article>';}).join('');
 var dirWeb=DATA.directory.filter(function(d){return d.kind==='Website';});
 var dirApp=DATA.directory.filter(function(d){return d.kind!=='Website';});
 function dirRow(d){var icon=d.channel==='F-Droid'?'<img class="fd-icon" src="assets/fdroid-icon.svg" width="18" height="18" alt="">':'';return '<a class="dir-row" href="'+esc(d.url)+'" target="_blank" rel="noopener"><span class="dn">'+icon+esc(d.name)+'</span><span class="dk">'+esc(d.channel)+'</span><span class="da">↗</span></a>';}
@@ -935,8 +914,6 @@ document.getElementById('about-name').textContent=A.name;
 document.getElementById('about-tagline').textContent=A.tagline;
 document.getElementById('about-bio').innerHTML=A.bio.map(function(p){return '<p>'+esc(p)+'</p>';}).join('');
 document.getElementById('about-roles').innerHTML=A.roles.map(function(r){return '<span class="role">'+esc(r)+'</span>';}).join('');
-document.getElementById('about-absorbed').textContent=A.absorbed_note;
-document.getElementById('about-source').textContent='Source: '+A.source.repo+' @ '+A.source.tip+' · '+A.source.files.join(', ')+'. '+A.source.note;
 document.getElementById('portrait-img').src=A.portrait;
 document.getElementById('portrait-img').alt=A.portrait_alt;
 document.getElementById('portrait-cap-name').textContent=A.portrait_caption;
@@ -947,11 +924,11 @@ document.getElementById('skill-count').textContent=A.skills.length+' items';
 document.getElementById('about-services').innerHTML=A.services.map(function(s){return '<div class="svc-row"><div class="top"><b>'+esc(s.title)+'</b><span class="rate">'+esc(s.price)+'</span></div><p>'+esc(s.description)+'</p></div>';}).join('');
 document.getElementById('services-note').textContent=A.services_note;
 document.getElementById('svc-count').textContent=A.services.length+' rates';
-document.getElementById('socials').innerHTML=A.socials.map(function(s){var ext=s.url.indexOf('mailto:')!==0;return '<a href="'+esc(s.url)+'"'+(ext?' target="_blank" rel="noopener"':'')+'>'+esc(s.label)+(ext?' ↗':' →')+'</a>';}).join('');
+document.getElementById('socials').innerHTML=A.socials.map(function(s){var ext=s.url.indexOf('mailto:')!==0;var glyph=A.icons[s.label]?'<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">'+A.icons[s.label]+'</svg>':'';return '<a href="'+esc(s.url)+'"'+(ext?' target="_blank" rel="noopener"':'')+'>'+glyph+'<span>'+esc(s.label)+'</span></a>';}).join('');
 
-document.getElementById('contact-grid').innerHTML=DATA.contact.map(function(c){return '<div class="contact-item"><div class="lbl">'+esc(c.label)+'</div><a href="'+esc(c.href)+'">'+esc(c.text)+'</a>'+(c.copy?'<br><button class="copy-btn" data-copy="'+esc(c.text)+'">Copy address</button>':'')+'</div>';}).join('');
+document.getElementById('contact-grid').innerHTML=DATA.contact.map(function(c){return '<div class="contact-item"><div class="lbl">'+esc(c.label)+'</div><a href="'+esc(c.href)+'">'+esc(c.text)+'</a></div>';}).join('');
 document.getElementById('kbd-list').innerHTML=DATA.shortcuts.map(function(k){return '<div class="kbd-row"><span>'+esc(k[1])+'</span><kbd>'+esc(k[0])+'</kbd></div>';}).join('');
-document.getElementById('notes-body').innerHTML='<h4>Design &amp; motion</h4><ol>'+DATA.notes.design.map(function(n){return '<li>'+n+'</li>';}).join('')+'</ol><h4>Search Console checklist</h4><ol>'+DATA.notes.seo.map(function(n){return '<li>'+n+'</li>';}).join('')+'</ol><p style="margin-top:16px">Build facts: 39 repos audited · 23 private · '+DATA.repos.length+' studio repositories indexed · '+DATA.directory.length+' live surfaces · '+DATA.products.length+' top projects · '+languages.length+' languages · 1 F-Droid release. Source: GitHub API, HTTP probes and the portfolio repo, 2026-11-12.</p>';
+document.getElementById('notes-body').innerHTML='<h4>Design &amp; motion</h4><ol>'+DATA.notes.design.map(function(n){return '<li>'+n+'</li>';}).join('')+'</ol><h4>Search Console checklist</h4><ol>'+DATA.notes.seo.map(function(n){return '<li>'+n+'</li>';}).join('')+'</ol><p style="margin-top:16px">Build facts: 39 repos audited · 23 private · '+DATA.repos.length+' studio repositories indexed · '+DATA.directory.length+' live surfaces · '+DATA.products.length+' top projects · '+languages.length+' languages · 1 F-Droid release. Source: GitHub API and HTTP probes, 2026-11-12.</p>';
 
 var langs=['All'].concat(DATA.repos.map(function(r){return r.lang;}).filter(function(v,i,a){return a.indexOf(v)===i&&v!=='—';}).sort());
 var fbox=document.getElementById('filters');
@@ -967,14 +944,6 @@ function filterRepos(l){
 }
 fbox.addEventListener('click',function(e){var b=e.target.closest('button[data-lang]');if(b)filterRepos(b.dataset.lang);});
 filterRepos('All');
-
-document.addEventListener('click',function(e){
-  var b=e.target.closest('[data-copy]');if(!b)return;
-  var txt=b.dataset.copy;
-  function done(){b.textContent='Copied ✓';setTimeout(function(){b.textContent='Copy address';},1800);}
-  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(done,function(){fallback();});}else{fallback();}
-  function fallback(){var t=document.createElement('textarea');t.value=txt;document.body.appendChild(t);t.select();try{document.execCommand('copy');done();}catch(x){b.textContent='Select manually';}document.body.removeChild(t);}
-});
 
 var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 if(!reduce){
