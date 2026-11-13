@@ -1,34 +1,14 @@
-const NAME = 'a1s-v2';
-const FILES = [
-  '/index.html',
-  '/manifest.json',
-  '/icon.svg',
-  '/favicon.svg',
-  '/apple-touch-icon.svg',
-  '/og.svg',
-  '/robots.txt',
-  '/sitemap.xml'
-];
+/* Retired service worker. The previous site used a cache-first worker that
+   fell back to a stale /index.html. This file exists only to clean up clients
+   that still have it registered: it clears every old cache, unregisters
+   itself, and stops intercepting requests. The new hub never registers a
+   service worker and needs no offline cache. */
+self.addEventListener('install', function () { self.skipWaiting(); });
 
-self.addEventListener('install', e => {
-  e.waitUntil(caches.open(NAME).then(c => c.addAll(FILES)));
-  self.skipWaiting();
-});
-
-self.addEventListener('activate', e => {
-  e.waitUntil(caches.keys().then(keys => Promise.all(keys.filter(k => k !== NAME).map(k => caches.delete(k)))));
-  self.clients.claim();
-});
-
-self.addEventListener('fetch', e => {
-  if (e.request.url.includes('api.github.com')) return;
-  e.respondWith(
-    caches.match(e.request).then(r => r || fetch(e.request).then(res => {
-      if (res.ok && res.type === 'basic') {
-        const clone = res.clone();
-        caches.open(NAME).then(c => c.put(e.request, clone));
-      }
-      return res;
-    }).catch(() => caches.match('/index.html')))
-  );
+self.addEventListener('activate', function (event) {
+  event.waitUntil((async function () {
+    const keys = await caches.keys();
+    await Promise.all(keys.map(function (key) { return caches.delete(key); }));
+    await self.registration.unregister();
+  })());
 });
