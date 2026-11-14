@@ -195,7 +195,7 @@ h1{font-family:var(--serif);font-size:var(--t8);line-height:1.02;letter-spacing:
 .role::before{content:"";width:5px;height:5px;background:var(--ac);flex:none}
 .portrait-plate{margin:0;background:var(--sf);border:1px solid var(--ln);border-radius:10px;overflow:hidden}
 .plate-img{position:relative;background:#0B0B0A}
-.plate-img img{width:100%;height:auto;aspect-ratio:1/1;object-fit:cover}
+.plate-img img{width:100%;height:auto;aspect-ratio:4/5;object-fit:cover}
 .plate-img .tick{position:absolute;width:15px;height:15px;border:1px solid var(--ac);pointer-events:none}
 .plate-img .tick.tl{top:14px;left:14px;border-width:1px 0 0 1px}
 .plate-img .tick.br{right:14px;bottom:14px;border-width:0 1px 1px 0}
@@ -404,7 +404,7 @@ kbd{font-family:var(--mono);font-size:var(--t1);border:1px solid var(--ln);borde
       <div class="roles" id="about-roles"></div>
     </div>
     <figure class="portrait-plate">
-      <div class="plate-img"><span class="tick tl"></span><span class="tick br"></span><img id="portrait-img" src="assets/portrait.webp" width="640" height="640" alt="Portrait of Samuel Mensah" loading="lazy" decoding="async"></div>
+      <div class="plate-img"><span class="tick tl"></span><span class="tick br"></span><img id="portrait-img" src="assets/portrait.webp" width="640" height="800" alt="Full-length portrait of Samuel Mensah in legal robes and wig, standing before a teal doorway" loading="lazy" decoding="async"></div>
       <figcaption><span id="portrait-cap-name"></span><span id="portrait-cap-place"></span></figcaption>
     </figure>
   </div>
@@ -733,7 +733,7 @@ var DATA = {
   "availability": "Available for hire",
   "location": "Based in Ghana, available worldwide",
   "portrait": "assets/portrait.webp",
-  "portrait_alt": "Portrait of Samuel Mensah",
+  "portrait_alt": "Full-length portrait of Samuel Mensah in legal robes and wig, standing before a teal doorway",
   "portrait_caption": "Samuel Mensah",
   "portrait_place": "Accra, GH",
   "tagline": "I craft digital experiences that merge technical precision with creative vision. From full-stack development to multimedia production, I deliver solutions that perform at the highest level.",
