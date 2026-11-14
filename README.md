@@ -39,7 +39,7 @@ Sam Atlas and Symphonia are not part of Alpha-1 Studio and are intentionally abs
 
 ## Built by
 
-Samuel Mensah · Accra, Ghana · alphariansamuel@gmail.com
+Samuel Mensah · Kumasi, Ghana · alphariansamuel@gmail.com
 https://github.com/alpha-1-design
 
 © 2026 Alpha-1 Studio.
